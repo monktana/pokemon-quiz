@@ -67,28 +67,28 @@ export function Game() {
       >
         <Button
           data-testid="no-effect-button"
-          isDisabled={isFetching}
+          disabled={isFetching}
           onClick={() => handleGuess(TypeEffectiveness.NoEffect)}
         >
           {getText('types.effectiveness.noeffect')}
         </Button>
         <Button
           data-testid="not-effective-button"
-          isDisabled={isFetching}
+          disabled={isFetching}
           onClick={() => handleGuess(TypeEffectiveness.NotVeryEffective)}
         >
           {getText('types.effectiveness.noteffective')}
         </Button>
         <Button
           data-testid="effective-button"
-          isDisabled={isFetching}
+          disabled={isFetching}
           onClick={() => handleGuess(TypeEffectiveness.Effective)}
         >
           {getText('types.effectiveness.effective')}
         </Button>
         <Button
           data-testid="super-effective-button"
-          isDisabled={isFetching}
+          disabled={isFetching}
           onClick={() => handleGuess(TypeEffectiveness.SuperEffective)}
         >
           {getText('types.effectiveness.supereffective')}

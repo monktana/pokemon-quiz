@@ -1,4 +1,6 @@
-export const colors = {
+import { defineTokens } from '@chakra-ui/react';
+
+const rawColors = {
   border: {
     100: '#484848',
     500: '#bbbbbb',
@@ -238,3 +240,16 @@ export const colors = {
     900: '#341123',
   },
 };
+
+export const colorPaletteNames = Object.keys(rawColors).filter(
+  (name) => !['border', 'font', 'background'].includes(name)
+);
+
+export const colors = defineTokens.colors(
+  Object.fromEntries(
+    Object.entries(rawColors).map(([name, shades]) => [
+      name,
+      Object.fromEntries(Object.entries(shades).map(([shade, value]) => [shade, { value }])),
+    ])
+  )
+);

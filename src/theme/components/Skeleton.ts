@@ -1,21 +1,18 @@
-import { cssVar, defineStyle, defineStyleConfig } from '@chakra-ui/react';
-
-const $startColor = cssVar('skeleton-start-color');
-const $endColor = cssVar('skeleton-end-color');
+import { defineRecipe, defineStyle } from '@chakra-ui/react';
 
 const quiz = defineStyle({
   borderRadius: 'md',
   borderWidth: '1px',
   borderColor: 'border.500',
-  [$startColor.variable]: 'colors.background.100',
-  [$endColor.variable]: 'colors.background.300',
+  background: 'background.300',
+  animation: 'pulse',
+  animationDuration: 'var(--duration, 1.2s)',
   _dark: {
     borderColor: 'border.100',
-    [$startColor.variable]: 'colors.background.700',
-    [$endColor.variable]: 'colors.background.900',
+    background: 'background.700',
   },
 });
 
-export const Skeleton = defineStyleConfig({
-  variants: { quiz },
+export const Skeleton = defineRecipe({
+  variants: { variant: { quiz } },
 });

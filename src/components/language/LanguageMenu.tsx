@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  MenuOptionGroup,
-  Text,
-} from '@chakra-ui/react';
+import { HStack, IconButton, Menu, Text } from '@chakra-ui/react';
 
 import { LanguageIcon } from '@/components';
 import { useLocalization } from '@/hooks';
@@ -20,22 +12,25 @@ export const LanguageMenu = () => {
   const { setLanguage } = useLanguageActions();
 
   return (
-    <Menu data-testid="language-menu">
-      <MenuButton
-        data-testid="language-switch"
-        aria-label={getText('navbar.language.label')}
-        as={IconButton}
-        icon={<LanguageIcon type={language} aria-label={language} />}
-      />
-      <MenuList backgroundColor="background.200" _dark={{ backgroundColor: 'background.800' }}>
-        <MenuOptionGroup defaultValue={language} type="radio">
-          {Languages.map((language) => {
-            return (
-              <MenuItem
+    <Menu.Root data-testid="language-menu">
+      <Menu.Trigger asChild>
+        <IconButton data-testid="language-switch" aria-label={getText('navbar.language.label')}>
+          <LanguageIcon type={language} aria-label={language} />
+        </IconButton>
+      </Menu.Trigger>
+      <Menu.Positioner>
+        <Menu.Content
+          minWidth="12rem"
+          backgroundColor="background.200"
+          _dark={{ backgroundColor: 'background.800' }}
+        >
+          <Menu.RadioItemGroup value={language}>
+            {Languages.map((language) => (
+              <Menu.RadioItem
                 key={language}
+                value={language}
                 data-testid={`${language}-language`}
                 backgroundColor="background.200"
-                icon={<LanguageIcon type={language} />}
                 onClick={() => setLanguage(language)}
                 _hover={{
                   backgroundColor: 'background.300',
@@ -47,12 +42,15 @@ export const LanguageMenu = () => {
                   },
                 }}
               >
-                <Text>{getText(language)}</Text>
-              </MenuItem>
-            );
-          })}
-        </MenuOptionGroup>
-      </MenuList>
-    </Menu>
+                <HStack>
+                  <LanguageIcon type={language} />
+                  <Text>{getText(language)}</Text>
+                </HStack>
+              </Menu.RadioItem>
+            ))}
+          </Menu.RadioItemGroup>
+        </Menu.Content>
+      </Menu.Positioner>
+    </Menu.Root>
   );
 };

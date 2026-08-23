@@ -1,22 +1,12 @@
 import React from 'react';
-import { Box, Button, Center, keyframes, VStack } from '@chakra-ui/react';
+import { Box, Button, Center, VStack } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
 import { usePrefetchMatchup } from '@/api';
 import { useLocalization } from '@/hooks';
 import { useAppStateActions, useScoreActions } from '@/stores';
 
-const animationKeyframes = keyframes`
-  0% { transform: rotate(0) }
-  10% { transform: rotate(-25deg) }
-  30% { transform: rotate(17deg) }
-  60% { transform: rotate(-10deg) }
-  80% { transform: rotate(5deg) }
-  90% { transform: rotate(0) }
-  100% { transform: rotate(0) }
-`;
-
-const animation = `${animationKeyframes} 4s ease-in-out infinite`;
+const animation = 'pokeball 4s ease-in-out infinite';
 
 export function Menu() {
   const { startQuiz } = useAppStateActions();
@@ -31,7 +21,7 @@ export function Menu() {
   };
 
   return (
-    <VStack spacing={2}>
+    <VStack gap={2}>
       <Box
         data-testid="pokeball"
         as={motion.div}
@@ -42,7 +32,7 @@ export function Menu() {
         rounded="full"
         borderWidth="6px"
         borderColor="black"
-        bgGradient="linear(red.500 0%, red.500 50%, white 50%)"
+        background="linear-gradient(var(--chakra-colors-red-500) 0%, var(--chakra-colors-red-500) 50%, white 50%)"
       >
         <Box
           position="absolute"
