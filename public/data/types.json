@@ -1,0 +1,254 @@
+[
+  {
+    "id": 1,
+    "name": "normal",
+    "names": [
+      {
+        "name": "Normal",
+        "language": "de"
+      },
+      {
+        "name": "Normal",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "fighting",
+    "names": [
+      {
+        "name": "Kampf",
+        "language": "de"
+      },
+      {
+        "name": "Fighting",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "flying",
+    "names": [
+      {
+        "name": "Flug",
+        "language": "de"
+      },
+      {
+        "name": "Flying",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "poison",
+    "names": [
+      {
+        "name": "Gift",
+        "language": "de"
+      },
+      {
+        "name": "Poison",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "ground",
+    "names": [
+      {
+        "name": "Boden",
+        "language": "de"
+      },
+      {
+        "name": "Ground",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "rock",
+    "names": [
+      {
+        "name": "Gestein",
+        "language": "de"
+      },
+      {
+        "name": "Rock",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "bug",
+    "names": [
+      {
+        "name": "Käfer",
+        "language": "de"
+      },
+      {
+        "name": "Bug",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "ghost",
+    "names": [
+      {
+        "name": "Geist",
+        "language": "de"
+      },
+      {
+        "name": "Ghost",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "steel",
+    "names": [
+      {
+        "name": "Stahl",
+        "language": "de"
+      },
+      {
+        "name": "Steel",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "fire",
+    "names": [
+      {
+        "name": "Feuer",
+        "language": "de"
+      },
+      {
+        "name": "Fire",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "water",
+    "names": [
+      {
+        "name": "Wasser",
+        "language": "de"
+      },
+      {
+        "name": "Water",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "grass",
+    "names": [
+      {
+        "name": "Pflanze",
+        "language": "de"
+      },
+      {
+        "name": "Grass",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "electric",
+    "names": [
+      {
+        "name": "Elektro",
+        "language": "de"
+      },
+      {
+        "name": "Electric",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "psychic",
+    "names": [
+      {
+        "name": "Psycho",
+        "language": "de"
+      },
+      {
+        "name": "Psychic",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "ice",
+    "names": [
+      {
+        "name": "Eis",
+        "language": "de"
+      },
+      {
+        "name": "Ice",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "dragon",
+    "names": [
+      {
+        "name": "Drache",
+        "language": "de"
+      },
+      {
+        "name": "Dragon",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "dark",
+    "names": [
+      {
+        "name": "Unlicht",
+        "language": "de"
+      },
+      {
+        "name": "Dark",
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "fairy",
+    "names": [
+      {
+        "name": "Fee",
+        "language": "de"
+      },
+      {
+        "name": "Fairy",
+        "language": "en"
+      }
+    ]
+  }
+]
