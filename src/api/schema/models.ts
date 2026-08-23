@@ -1,12 +1,8 @@
- 
-/* tslint:disable */
-/*
- * ---------------------------------------------------------------
- * ## THIS FILE WAS GENERATED VIA SWAGGER-TYPESCRIPT-API        ##
- * ##                                                           ##
- * ## AUTHOR: acacode                                           ##
- * ## SOURCE: https://github.com/acacode/swagger-typescript-api ##
- * ---------------------------------------------------------------
+/**
+ * Data contract for the client-side game logic (see src/lib/generateMatchup.ts).
+ * Was previously generated from the now-removed C# backend's Swagger schema;
+ * hand-authored now, kept field-for-field identical so nothing downstream
+ * had to change.
  */
 
 export interface InternationalName {

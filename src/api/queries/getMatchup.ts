@@ -1,16 +1,13 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { Options } from 'ky';
 
 import { Matchup } from '@/api';
-import { apiClient, queryClient } from '@/lib';
+import { queryClient } from '@/lib';
+import { generateMatchup } from '@/lib/generateMatchup';
 
-const endpoint = 'matchup';
 const queryKey = 'matchup';
 const staleTime = 10 * 1000;
 
-const getMatchup = async ({ signal }: Options): Promise<Matchup> => {
-  return apiClient(endpoint, { signal }).json<Matchup>();
-};
+const getMatchup = async (): Promise<Matchup> => generateMatchup();
 
 export const useMatchup = (id: number) => {
   return useSuspenseQuery({

@@ -1,0 +1,5610 @@
+[
+  {
+    "id": 1,
+    "name": "pound",
+    "names": [
+      {
+        "name": "Klaps",
+        "language": "de"
+      },
+      {
+        "name": "Pound",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 1
+  },
+  {
+    "id": 2,
+    "name": "karate-chop",
+    "names": [
+      {
+        "name": "Karateschlag",
+        "language": "de"
+      },
+      {
+        "name": "Karate Chop",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 2
+  },
+  {
+    "id": 3,
+    "name": "double-slap",
+    "names": [
+      {
+        "name": "Duplexhieb",
+        "language": "de"
+      },
+      {
+        "name": "Double Slap",
+        "language": "en"
+      }
+    ],
+    "power": 15,
+    "typeId": 1
+  },
+  {
+    "id": 4,
+    "name": "comet-punch",
+    "names": [
+      {
+        "name": "Kometenhieb",
+        "language": "de"
+      },
+      {
+        "name": "Comet Punch",
+        "language": "en"
+      }
+    ],
+    "power": 18,
+    "typeId": 1
+  },
+  {
+    "id": 5,
+    "name": "mega-punch",
+    "names": [
+      {
+        "name": "Megahieb",
+        "language": "de"
+      },
+      {
+        "name": "Mega Punch",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 1
+  },
+  {
+    "id": 6,
+    "name": "pay-day",
+    "names": [
+      {
+        "name": "Zahltag",
+        "language": "de"
+      },
+      {
+        "name": "Pay Day",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 1
+  },
+  {
+    "id": 7,
+    "name": "fire-punch",
+    "names": [
+      {
+        "name": "Feuerschlag",
+        "language": "de"
+      },
+      {
+        "name": "Fire Punch",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 10
+  },
+  {
+    "id": 8,
+    "name": "ice-punch",
+    "names": [
+      {
+        "name": "Eishieb",
+        "language": "de"
+      },
+      {
+        "name": "Ice Punch",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 15
+  },
+  {
+    "id": 9,
+    "name": "thunder-punch",
+    "names": [
+      {
+        "name": "Donnerschlag",
+        "language": "de"
+      },
+      {
+        "name": "Thunder Punch",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 13
+  },
+  {
+    "id": 10,
+    "name": "scratch",
+    "names": [
+      {
+        "name": "Kratzer",
+        "language": "de"
+      },
+      {
+        "name": "Scratch",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 1
+  },
+  {
+    "id": 11,
+    "name": "vice-grip",
+    "names": [
+      {
+        "name": "Klammer",
+        "language": "de"
+      },
+      {
+        "name": "Vise Grip",
+        "language": "en"
+      }
+    ],
+    "power": 55,
+    "typeId": 1
+  },
+  {
+    "id": 13,
+    "name": "razor-wind",
+    "names": [
+      {
+        "name": "Klingensturm",
+        "language": "de"
+      },
+      {
+        "name": "Razor Wind",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 1
+  },
+  {
+    "id": 15,
+    "name": "cut",
+    "names": [
+      {
+        "name": "Zerschneider",
+        "language": "de"
+      },
+      {
+        "name": "Cut",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 1
+  },
+  {
+    "id": 16,
+    "name": "gust",
+    "names": [
+      {
+        "name": "Windstoß",
+        "language": "de"
+      },
+      {
+        "name": "Gust",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 3
+  },
+  {
+    "id": 17,
+    "name": "wing-attack",
+    "names": [
+      {
+        "name": "Flügelschlag",
+        "language": "de"
+      },
+      {
+        "name": "Wing Attack",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 3
+  },
+  {
+    "id": 19,
+    "name": "fly",
+    "names": [
+      {
+        "name": "Fliegen",
+        "language": "de"
+      },
+      {
+        "name": "Fly",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 3
+  },
+  {
+    "id": 20,
+    "name": "bind",
+    "names": [
+      {
+        "name": "Klammergriff",
+        "language": "de"
+      },
+      {
+        "name": "Bind",
+        "language": "en"
+      }
+    ],
+    "power": 15,
+    "typeId": 1
+  },
+  {
+    "id": 21,
+    "name": "slam",
+    "names": [
+      {
+        "name": "Slam",
+        "language": "de"
+      },
+      {
+        "name": "Slam",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 1
+  },
+  {
+    "id": 22,
+    "name": "vine-whip",
+    "names": [
+      {
+        "name": "Rankenhieb",
+        "language": "de"
+      },
+      {
+        "name": "Vine Whip",
+        "language": "en"
+      }
+    ],
+    "power": 45,
+    "typeId": 12
+  },
+  {
+    "id": 23,
+    "name": "stomp",
+    "names": [
+      {
+        "name": "Stampfer",
+        "language": "de"
+      },
+      {
+        "name": "Stomp",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 1
+  },
+  {
+    "id": 24,
+    "name": "double-kick",
+    "names": [
+      {
+        "name": "Doppelkick",
+        "language": "de"
+      },
+      {
+        "name": "Double Kick",
+        "language": "en"
+      }
+    ],
+    "power": 30,
+    "typeId": 2
+  },
+  {
+    "id": 25,
+    "name": "mega-kick",
+    "names": [
+      {
+        "name": "Megakick",
+        "language": "de"
+      },
+      {
+        "name": "Mega Kick",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 1
+  },
+  {
+    "id": 26,
+    "name": "jump-kick",
+    "names": [
+      {
+        "name": "Sprungkick",
+        "language": "de"
+      },
+      {
+        "name": "Jump Kick",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 2
+  },
+  {
+    "id": 27,
+    "name": "rolling-kick",
+    "names": [
+      {
+        "name": "Fegekick",
+        "language": "de"
+      },
+      {
+        "name": "Rolling Kick",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 2
+  },
+  {
+    "id": 29,
+    "name": "headbutt",
+    "names": [
+      {
+        "name": "Kopfnuss",
+        "language": "de"
+      },
+      {
+        "name": "Headbutt",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 1
+  },
+  {
+    "id": 30,
+    "name": "horn-attack",
+    "names": [
+      {
+        "name": "Hornattacke",
+        "language": "de"
+      },
+      {
+        "name": "Horn Attack",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 1
+  },
+  {
+    "id": 31,
+    "name": "fury-attack",
+    "names": [
+      {
+        "name": "Furienschlag",
+        "language": "de"
+      },
+      {
+        "name": "Fury Attack",
+        "language": "en"
+      }
+    ],
+    "power": 15,
+    "typeId": 1
+  },
+  {
+    "id": 33,
+    "name": "tackle",
+    "names": [
+      {
+        "name": "Tackle",
+        "language": "de"
+      },
+      {
+        "name": "Tackle",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 1
+  },
+  {
+    "id": 34,
+    "name": "body-slam",
+    "names": [
+      {
+        "name": "Bodyslam",
+        "language": "de"
+      },
+      {
+        "name": "Body Slam",
+        "language": "en"
+      }
+    ],
+    "power": 85,
+    "typeId": 1
+  },
+  {
+    "id": 35,
+    "name": "wrap",
+    "names": [
+      {
+        "name": "Wickel",
+        "language": "de"
+      },
+      {
+        "name": "Wrap",
+        "language": "en"
+      }
+    ],
+    "power": 15,
+    "typeId": 1
+  },
+  {
+    "id": 36,
+    "name": "take-down",
+    "names": [
+      {
+        "name": "Bodycheck",
+        "language": "de"
+      },
+      {
+        "name": "Take Down",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 1
+  },
+  {
+    "id": 37,
+    "name": "thrash",
+    "names": [
+      {
+        "name": "Fuchtler",
+        "language": "de"
+      },
+      {
+        "name": "Thrash",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 1
+  },
+  {
+    "id": 38,
+    "name": "double-edge",
+    "names": [
+      {
+        "name": "Risikotackle",
+        "language": "de"
+      },
+      {
+        "name": "Double-Edge",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 1
+  },
+  {
+    "id": 40,
+    "name": "poison-sting",
+    "names": [
+      {
+        "name": "Giftstachel",
+        "language": "de"
+      },
+      {
+        "name": "Poison Sting",
+        "language": "en"
+      }
+    ],
+    "power": 15,
+    "typeId": 4
+  },
+  {
+    "id": 41,
+    "name": "twineedle",
+    "names": [
+      {
+        "name": "Duonadel",
+        "language": "de"
+      },
+      {
+        "name": "Twineedle",
+        "language": "en"
+      }
+    ],
+    "power": 25,
+    "typeId": 7
+  },
+  {
+    "id": 42,
+    "name": "pin-missile",
+    "names": [
+      {
+        "name": "Nadelrakete",
+        "language": "de"
+      },
+      {
+        "name": "Pin Missile",
+        "language": "en"
+      }
+    ],
+    "power": 25,
+    "typeId": 7
+  },
+  {
+    "id": 44,
+    "name": "bite",
+    "names": [
+      {
+        "name": "Biss",
+        "language": "de"
+      },
+      {
+        "name": "Bite",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 17
+  },
+  {
+    "id": 51,
+    "name": "acid",
+    "names": [
+      {
+        "name": "Säure",
+        "language": "de"
+      },
+      {
+        "name": "Acid",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 4
+  },
+  {
+    "id": 52,
+    "name": "ember",
+    "names": [
+      {
+        "name": "Glut",
+        "language": "de"
+      },
+      {
+        "name": "Ember",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 10
+  },
+  {
+    "id": 53,
+    "name": "flamethrower",
+    "names": [
+      {
+        "name": "Flammenwurf",
+        "language": "de"
+      },
+      {
+        "name": "Flamethrower",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 10
+  },
+  {
+    "id": 55,
+    "name": "water-gun",
+    "names": [
+      {
+        "name": "Aquaknarre",
+        "language": "de"
+      },
+      {
+        "name": "Water Gun",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 11
+  },
+  {
+    "id": 56,
+    "name": "hydro-pump",
+    "names": [
+      {
+        "name": "Hydropumpe",
+        "language": "de"
+      },
+      {
+        "name": "Hydro Pump",
+        "language": "en"
+      }
+    ],
+    "power": 110,
+    "typeId": 11
+  },
+  {
+    "id": 57,
+    "name": "surf",
+    "names": [
+      {
+        "name": "Surfer",
+        "language": "de"
+      },
+      {
+        "name": "Surf",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 11
+  },
+  {
+    "id": 58,
+    "name": "ice-beam",
+    "names": [
+      {
+        "name": "Eisstrahl",
+        "language": "de"
+      },
+      {
+        "name": "Ice Beam",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 15
+  },
+  {
+    "id": 59,
+    "name": "blizzard",
+    "names": [
+      {
+        "name": "Blizzard",
+        "language": "de"
+      },
+      {
+        "name": "Blizzard",
+        "language": "en"
+      }
+    ],
+    "power": 110,
+    "typeId": 15
+  },
+  {
+    "id": 60,
+    "name": "psybeam",
+    "names": [
+      {
+        "name": "Psystrahl",
+        "language": "de"
+      },
+      {
+        "name": "Psybeam",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 14
+  },
+  {
+    "id": 61,
+    "name": "bubble-beam",
+    "names": [
+      {
+        "name": "Blubbstrahl",
+        "language": "de"
+      },
+      {
+        "name": "Bubble Beam",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 11
+  },
+  {
+    "id": 62,
+    "name": "aurora-beam",
+    "names": [
+      {
+        "name": "Aurorastrahl",
+        "language": "de"
+      },
+      {
+        "name": "Aurora Beam",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 15
+  },
+  {
+    "id": 63,
+    "name": "hyper-beam",
+    "names": [
+      {
+        "name": "Hyperstrahl",
+        "language": "de"
+      },
+      {
+        "name": "Hyper Beam",
+        "language": "en"
+      }
+    ],
+    "power": 150,
+    "typeId": 1
+  },
+  {
+    "id": 64,
+    "name": "peck",
+    "names": [
+      {
+        "name": "Pikser",
+        "language": "de"
+      },
+      {
+        "name": "Peck",
+        "language": "en"
+      }
+    ],
+    "power": 35,
+    "typeId": 3
+  },
+  {
+    "id": 65,
+    "name": "drill-peck",
+    "names": [
+      {
+        "name": "Bohrschnabel",
+        "language": "de"
+      },
+      {
+        "name": "Drill Peck",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 3
+  },
+  {
+    "id": 66,
+    "name": "submission",
+    "names": [
+      {
+        "name": "Überroller",
+        "language": "de"
+      },
+      {
+        "name": "Submission",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 2
+  },
+  {
+    "id": 70,
+    "name": "strength",
+    "names": [
+      {
+        "name": "Stärke",
+        "language": "de"
+      },
+      {
+        "name": "Strength",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 1
+  },
+  {
+    "id": 71,
+    "name": "absorb",
+    "names": [
+      {
+        "name": "Absorber",
+        "language": "de"
+      },
+      {
+        "name": "Absorb",
+        "language": "en"
+      }
+    ],
+    "power": 20,
+    "typeId": 12
+  },
+  {
+    "id": 72,
+    "name": "mega-drain",
+    "names": [
+      {
+        "name": "Megasauger",
+        "language": "de"
+      },
+      {
+        "name": "Mega Drain",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 12
+  },
+  {
+    "id": 75,
+    "name": "razor-leaf",
+    "names": [
+      {
+        "name": "Rasierblatt",
+        "language": "de"
+      },
+      {
+        "name": "Razor Leaf",
+        "language": "en"
+      }
+    ],
+    "power": 55,
+    "typeId": 12
+  },
+  {
+    "id": 76,
+    "name": "solar-beam",
+    "names": [
+      {
+        "name": "Solarstrahl",
+        "language": "de"
+      },
+      {
+        "name": "Solar Beam",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 12
+  },
+  {
+    "id": 80,
+    "name": "petal-dance",
+    "names": [
+      {
+        "name": "Blättertanz",
+        "language": "de"
+      },
+      {
+        "name": "Petal Dance",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 12
+  },
+  {
+    "id": 83,
+    "name": "fire-spin",
+    "names": [
+      {
+        "name": "Feuerwirbel",
+        "language": "de"
+      },
+      {
+        "name": "Fire Spin",
+        "language": "en"
+      }
+    ],
+    "power": 35,
+    "typeId": 10
+  },
+  {
+    "id": 84,
+    "name": "thunder-shock",
+    "names": [
+      {
+        "name": "Donnerschock",
+        "language": "de"
+      },
+      {
+        "name": "Thunder Shock",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 13
+  },
+  {
+    "id": 85,
+    "name": "thunderbolt",
+    "names": [
+      {
+        "name": "Donnerblitz",
+        "language": "de"
+      },
+      {
+        "name": "Thunderbolt",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 13
+  },
+  {
+    "id": 87,
+    "name": "thunder",
+    "names": [
+      {
+        "name": "Donner",
+        "language": "de"
+      },
+      {
+        "name": "Thunder",
+        "language": "en"
+      }
+    ],
+    "power": 110,
+    "typeId": 13
+  },
+  {
+    "id": 88,
+    "name": "rock-throw",
+    "names": [
+      {
+        "name": "Steinwurf",
+        "language": "de"
+      },
+      {
+        "name": "Rock Throw",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 6
+  },
+  {
+    "id": 89,
+    "name": "earthquake",
+    "names": [
+      {
+        "name": "Erdbeben",
+        "language": "de"
+      },
+      {
+        "name": "Earthquake",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 5
+  },
+  {
+    "id": 91,
+    "name": "dig",
+    "names": [
+      {
+        "name": "Schaufler",
+        "language": "de"
+      },
+      {
+        "name": "Dig",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 5
+  },
+  {
+    "id": 93,
+    "name": "confusion",
+    "names": [
+      {
+        "name": "Konfusion",
+        "language": "de"
+      },
+      {
+        "name": "Confusion",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 14
+  },
+  {
+    "id": 94,
+    "name": "psychic",
+    "names": [
+      {
+        "name": "Psychokinese",
+        "language": "de"
+      },
+      {
+        "name": "Psychic",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 14
+  },
+  {
+    "id": 98,
+    "name": "quick-attack",
+    "names": [
+      {
+        "name": "Ruckzuckhieb",
+        "language": "de"
+      },
+      {
+        "name": "Quick Attack",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 1
+  },
+  {
+    "id": 99,
+    "name": "rage",
+    "names": [
+      {
+        "name": "Raserei",
+        "language": "de"
+      },
+      {
+        "name": "Rage",
+        "language": "en"
+      }
+    ],
+    "power": 20,
+    "typeId": 1
+  },
+  {
+    "id": 120,
+    "name": "self-destruct",
+    "names": [
+      {
+        "name": "Finale",
+        "language": "de"
+      },
+      {
+        "name": "Self-Destruct",
+        "language": "en"
+      }
+    ],
+    "power": 200,
+    "typeId": 1
+  },
+  {
+    "id": 121,
+    "name": "egg-bomb",
+    "names": [
+      {
+        "name": "Eierbombe",
+        "language": "de"
+      },
+      {
+        "name": "Egg Bomb",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 1
+  },
+  {
+    "id": 122,
+    "name": "lick",
+    "names": [
+      {
+        "name": "Schlecker",
+        "language": "de"
+      },
+      {
+        "name": "Lick",
+        "language": "en"
+      }
+    ],
+    "power": 30,
+    "typeId": 8
+  },
+  {
+    "id": 123,
+    "name": "smog",
+    "names": [
+      {
+        "name": "Smog",
+        "language": "de"
+      },
+      {
+        "name": "Smog",
+        "language": "en"
+      }
+    ],
+    "power": 30,
+    "typeId": 4
+  },
+  {
+    "id": 124,
+    "name": "sludge",
+    "names": [
+      {
+        "name": "Schlammbad",
+        "language": "de"
+      },
+      {
+        "name": "Sludge",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 4
+  },
+  {
+    "id": 125,
+    "name": "bone-club",
+    "names": [
+      {
+        "name": "Knochenkeule",
+        "language": "de"
+      },
+      {
+        "name": "Bone Club",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 5
+  },
+  {
+    "id": 126,
+    "name": "fire-blast",
+    "names": [
+      {
+        "name": "Feuersturm",
+        "language": "de"
+      },
+      {
+        "name": "Fire Blast",
+        "language": "en"
+      }
+    ],
+    "power": 110,
+    "typeId": 10
+  },
+  {
+    "id": 127,
+    "name": "waterfall",
+    "names": [
+      {
+        "name": "Kaskade",
+        "language": "de"
+      },
+      {
+        "name": "Waterfall",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 11
+  },
+  {
+    "id": 128,
+    "name": "clamp",
+    "names": [
+      {
+        "name": "Schnapper",
+        "language": "de"
+      },
+      {
+        "name": "Clamp",
+        "language": "en"
+      }
+    ],
+    "power": 35,
+    "typeId": 11
+  },
+  {
+    "id": 129,
+    "name": "swift",
+    "names": [
+      {
+        "name": "Sternschauer",
+        "language": "de"
+      },
+      {
+        "name": "Swift",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 1
+  },
+  {
+    "id": 130,
+    "name": "skull-bash",
+    "names": [
+      {
+        "name": "Schädelwumme",
+        "language": "de"
+      },
+      {
+        "name": "Skull Bash",
+        "language": "en"
+      }
+    ],
+    "power": 130,
+    "typeId": 1
+  },
+  {
+    "id": 131,
+    "name": "spike-cannon",
+    "names": [
+      {
+        "name": "Dornkanone",
+        "language": "de"
+      },
+      {
+        "name": "Spike Cannon",
+        "language": "en"
+      }
+    ],
+    "power": 20,
+    "typeId": 1
+  },
+  {
+    "id": 132,
+    "name": "constrict",
+    "names": [
+      {
+        "name": "Umklammerung",
+        "language": "de"
+      },
+      {
+        "name": "Constrict",
+        "language": "en"
+      }
+    ],
+    "power": 10,
+    "typeId": 1
+  },
+  {
+    "id": 136,
+    "name": "high-jump-kick",
+    "names": [
+      {
+        "name": "Turmkick",
+        "language": "de"
+      },
+      {
+        "name": "High Jump Kick",
+        "language": "en"
+      }
+    ],
+    "power": 130,
+    "typeId": 2
+  },
+  {
+    "id": 138,
+    "name": "dream-eater",
+    "names": [
+      {
+        "name": "Traumfresser",
+        "language": "de"
+      },
+      {
+        "name": "Dream Eater",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 14
+  },
+  {
+    "id": 140,
+    "name": "barrage",
+    "names": [
+      {
+        "name": "Stakkato",
+        "language": "de"
+      },
+      {
+        "name": "Barrage",
+        "language": "en"
+      }
+    ],
+    "power": 15,
+    "typeId": 1
+  },
+  {
+    "id": 141,
+    "name": "leech-life",
+    "names": [
+      {
+        "name": "Blutsauger",
+        "language": "de"
+      },
+      {
+        "name": "Leech Life",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 7
+  },
+  {
+    "id": 143,
+    "name": "sky-attack",
+    "names": [
+      {
+        "name": "Himmelsfeger",
+        "language": "de"
+      },
+      {
+        "name": "Sky Attack",
+        "language": "en"
+      }
+    ],
+    "power": 140,
+    "typeId": 3
+  },
+  {
+    "id": 145,
+    "name": "bubble",
+    "names": [
+      {
+        "name": "Blubber",
+        "language": "de"
+      },
+      {
+        "name": "Bubble",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 11
+  },
+  {
+    "id": 146,
+    "name": "dizzy-punch",
+    "names": [
+      {
+        "name": "Irrschlag",
+        "language": "de"
+      },
+      {
+        "name": "Dizzy Punch",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 1
+  },
+  {
+    "id": 152,
+    "name": "crabhammer",
+    "names": [
+      {
+        "name": "Krabbhammer",
+        "language": "de"
+      },
+      {
+        "name": "Crabhammer",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 11
+  },
+  {
+    "id": 153,
+    "name": "explosion",
+    "names": [
+      {
+        "name": "Explosion",
+        "language": "de"
+      },
+      {
+        "name": "Explosion",
+        "language": "en"
+      }
+    ],
+    "power": 250,
+    "typeId": 1
+  },
+  {
+    "id": 154,
+    "name": "fury-swipes",
+    "names": [
+      {
+        "name": "Kratzfurie",
+        "language": "de"
+      },
+      {
+        "name": "Fury Swipes",
+        "language": "en"
+      }
+    ],
+    "power": 18,
+    "typeId": 1
+  },
+  {
+    "id": 155,
+    "name": "bonemerang",
+    "names": [
+      {
+        "name": "Knochmerang",
+        "language": "de"
+      },
+      {
+        "name": "Bonemerang",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 5
+  },
+  {
+    "id": 157,
+    "name": "rock-slide",
+    "names": [
+      {
+        "name": "Steinhagel",
+        "language": "de"
+      },
+      {
+        "name": "Rock Slide",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 6
+  },
+  {
+    "id": 158,
+    "name": "hyper-fang",
+    "names": [
+      {
+        "name": "Hyperzahn",
+        "language": "de"
+      },
+      {
+        "name": "Hyper Fang",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 1
+  },
+  {
+    "id": 161,
+    "name": "tri-attack",
+    "names": [
+      {
+        "name": "Triplette",
+        "language": "de"
+      },
+      {
+        "name": "Tri Attack",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 1
+  },
+  {
+    "id": 163,
+    "name": "slash",
+    "names": [
+      {
+        "name": "Schlitzer",
+        "language": "de"
+      },
+      {
+        "name": "Slash",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 1
+  },
+  {
+    "id": 168,
+    "name": "thief",
+    "names": [
+      {
+        "name": "Raub",
+        "language": "de"
+      },
+      {
+        "name": "Thief",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 17
+  },
+  {
+    "id": 172,
+    "name": "flame-wheel",
+    "names": [
+      {
+        "name": "Flammenrad",
+        "language": "de"
+      },
+      {
+        "name": "Flame Wheel",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 10
+  },
+  {
+    "id": 173,
+    "name": "snore",
+    "names": [
+      {
+        "name": "Schnarcher",
+        "language": "de"
+      },
+      {
+        "name": "Snore",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 1
+  },
+  {
+    "id": 181,
+    "name": "powder-snow",
+    "names": [
+      {
+        "name": "Pulverschnee",
+        "language": "de"
+      },
+      {
+        "name": "Powder Snow",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 15
+  },
+  {
+    "id": 183,
+    "name": "mach-punch",
+    "names": [
+      {
+        "name": "Tempohieb",
+        "language": "de"
+      },
+      {
+        "name": "Mach Punch",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 2
+  },
+  {
+    "id": 185,
+    "name": "feint-attack",
+    "names": [
+      {
+        "name": "Finte",
+        "language": "de"
+      },
+      {
+        "name": "Feint Attack",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 17
+  },
+  {
+    "id": 188,
+    "name": "sludge-bomb",
+    "names": [
+      {
+        "name": "Matschbombe",
+        "language": "de"
+      },
+      {
+        "name": "Sludge Bomb",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 4
+  },
+  {
+    "id": 189,
+    "name": "mud-slap",
+    "names": [
+      {
+        "name": "Lehmschelle",
+        "language": "de"
+      },
+      {
+        "name": "Mud-Slap",
+        "language": "en"
+      }
+    ],
+    "power": 20,
+    "typeId": 5
+  },
+  {
+    "id": 190,
+    "name": "octazooka",
+    "names": [
+      {
+        "name": "Octazooka",
+        "language": "de"
+      },
+      {
+        "name": "Octazooka",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 11
+  },
+  {
+    "id": 192,
+    "name": "zap-cannon",
+    "names": [
+      {
+        "name": "Blitzkanone",
+        "language": "de"
+      },
+      {
+        "name": "Zap Cannon",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 13
+  },
+  {
+    "id": 196,
+    "name": "icy-wind",
+    "names": [
+      {
+        "name": "Eissturm",
+        "language": "de"
+      },
+      {
+        "name": "Icy Wind",
+        "language": "en"
+      }
+    ],
+    "power": 55,
+    "typeId": 15
+  },
+  {
+    "id": 198,
+    "name": "bone-rush",
+    "names": [
+      {
+        "name": "Knochenhatz",
+        "language": "de"
+      },
+      {
+        "name": "Bone Rush",
+        "language": "en"
+      }
+    ],
+    "power": 25,
+    "typeId": 5
+  },
+  {
+    "id": 200,
+    "name": "outrage",
+    "names": [
+      {
+        "name": "Wutanfall",
+        "language": "de"
+      },
+      {
+        "name": "Outrage",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 16
+  },
+  {
+    "id": 202,
+    "name": "giga-drain",
+    "names": [
+      {
+        "name": "Gigasauger",
+        "language": "de"
+      },
+      {
+        "name": "Giga Drain",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 12
+  },
+  {
+    "id": 205,
+    "name": "rollout",
+    "names": [
+      {
+        "name": "Walzer",
+        "language": "de"
+      },
+      {
+        "name": "Rollout",
+        "language": "en"
+      }
+    ],
+    "power": 30,
+    "typeId": 6
+  },
+  {
+    "id": 206,
+    "name": "false-swipe",
+    "names": [
+      {
+        "name": "Trugschlag",
+        "language": "de"
+      },
+      {
+        "name": "False Swipe",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 1
+  },
+  {
+    "id": 209,
+    "name": "spark",
+    "names": [
+      {
+        "name": "Funkensprung",
+        "language": "de"
+      },
+      {
+        "name": "Spark",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 13
+  },
+  {
+    "id": 210,
+    "name": "fury-cutter",
+    "names": [
+      {
+        "name": "Zornklinge",
+        "language": "de"
+      },
+      {
+        "name": "Fury Cutter",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 7
+  },
+  {
+    "id": 211,
+    "name": "steel-wing",
+    "names": [
+      {
+        "name": "Stahlflügel",
+        "language": "de"
+      },
+      {
+        "name": "Steel Wing",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 9
+  },
+  {
+    "id": 223,
+    "name": "dynamic-punch",
+    "names": [
+      {
+        "name": "Wuchtschlag",
+        "language": "de"
+      },
+      {
+        "name": "Dynamic Punch",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 2
+  },
+  {
+    "id": 224,
+    "name": "megahorn",
+    "names": [
+      {
+        "name": "Vielender",
+        "language": "de"
+      },
+      {
+        "name": "Megahorn",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 7
+  },
+  {
+    "id": 225,
+    "name": "dragon-breath",
+    "names": [
+      {
+        "name": "Feuerodem",
+        "language": "de"
+      },
+      {
+        "name": "Dragon Breath",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 16
+  },
+  {
+    "id": 228,
+    "name": "pursuit",
+    "names": [
+      {
+        "name": "Verfolgung",
+        "language": "de"
+      },
+      {
+        "name": "Pursuit",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 17
+  },
+  {
+    "id": 229,
+    "name": "rapid-spin",
+    "names": [
+      {
+        "name": "Turbodreher",
+        "language": "de"
+      },
+      {
+        "name": "Rapid Spin",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 1
+  },
+  {
+    "id": 231,
+    "name": "iron-tail",
+    "names": [
+      {
+        "name": "Eisenschweif",
+        "language": "de"
+      },
+      {
+        "name": "Iron Tail",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 9
+  },
+  {
+    "id": 232,
+    "name": "metal-claw",
+    "names": [
+      {
+        "name": "Metallklaue",
+        "language": "de"
+      },
+      {
+        "name": "Metal Claw",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 9
+  },
+  {
+    "id": 233,
+    "name": "vital-throw",
+    "names": [
+      {
+        "name": "Überwurf",
+        "language": "de"
+      },
+      {
+        "name": "Vital Throw",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 2
+  },
+  {
+    "id": 237,
+    "name": "hidden-power",
+    "names": [
+      {
+        "name": "Kraftreserve",
+        "language": "de"
+      },
+      {
+        "name": "Hidden Power",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 1
+  },
+  {
+    "id": 238,
+    "name": "cross-chop",
+    "names": [
+      {
+        "name": "Kreuzhieb",
+        "language": "de"
+      },
+      {
+        "name": "Cross Chop",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 2
+  },
+  {
+    "id": 239,
+    "name": "twister",
+    "names": [
+      {
+        "name": "Windhose",
+        "language": "de"
+      },
+      {
+        "name": "Twister",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 16
+  },
+  {
+    "id": 242,
+    "name": "crunch",
+    "names": [
+      {
+        "name": "Knirscher",
+        "language": "de"
+      },
+      {
+        "name": "Crunch",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 17
+  },
+  {
+    "id": 245,
+    "name": "extreme-speed",
+    "names": [
+      {
+        "name": "Turbotempo",
+        "language": "de"
+      },
+      {
+        "name": "Extreme Speed",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 1
+  },
+  {
+    "id": 246,
+    "name": "ancient-power",
+    "names": [
+      {
+        "name": "Antik-Kraft",
+        "language": "de"
+      },
+      {
+        "name": "Ancient Power",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 6
+  },
+  {
+    "id": 247,
+    "name": "shadow-ball",
+    "names": [
+      {
+        "name": "Spukball",
+        "language": "de"
+      },
+      {
+        "name": "Shadow Ball",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 8
+  },
+  {
+    "id": 248,
+    "name": "future-sight",
+    "names": [
+      {
+        "name": "Seher",
+        "language": "de"
+      },
+      {
+        "name": "Future Sight",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 14
+  },
+  {
+    "id": 249,
+    "name": "rock-smash",
+    "names": [
+      {
+        "name": "Zertrümmerer",
+        "language": "de"
+      },
+      {
+        "name": "Rock Smash",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 2
+  },
+  {
+    "id": 250,
+    "name": "whirlpool",
+    "names": [
+      {
+        "name": "Whirlpool",
+        "language": "de"
+      },
+      {
+        "name": "Whirlpool",
+        "language": "en"
+      }
+    ],
+    "power": 35,
+    "typeId": 11
+  },
+  {
+    "id": 252,
+    "name": "fake-out",
+    "names": [
+      {
+        "name": "Mogelhieb",
+        "language": "de"
+      },
+      {
+        "name": "Fake Out",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 1
+  },
+  {
+    "id": 253,
+    "name": "uproar",
+    "names": [
+      {
+        "name": "Aufruhr",
+        "language": "de"
+      },
+      {
+        "name": "Uproar",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 1
+  },
+  {
+    "id": 257,
+    "name": "heat-wave",
+    "names": [
+      {
+        "name": "Hitzewelle",
+        "language": "de"
+      },
+      {
+        "name": "Heat Wave",
+        "language": "en"
+      }
+    ],
+    "power": 95,
+    "typeId": 10
+  },
+  {
+    "id": 263,
+    "name": "facade",
+    "names": [
+      {
+        "name": "Fassade",
+        "language": "de"
+      },
+      {
+        "name": "Facade",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 1
+  },
+  {
+    "id": 264,
+    "name": "focus-punch",
+    "names": [
+      {
+        "name": "Power-Punch",
+        "language": "de"
+      },
+      {
+        "name": "Focus Punch",
+        "language": "en"
+      }
+    ],
+    "power": 150,
+    "typeId": 2
+  },
+  {
+    "id": 265,
+    "name": "smelling-salts",
+    "names": [
+      {
+        "name": "Riechsalz",
+        "language": "de"
+      },
+      {
+        "name": "Smelling Salts",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 1
+  },
+  {
+    "id": 276,
+    "name": "superpower",
+    "names": [
+      {
+        "name": "Kraftkoloss",
+        "language": "de"
+      },
+      {
+        "name": "Superpower",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 2
+  },
+  {
+    "id": 279,
+    "name": "revenge",
+    "names": [
+      {
+        "name": "Vergeltung",
+        "language": "de"
+      },
+      {
+        "name": "Revenge",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 2
+  },
+  {
+    "id": 280,
+    "name": "brick-break",
+    "names": [
+      {
+        "name": "Durchbruch",
+        "language": "de"
+      },
+      {
+        "name": "Brick Break",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 2
+  },
+  {
+    "id": 282,
+    "name": "knock-off",
+    "names": [
+      {
+        "name": "Abschlag",
+        "language": "de"
+      },
+      {
+        "name": "Knock Off",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 17
+  },
+  {
+    "id": 290,
+    "name": "secret-power",
+    "names": [
+      {
+        "name": "Geheimpower",
+        "language": "de"
+      },
+      {
+        "name": "Secret Power",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 1
+  },
+  {
+    "id": 291,
+    "name": "dive",
+    "names": [
+      {
+        "name": "Taucher",
+        "language": "de"
+      },
+      {
+        "name": "Dive",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 11
+  },
+  {
+    "id": 299,
+    "name": "blaze-kick",
+    "names": [
+      {
+        "name": "Feuerfeger",
+        "language": "de"
+      },
+      {
+        "name": "Blaze Kick",
+        "language": "en"
+      }
+    ],
+    "power": 85,
+    "typeId": 10
+  },
+  {
+    "id": 301,
+    "name": "ice-ball",
+    "names": [
+      {
+        "name": "Frostbeule",
+        "language": "de"
+      },
+      {
+        "name": "Ice Ball",
+        "language": "en"
+      }
+    ],
+    "power": 30,
+    "typeId": 15
+  },
+  {
+    "id": 304,
+    "name": "hyper-voice",
+    "names": [
+      {
+        "name": "Schallwelle",
+        "language": "de"
+      },
+      {
+        "name": "Hyper Voice",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 1
+  },
+  {
+    "id": 305,
+    "name": "poison-fang",
+    "names": [
+      {
+        "name": "Giftzahn",
+        "language": "de"
+      },
+      {
+        "name": "Poison Fang",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 4
+  },
+  {
+    "id": 306,
+    "name": "crush-claw",
+    "names": [
+      {
+        "name": "Zermalmklaue",
+        "language": "de"
+      },
+      {
+        "name": "Crush Claw",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 1
+  },
+  {
+    "id": 307,
+    "name": "blast-burn",
+    "names": [
+      {
+        "name": "Lohekanonade",
+        "language": "de"
+      },
+      {
+        "name": "Blast Burn",
+        "language": "en"
+      }
+    ],
+    "power": 150,
+    "typeId": 10
+  },
+  {
+    "id": 308,
+    "name": "hydro-cannon",
+    "names": [
+      {
+        "name": "Aquahaubitze",
+        "language": "de"
+      },
+      {
+        "name": "Hydro Cannon",
+        "language": "en"
+      }
+    ],
+    "power": 150,
+    "typeId": 11
+  },
+  {
+    "id": 309,
+    "name": "meteor-mash",
+    "names": [
+      {
+        "name": "Sternenhieb",
+        "language": "de"
+      },
+      {
+        "name": "Meteor Mash",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 9
+  },
+  {
+    "id": 310,
+    "name": "astonish",
+    "names": [
+      {
+        "name": "Erstauner",
+        "language": "de"
+      },
+      {
+        "name": "Astonish",
+        "language": "en"
+      }
+    ],
+    "power": 30,
+    "typeId": 8
+  },
+  {
+    "id": 311,
+    "name": "weather-ball",
+    "names": [
+      {
+        "name": "Meteorologe",
+        "language": "de"
+      },
+      {
+        "name": "Weather Ball",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 1
+  },
+  {
+    "id": 314,
+    "name": "air-cutter",
+    "names": [
+      {
+        "name": "Windschnitt",
+        "language": "de"
+      },
+      {
+        "name": "Air Cutter",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 3
+  },
+  {
+    "id": 315,
+    "name": "overheat",
+    "names": [
+      {
+        "name": "Hitzekoller",
+        "language": "de"
+      },
+      {
+        "name": "Overheat",
+        "language": "en"
+      }
+    ],
+    "power": 130,
+    "typeId": 10
+  },
+  {
+    "id": 317,
+    "name": "rock-tomb",
+    "names": [
+      {
+        "name": "Felsgrab",
+        "language": "de"
+      },
+      {
+        "name": "Rock Tomb",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 6
+  },
+  {
+    "id": 318,
+    "name": "silver-wind",
+    "names": [
+      {
+        "name": "Silberhauch",
+        "language": "de"
+      },
+      {
+        "name": "Silver Wind",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 7
+  },
+  {
+    "id": 323,
+    "name": "water-spout",
+    "names": [
+      {
+        "name": "Fontränen",
+        "language": "de"
+      },
+      {
+        "name": "Water Spout",
+        "language": "en"
+      }
+    ],
+    "power": 150,
+    "typeId": 11
+  },
+  {
+    "id": 324,
+    "name": "signal-beam",
+    "names": [
+      {
+        "name": "Ampelleuchte",
+        "language": "de"
+      },
+      {
+        "name": "Signal Beam",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 7
+  },
+  {
+    "id": 325,
+    "name": "shadow-punch",
+    "names": [
+      {
+        "name": "Finsterfaust",
+        "language": "de"
+      },
+      {
+        "name": "Shadow Punch",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 8
+  },
+  {
+    "id": 326,
+    "name": "extrasensory",
+    "names": [
+      {
+        "name": "Sondersensor",
+        "language": "de"
+      },
+      {
+        "name": "Extrasensory",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 14
+  },
+  {
+    "id": 327,
+    "name": "sky-uppercut",
+    "names": [
+      {
+        "name": "Himmelhieb",
+        "language": "de"
+      },
+      {
+        "name": "Sky Uppercut",
+        "language": "en"
+      }
+    ],
+    "power": 85,
+    "typeId": 2
+  },
+  {
+    "id": 328,
+    "name": "sand-tomb",
+    "names": [
+      {
+        "name": "Sandgrab",
+        "language": "de"
+      },
+      {
+        "name": "Sand Tomb",
+        "language": "en"
+      }
+    ],
+    "power": 35,
+    "typeId": 5
+  },
+  {
+    "id": 330,
+    "name": "muddy-water",
+    "names": [
+      {
+        "name": "Lehmbrühe",
+        "language": "de"
+      },
+      {
+        "name": "Muddy Water",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 11
+  },
+  {
+    "id": 331,
+    "name": "bullet-seed",
+    "names": [
+      {
+        "name": "Kugelsaat",
+        "language": "de"
+      },
+      {
+        "name": "Bullet Seed",
+        "language": "en"
+      }
+    ],
+    "power": 25,
+    "typeId": 12
+  },
+  {
+    "id": 332,
+    "name": "aerial-ace",
+    "names": [
+      {
+        "name": "Aero-Ass",
+        "language": "de"
+      },
+      {
+        "name": "Aerial Ace",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 3
+  },
+  {
+    "id": 333,
+    "name": "icicle-spear",
+    "names": [
+      {
+        "name": "Eisspeer",
+        "language": "de"
+      },
+      {
+        "name": "Icicle Spear",
+        "language": "en"
+      }
+    ],
+    "power": 25,
+    "typeId": 15
+  },
+  {
+    "id": 337,
+    "name": "dragon-claw",
+    "names": [
+      {
+        "name": "Drachenklaue",
+        "language": "de"
+      },
+      {
+        "name": "Dragon Claw",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 16
+  },
+  {
+    "id": 338,
+    "name": "frenzy-plant",
+    "names": [
+      {
+        "name": "Flora-Statue",
+        "language": "de"
+      },
+      {
+        "name": "Frenzy Plant",
+        "language": "en"
+      }
+    ],
+    "power": 150,
+    "typeId": 12
+  },
+  {
+    "id": 340,
+    "name": "bounce",
+    "names": [
+      {
+        "name": "Sprungfeder",
+        "language": "de"
+      },
+      {
+        "name": "Bounce",
+        "language": "en"
+      }
+    ],
+    "power": 85,
+    "typeId": 3
+  },
+  {
+    "id": 341,
+    "name": "mud-shot",
+    "names": [
+      {
+        "name": "Lehmschuss",
+        "language": "de"
+      },
+      {
+        "name": "Mud Shot",
+        "language": "en"
+      }
+    ],
+    "power": 55,
+    "typeId": 5
+  },
+  {
+    "id": 342,
+    "name": "poison-tail",
+    "names": [
+      {
+        "name": "Giftschweif",
+        "language": "de"
+      },
+      {
+        "name": "Poison Tail",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 4
+  },
+  {
+    "id": 343,
+    "name": "covet",
+    "names": [
+      {
+        "name": "Bezirzer",
+        "language": "de"
+      },
+      {
+        "name": "Covet",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 1
+  },
+  {
+    "id": 344,
+    "name": "volt-tackle",
+    "names": [
+      {
+        "name": "Volttackle",
+        "language": "de"
+      },
+      {
+        "name": "Volt Tackle",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 13
+  },
+  {
+    "id": 345,
+    "name": "magical-leaf",
+    "names": [
+      {
+        "name": "Zauberblatt",
+        "language": "de"
+      },
+      {
+        "name": "Magical Leaf",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 12
+  },
+  {
+    "id": 348,
+    "name": "leaf-blade",
+    "names": [
+      {
+        "name": "Laubklinge",
+        "language": "de"
+      },
+      {
+        "name": "Leaf Blade",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 12
+  },
+  {
+    "id": 350,
+    "name": "rock-blast",
+    "names": [
+      {
+        "name": "Felswurf",
+        "language": "de"
+      },
+      {
+        "name": "Rock Blast",
+        "language": "en"
+      }
+    ],
+    "power": 25,
+    "typeId": 6
+  },
+  {
+    "id": 351,
+    "name": "shock-wave",
+    "names": [
+      {
+        "name": "Schockwelle",
+        "language": "de"
+      },
+      {
+        "name": "Shock Wave",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 13
+  },
+  {
+    "id": 352,
+    "name": "water-pulse",
+    "names": [
+      {
+        "name": "Aquawelle",
+        "language": "de"
+      },
+      {
+        "name": "Water Pulse",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 11
+  },
+  {
+    "id": 358,
+    "name": "wake-up-slap",
+    "names": [
+      {
+        "name": "Weckruf",
+        "language": "de"
+      },
+      {
+        "name": "Wake-Up Slap",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 2
+  },
+  {
+    "id": 359,
+    "name": "hammer-arm",
+    "names": [
+      {
+        "name": "Hammerarm",
+        "language": "de"
+      },
+      {
+        "name": "Hammer Arm",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 2
+  },
+  {
+    "id": 362,
+    "name": "brine",
+    "names": [
+      {
+        "name": "Lake",
+        "language": "de"
+      },
+      {
+        "name": "Brine",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 11
+  },
+  {
+    "id": 364,
+    "name": "feint",
+    "names": [
+      {
+        "name": "Offenlegung",
+        "language": "de"
+      },
+      {
+        "name": "Feint",
+        "language": "en"
+      }
+    ],
+    "power": 30,
+    "typeId": 1
+  },
+  {
+    "id": 365,
+    "name": "pluck",
+    "names": [
+      {
+        "name": "Pflücker",
+        "language": "de"
+      },
+      {
+        "name": "Pluck",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 3
+  },
+  {
+    "id": 369,
+    "name": "u-turn",
+    "names": [
+      {
+        "name": "Kehrtwende",
+        "language": "de"
+      },
+      {
+        "name": "U-turn",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 7
+  },
+  {
+    "id": 370,
+    "name": "close-combat",
+    "names": [
+      {
+        "name": "Nahkampf",
+        "language": "de"
+      },
+      {
+        "name": "Close Combat",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 2
+  },
+  {
+    "id": 371,
+    "name": "payback",
+    "names": [
+      {
+        "name": "Gegenstoß",
+        "language": "de"
+      },
+      {
+        "name": "Payback",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 17
+  },
+  {
+    "id": 372,
+    "name": "assurance",
+    "names": [
+      {
+        "name": "Gewissheit",
+        "language": "de"
+      },
+      {
+        "name": "Assurance",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 17
+  },
+  {
+    "id": 387,
+    "name": "last-resort",
+    "names": [
+      {
+        "name": "Zuflucht",
+        "language": "de"
+      },
+      {
+        "name": "Last Resort",
+        "language": "en"
+      }
+    ],
+    "power": 140,
+    "typeId": 1
+  },
+  {
+    "id": 389,
+    "name": "sucker-punch",
+    "names": [
+      {
+        "name": "Tiefschlag",
+        "language": "de"
+      },
+      {
+        "name": "Sucker Punch",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 17
+  },
+  {
+    "id": 394,
+    "name": "flare-blitz",
+    "names": [
+      {
+        "name": "Flammenblitz",
+        "language": "de"
+      },
+      {
+        "name": "Flare Blitz",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 10
+  },
+  {
+    "id": 396,
+    "name": "aura-sphere",
+    "names": [
+      {
+        "name": "Aurasphäre",
+        "language": "de"
+      },
+      {
+        "name": "Aura Sphere",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 2
+  },
+  {
+    "id": 398,
+    "name": "poison-jab",
+    "names": [
+      {
+        "name": "Gifthieb",
+        "language": "de"
+      },
+      {
+        "name": "Poison Jab",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 4
+  },
+  {
+    "id": 399,
+    "name": "dark-pulse",
+    "names": [
+      {
+        "name": "Finsteraura",
+        "language": "de"
+      },
+      {
+        "name": "Dark Pulse",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 17
+  },
+  {
+    "id": 400,
+    "name": "night-slash",
+    "names": [
+      {
+        "name": "Nachthieb",
+        "language": "de"
+      },
+      {
+        "name": "Night Slash",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 17
+  },
+  {
+    "id": 401,
+    "name": "aqua-tail",
+    "names": [
+      {
+        "name": "Nassschweif",
+        "language": "de"
+      },
+      {
+        "name": "Aqua Tail",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 11
+  },
+  {
+    "id": 402,
+    "name": "seed-bomb",
+    "names": [
+      {
+        "name": "Samenbomben",
+        "language": "de"
+      },
+      {
+        "name": "Seed Bomb",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 12
+  },
+  {
+    "id": 403,
+    "name": "air-slash",
+    "names": [
+      {
+        "name": "Luftschnitt",
+        "language": "de"
+      },
+      {
+        "name": "Air Slash",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 3
+  },
+  {
+    "id": 404,
+    "name": "x-scissor",
+    "names": [
+      {
+        "name": "Kreuzschere",
+        "language": "de"
+      },
+      {
+        "name": "X-Scissor",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 7
+  },
+  {
+    "id": 405,
+    "name": "bug-buzz",
+    "names": [
+      {
+        "name": "Käfergebrumm",
+        "language": "de"
+      },
+      {
+        "name": "Bug Buzz",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 7
+  },
+  {
+    "id": 406,
+    "name": "dragon-pulse",
+    "names": [
+      {
+        "name": "Drachenpuls",
+        "language": "de"
+      },
+      {
+        "name": "Dragon Pulse",
+        "language": "en"
+      }
+    ],
+    "power": 85,
+    "typeId": 16
+  },
+  {
+    "id": 407,
+    "name": "dragon-rush",
+    "names": [
+      {
+        "name": "Drachenstoß",
+        "language": "de"
+      },
+      {
+        "name": "Dragon Rush",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 16
+  },
+  {
+    "id": 408,
+    "name": "power-gem",
+    "names": [
+      {
+        "name": "Juwelenkraft",
+        "language": "de"
+      },
+      {
+        "name": "Power Gem",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 6
+  },
+  {
+    "id": 409,
+    "name": "drain-punch",
+    "names": [
+      {
+        "name": "Ableithieb",
+        "language": "de"
+      },
+      {
+        "name": "Drain Punch",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 2
+  },
+  {
+    "id": 410,
+    "name": "vacuum-wave",
+    "names": [
+      {
+        "name": "Vakuumwelle",
+        "language": "de"
+      },
+      {
+        "name": "Vacuum Wave",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 2
+  },
+  {
+    "id": 411,
+    "name": "focus-blast",
+    "names": [
+      {
+        "name": "Fokusstoß",
+        "language": "de"
+      },
+      {
+        "name": "Focus Blast",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 2
+  },
+  {
+    "id": 412,
+    "name": "energy-ball",
+    "names": [
+      {
+        "name": "Energieball",
+        "language": "de"
+      },
+      {
+        "name": "Energy Ball",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 12
+  },
+  {
+    "id": 413,
+    "name": "brave-bird",
+    "names": [
+      {
+        "name": "Sturzflug",
+        "language": "de"
+      },
+      {
+        "name": "Brave Bird",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 3
+  },
+  {
+    "id": 414,
+    "name": "earth-power",
+    "names": [
+      {
+        "name": "Erdkräfte",
+        "language": "de"
+      },
+      {
+        "name": "Earth Power",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 5
+  },
+  {
+    "id": 416,
+    "name": "giga-impact",
+    "names": [
+      {
+        "name": "Gigastoß",
+        "language": "de"
+      },
+      {
+        "name": "Giga Impact",
+        "language": "en"
+      }
+    ],
+    "power": 150,
+    "typeId": 1
+  },
+  {
+    "id": 418,
+    "name": "bullet-punch",
+    "names": [
+      {
+        "name": "Patronenhieb",
+        "language": "de"
+      },
+      {
+        "name": "Bullet Punch",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 9
+  },
+  {
+    "id": 419,
+    "name": "avalanche",
+    "names": [
+      {
+        "name": "Lawine",
+        "language": "de"
+      },
+      {
+        "name": "Avalanche",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 15
+  },
+  {
+    "id": 420,
+    "name": "ice-shard",
+    "names": [
+      {
+        "name": "Eissplitter",
+        "language": "de"
+      },
+      {
+        "name": "Ice Shard",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 15
+  },
+  {
+    "id": 421,
+    "name": "shadow-claw",
+    "names": [
+      {
+        "name": "Dunkelklaue",
+        "language": "de"
+      },
+      {
+        "name": "Shadow Claw",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 8
+  },
+  {
+    "id": 422,
+    "name": "thunder-fang",
+    "names": [
+      {
+        "name": "Donnerzahn",
+        "language": "de"
+      },
+      {
+        "name": "Thunder Fang",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 13
+  },
+  {
+    "id": 423,
+    "name": "ice-fang",
+    "names": [
+      {
+        "name": "Eiszahn",
+        "language": "de"
+      },
+      {
+        "name": "Ice Fang",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 15
+  },
+  {
+    "id": 424,
+    "name": "fire-fang",
+    "names": [
+      {
+        "name": "Feuerzahn",
+        "language": "de"
+      },
+      {
+        "name": "Fire Fang",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 10
+  },
+  {
+    "id": 425,
+    "name": "shadow-sneak",
+    "names": [
+      {
+        "name": "Schattenstoß",
+        "language": "de"
+      },
+      {
+        "name": "Shadow Sneak",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 8
+  },
+  {
+    "id": 426,
+    "name": "mud-bomb",
+    "names": [
+      {
+        "name": "Schlammbombe",
+        "language": "de"
+      },
+      {
+        "name": "Mud Bomb",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 5
+  },
+  {
+    "id": 427,
+    "name": "psycho-cut",
+    "names": [
+      {
+        "name": "Psychoklinge",
+        "language": "de"
+      },
+      {
+        "name": "Psycho Cut",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 14
+  },
+  {
+    "id": 428,
+    "name": "zen-headbutt",
+    "names": [
+      {
+        "name": "Zen-Kopfstoß",
+        "language": "de"
+      },
+      {
+        "name": "Zen Headbutt",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 14
+  },
+  {
+    "id": 429,
+    "name": "mirror-shot",
+    "names": [
+      {
+        "name": "Spiegelsalve",
+        "language": "de"
+      },
+      {
+        "name": "Mirror Shot",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 9
+  },
+  {
+    "id": 430,
+    "name": "flash-cannon",
+    "names": [
+      {
+        "name": "Lichtkanone",
+        "language": "de"
+      },
+      {
+        "name": "Flash Cannon",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 9
+  },
+  {
+    "id": 431,
+    "name": "rock-climb",
+    "names": [
+      {
+        "name": "Kraxler",
+        "language": "de"
+      },
+      {
+        "name": "Rock Climb",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 1
+  },
+  {
+    "id": 434,
+    "name": "draco-meteor",
+    "names": [
+      {
+        "name": "Draco Meteor",
+        "language": "de"
+      },
+      {
+        "name": "Draco Meteor",
+        "language": "en"
+      }
+    ],
+    "power": 130,
+    "typeId": 16
+  },
+  {
+    "id": 435,
+    "name": "discharge",
+    "names": [
+      {
+        "name": "Ladungsstoß",
+        "language": "de"
+      },
+      {
+        "name": "Discharge",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 13
+  },
+  {
+    "id": 436,
+    "name": "lava-plume",
+    "names": [
+      {
+        "name": "Flammensturm",
+        "language": "de"
+      },
+      {
+        "name": "Lava Plume",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 10
+  },
+  {
+    "id": 437,
+    "name": "leaf-storm",
+    "names": [
+      {
+        "name": "Blättersturm",
+        "language": "de"
+      },
+      {
+        "name": "Leaf Storm",
+        "language": "en"
+      }
+    ],
+    "power": 130,
+    "typeId": 12
+  },
+  {
+    "id": 438,
+    "name": "power-whip",
+    "names": [
+      {
+        "name": "Blattgeißel",
+        "language": "de"
+      },
+      {
+        "name": "Power Whip",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 12
+  },
+  {
+    "id": 440,
+    "name": "cross-poison",
+    "names": [
+      {
+        "name": "Giftstreich",
+        "language": "de"
+      },
+      {
+        "name": "Cross Poison",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 4
+  },
+  {
+    "id": 441,
+    "name": "gunk-shot",
+    "names": [
+      {
+        "name": "Mülltreffer",
+        "language": "de"
+      },
+      {
+        "name": "Gunk Shot",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 4
+  },
+  {
+    "id": 442,
+    "name": "iron-head",
+    "names": [
+      {
+        "name": "Eisenschädel",
+        "language": "de"
+      },
+      {
+        "name": "Iron Head",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 9
+  },
+  {
+    "id": 443,
+    "name": "magnet-bomb",
+    "names": [
+      {
+        "name": "Magnetbombe",
+        "language": "de"
+      },
+      {
+        "name": "Magnet Bomb",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 9
+  },
+  {
+    "id": 444,
+    "name": "stone-edge",
+    "names": [
+      {
+        "name": "Steinkante",
+        "language": "de"
+      },
+      {
+        "name": "Stone Edge",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 6
+  },
+  {
+    "id": 450,
+    "name": "bug-bite",
+    "names": [
+      {
+        "name": "Käferbiss",
+        "language": "de"
+      },
+      {
+        "name": "Bug Bite",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 7
+  },
+  {
+    "id": 451,
+    "name": "charge-beam",
+    "names": [
+      {
+        "name": "Ladestrahl",
+        "language": "de"
+      },
+      {
+        "name": "Charge Beam",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 13
+  },
+  {
+    "id": 452,
+    "name": "wood-hammer",
+    "names": [
+      {
+        "name": "Holzhammer",
+        "language": "de"
+      },
+      {
+        "name": "Wood Hammer",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 12
+  },
+  {
+    "id": 453,
+    "name": "aqua-jet",
+    "names": [
+      {
+        "name": "Wasserdüse",
+        "language": "de"
+      },
+      {
+        "name": "Aqua Jet",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 11
+  },
+  {
+    "id": 457,
+    "name": "head-smash",
+    "names": [
+      {
+        "name": "Kopfstoß",
+        "language": "de"
+      },
+      {
+        "name": "Head Smash",
+        "language": "en"
+      }
+    ],
+    "power": 150,
+    "typeId": 6
+  },
+  {
+    "id": 458,
+    "name": "double-hit",
+    "names": [
+      {
+        "name": "Doppelschlag",
+        "language": "de"
+      },
+      {
+        "name": "Double Hit",
+        "language": "en"
+      }
+    ],
+    "power": 35,
+    "typeId": 1
+  },
+  {
+    "id": 466,
+    "name": "ominous-wind",
+    "names": [
+      {
+        "name": "Unheilböen",
+        "language": "de"
+      },
+      {
+        "name": "Ominous Wind",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 8
+  },
+  {
+    "id": 473,
+    "name": "psyshock",
+    "names": [
+      {
+        "name": "Psychoschock",
+        "language": "de"
+      },
+      {
+        "name": "Psyshock",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 14
+  },
+  {
+    "id": 474,
+    "name": "venoshock",
+    "names": [
+      {
+        "name": "Giftschock",
+        "language": "de"
+      },
+      {
+        "name": "Venoshock",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 4
+  },
+  {
+    "id": 479,
+    "name": "smack-down",
+    "names": [
+      {
+        "name": "Katapult",
+        "language": "de"
+      },
+      {
+        "name": "Smack Down",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 6
+  },
+  {
+    "id": 480,
+    "name": "storm-throw",
+    "names": [
+      {
+        "name": "Bergsturm",
+        "language": "de"
+      },
+      {
+        "name": "Storm Throw",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 2
+  },
+  {
+    "id": 481,
+    "name": "flame-burst",
+    "names": [
+      {
+        "name": "Funkenflug",
+        "language": "de"
+      },
+      {
+        "name": "Flame Burst",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 10
+  },
+  {
+    "id": 482,
+    "name": "sludge-wave",
+    "names": [
+      {
+        "name": "Schlammwoge",
+        "language": "de"
+      },
+      {
+        "name": "Sludge Wave",
+        "language": "en"
+      }
+    ],
+    "power": 95,
+    "typeId": 4
+  },
+  {
+    "id": 485,
+    "name": "synchronoise",
+    "names": [
+      {
+        "name": "Synchrolärm",
+        "language": "de"
+      },
+      {
+        "name": "Synchronoise",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 14
+  },
+  {
+    "id": 488,
+    "name": "flame-charge",
+    "names": [
+      {
+        "name": "Nitroladung",
+        "language": "de"
+      },
+      {
+        "name": "Flame Charge",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 10
+  },
+  {
+    "id": 490,
+    "name": "low-sweep",
+    "names": [
+      {
+        "name": "Fußtritt",
+        "language": "de"
+      },
+      {
+        "name": "Low Sweep",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 2
+  },
+  {
+    "id": 491,
+    "name": "acid-spray",
+    "names": [
+      {
+        "name": "Säurespeier",
+        "language": "de"
+      },
+      {
+        "name": "Acid Spray",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 4
+  },
+  {
+    "id": 492,
+    "name": "foul-play",
+    "names": [
+      {
+        "name": "Schmarotzer",
+        "language": "de"
+      },
+      {
+        "name": "Foul Play",
+        "language": "en"
+      }
+    ],
+    "power": 95,
+    "typeId": 17
+  },
+  {
+    "id": 496,
+    "name": "round",
+    "names": [
+      {
+        "name": "Kanon",
+        "language": "de"
+      },
+      {
+        "name": "Round",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 1
+  },
+  {
+    "id": 497,
+    "name": "echoed-voice",
+    "names": [
+      {
+        "name": "Widerhall",
+        "language": "de"
+      },
+      {
+        "name": "Echoed Voice",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 1
+  },
+  {
+    "id": 498,
+    "name": "chip-away",
+    "names": [
+      {
+        "name": "Zermürben",
+        "language": "de"
+      },
+      {
+        "name": "Chip Away",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 1
+  },
+  {
+    "id": 499,
+    "name": "clear-smog",
+    "names": [
+      {
+        "name": "Klärsmog",
+        "language": "de"
+      },
+      {
+        "name": "Clear Smog",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 4
+  },
+  {
+    "id": 500,
+    "name": "stored-power",
+    "names": [
+      {
+        "name": "Kraftvorrat",
+        "language": "de"
+      },
+      {
+        "name": "Stored Power",
+        "language": "en"
+      }
+    ],
+    "power": 20,
+    "typeId": 14
+  },
+  {
+    "id": 503,
+    "name": "scald",
+    "names": [
+      {
+        "name": "Siedewasser",
+        "language": "de"
+      },
+      {
+        "name": "Scald",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 11
+  },
+  {
+    "id": 506,
+    "name": "hex",
+    "names": [
+      {
+        "name": "Bürde",
+        "language": "de"
+      },
+      {
+        "name": "Hex",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 8
+  },
+  {
+    "id": 507,
+    "name": "sky-drop",
+    "names": [
+      {
+        "name": "Freier Fall",
+        "language": "de"
+      },
+      {
+        "name": "Sky Drop",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 3
+  },
+  {
+    "id": 509,
+    "name": "circle-throw",
+    "names": [
+      {
+        "name": "Überkopfwurf",
+        "language": "de"
+      },
+      {
+        "name": "Circle Throw",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 2
+  },
+  {
+    "id": 510,
+    "name": "incinerate",
+    "names": [
+      {
+        "name": "Einäschern",
+        "language": "de"
+      },
+      {
+        "name": "Incinerate",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 10
+  },
+  {
+    "id": 512,
+    "name": "acrobatics",
+    "names": [
+      {
+        "name": "Akrobatik",
+        "language": "de"
+      },
+      {
+        "name": "Acrobatics",
+        "language": "en"
+      }
+    ],
+    "power": 55,
+    "typeId": 3
+  },
+  {
+    "id": 514,
+    "name": "retaliate",
+    "names": [
+      {
+        "name": "Heimzahlung",
+        "language": "de"
+      },
+      {
+        "name": "Retaliate",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 1
+  },
+  {
+    "id": 517,
+    "name": "inferno",
+    "names": [
+      {
+        "name": "Inferno",
+        "language": "de"
+      },
+      {
+        "name": "Inferno",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 10
+  },
+  {
+    "id": 518,
+    "name": "water-pledge",
+    "names": [
+      {
+        "name": "Wassersäulen",
+        "language": "de"
+      },
+      {
+        "name": "Water Pledge",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 11
+  },
+  {
+    "id": 519,
+    "name": "fire-pledge",
+    "names": [
+      {
+        "name": "Feuersäulen",
+        "language": "de"
+      },
+      {
+        "name": "Fire Pledge",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 10
+  },
+  {
+    "id": 520,
+    "name": "grass-pledge",
+    "names": [
+      {
+        "name": "Pflanzensäulen",
+        "language": "de"
+      },
+      {
+        "name": "Grass Pledge",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 12
+  },
+  {
+    "id": 521,
+    "name": "volt-switch",
+    "names": [
+      {
+        "name": "Voltwechsel",
+        "language": "de"
+      },
+      {
+        "name": "Volt Switch",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 13
+  },
+  {
+    "id": 522,
+    "name": "struggle-bug",
+    "names": [
+      {
+        "name": "Käfertrutz",
+        "language": "de"
+      },
+      {
+        "name": "Struggle Bug",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 7
+  },
+  {
+    "id": 523,
+    "name": "bulldoze",
+    "names": [
+      {
+        "name": "Dampfwalze",
+        "language": "de"
+      },
+      {
+        "name": "Bulldoze",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 5
+  },
+  {
+    "id": 524,
+    "name": "frost-breath",
+    "names": [
+      {
+        "name": "Eisesodem",
+        "language": "de"
+      },
+      {
+        "name": "Frost Breath",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 15
+  },
+  {
+    "id": 525,
+    "name": "dragon-tail",
+    "names": [
+      {
+        "name": "Drachenrute",
+        "language": "de"
+      },
+      {
+        "name": "Dragon Tail",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 16
+  },
+  {
+    "id": 527,
+    "name": "electroweb",
+    "names": [
+      {
+        "name": "Elektronetz",
+        "language": "de"
+      },
+      {
+        "name": "Electroweb",
+        "language": "en"
+      }
+    ],
+    "power": 55,
+    "typeId": 13
+  },
+  {
+    "id": 528,
+    "name": "wild-charge",
+    "names": [
+      {
+        "name": "Stromstoß",
+        "language": "de"
+      },
+      {
+        "name": "Wild Charge",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 13
+  },
+  {
+    "id": 529,
+    "name": "drill-run",
+    "names": [
+      {
+        "name": "Schlagbohrer",
+        "language": "de"
+      },
+      {
+        "name": "Drill Run",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 5
+  },
+  {
+    "id": 530,
+    "name": "dual-chop",
+    "names": [
+      {
+        "name": "Doppelhieb",
+        "language": "de"
+      },
+      {
+        "name": "Dual Chop",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 16
+  },
+  {
+    "id": 531,
+    "name": "heart-stamp",
+    "names": [
+      {
+        "name": "Herzstempel",
+        "language": "de"
+      },
+      {
+        "name": "Heart Stamp",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 14
+  },
+  {
+    "id": 534,
+    "name": "razor-shell",
+    "names": [
+      {
+        "name": "Kalkklinge",
+        "language": "de"
+      },
+      {
+        "name": "Razor Shell",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 11
+  },
+  {
+    "id": 536,
+    "name": "leaf-tornado",
+    "names": [
+      {
+        "name": "Grasmixer",
+        "language": "de"
+      },
+      {
+        "name": "Leaf Tornado",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 12
+  },
+  {
+    "id": 537,
+    "name": "steamroller",
+    "names": [
+      {
+        "name": "Quetschwalze",
+        "language": "de"
+      },
+      {
+        "name": "Steamroller",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 7
+  },
+  {
+    "id": 540,
+    "name": "psystrike",
+    "names": [
+      {
+        "name": "Psychostoß",
+        "language": "de"
+      },
+      {
+        "name": "Psystrike",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 14
+  },
+  {
+    "id": 541,
+    "name": "tail-slap",
+    "names": [
+      {
+        "name": "Kehrschelle",
+        "language": "de"
+      },
+      {
+        "name": "Tail Slap",
+        "language": "en"
+      }
+    ],
+    "power": 25,
+    "typeId": 1
+  },
+  {
+    "id": 542,
+    "name": "hurricane",
+    "names": [
+      {
+        "name": "Orkan",
+        "language": "de"
+      },
+      {
+        "name": "Hurricane",
+        "language": "en"
+      }
+    ],
+    "power": 110,
+    "typeId": 3
+  },
+  {
+    "id": 555,
+    "name": "snarl",
+    "names": [
+      {
+        "name": "Standpauke",
+        "language": "de"
+      },
+      {
+        "name": "Snarl",
+        "language": "en"
+      }
+    ],
+    "power": 55,
+    "typeId": 17
+  },
+  {
+    "id": 556,
+    "name": "icicle-crash",
+    "names": [
+      {
+        "name": "Eiszapfhagel",
+        "language": "de"
+      },
+      {
+        "name": "Icicle Crash",
+        "language": "en"
+      }
+    ],
+    "power": 85,
+    "typeId": 15
+  },
+  {
+    "id": 562,
+    "name": "belch",
+    "names": [
+      {
+        "name": "Rülpser",
+        "language": "de"
+      },
+      {
+        "name": "Belch",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 4
+  },
+  {
+    "id": 565,
+    "name": "fell-stinger",
+    "names": [
+      {
+        "name": "Stachelfinale",
+        "language": "de"
+      },
+      {
+        "name": "Fell Stinger",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 7
+  },
+  {
+    "id": 566,
+    "name": "phantom-force",
+    "names": [
+      {
+        "name": "Phantomkraft",
+        "language": "de"
+      },
+      {
+        "name": "Phantom Force",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 8
+  },
+  {
+    "id": 572,
+    "name": "petal-blizzard",
+    "names": [
+      {
+        "name": "Blütenwirbel",
+        "language": "de"
+      },
+      {
+        "name": "Petal Blizzard",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 12
+  },
+  {
+    "id": 573,
+    "name": "freeze-dry",
+    "names": [
+      {
+        "name": "Gefriertrockner",
+        "language": "de"
+      },
+      {
+        "name": "Freeze-Dry",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 15
+  },
+  {
+    "id": 574,
+    "name": "disarming-voice",
+    "names": [
+      {
+        "name": "Säuselstimme",
+        "language": "de"
+      },
+      {
+        "name": "Disarming Voice",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 18
+  },
+  {
+    "id": 577,
+    "name": "draining-kiss",
+    "names": [
+      {
+        "name": "Diebeskuss",
+        "language": "de"
+      },
+      {
+        "name": "Draining Kiss",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 18
+  },
+  {
+    "id": 583,
+    "name": "play-rough",
+    "names": [
+      {
+        "name": "Knuddler",
+        "language": "de"
+      },
+      {
+        "name": "Play Rough",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 18
+  },
+  {
+    "id": 584,
+    "name": "fairy-wind",
+    "names": [
+      {
+        "name": "Feenbrise",
+        "language": "de"
+      },
+      {
+        "name": "Fairy Wind",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 18
+  },
+  {
+    "id": 585,
+    "name": "moonblast",
+    "names": [
+      {
+        "name": "Mondgewalt",
+        "language": "de"
+      },
+      {
+        "name": "Moonblast",
+        "language": "en"
+      }
+    ],
+    "power": 95,
+    "typeId": 18
+  },
+  {
+    "id": 595,
+    "name": "mystical-fire",
+    "names": [
+      {
+        "name": "Magieflamme",
+        "language": "de"
+      },
+      {
+        "name": "Mystical Fire",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 10
+  },
+  {
+    "id": 605,
+    "name": "dazzling-gleam",
+    "names": [
+      {
+        "name": "Zauberschein",
+        "language": "de"
+      },
+      {
+        "name": "Dazzling Gleam",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 18
+  },
+  {
+    "id": 609,
+    "name": "nuzzle",
+    "names": [
+      {
+        "name": "Wangenrubbler",
+        "language": "de"
+      },
+      {
+        "name": "Nuzzle",
+        "language": "en"
+      }
+    ],
+    "power": 20,
+    "typeId": 13
+  },
+  {
+    "id": 611,
+    "name": "infestation",
+    "names": [
+      {
+        "name": "Plage",
+        "language": "de"
+      },
+      {
+        "name": "Infestation",
+        "language": "en"
+      }
+    ],
+    "power": 20,
+    "typeId": 7
+  },
+  {
+    "id": 612,
+    "name": "power-up-punch",
+    "names": [
+      {
+        "name": "Steigerungshieb",
+        "language": "de"
+      },
+      {
+        "name": "Power-Up Punch",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 2
+  },
+  {
+    "id": 660,
+    "name": "first-impression",
+    "names": [
+      {
+        "name": "Überrumpler",
+        "language": "de"
+      },
+      {
+        "name": "First Impression",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 7
+  },
+  {
+    "id": 663,
+    "name": "darkest-lariat",
+    "names": [
+      {
+        "name": "Dark Lariat",
+        "language": "de"
+      },
+      {
+        "name": "Darkest Lariat",
+        "language": "en"
+      }
+    ],
+    "power": 85,
+    "typeId": 17
+  },
+  {
+    "id": 664,
+    "name": "sparkling-aria",
+    "names": [
+      {
+        "name": "Schaumserenade",
+        "language": "de"
+      },
+      {
+        "name": "Sparkling Aria",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 11
+  },
+  {
+    "id": 667,
+    "name": "high-horsepower",
+    "names": [
+      {
+        "name": "Pferdestärke",
+        "language": "de"
+      },
+      {
+        "name": "High Horsepower",
+        "language": "en"
+      }
+    ],
+    "power": 95,
+    "typeId": 5
+  },
+  {
+    "id": 669,
+    "name": "solar-blade",
+    "names": [
+      {
+        "name": "Solarklinge",
+        "language": "de"
+      },
+      {
+        "name": "Solar Blade",
+        "language": "en"
+      }
+    ],
+    "power": 125,
+    "typeId": 12
+  },
+  {
+    "id": 675,
+    "name": "throat-chop",
+    "names": [
+      {
+        "name": "Neck Strike",
+        "language": "de"
+      },
+      {
+        "name": "Throat Chop",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 17
+  },
+  {
+    "id": 676,
+    "name": "pollen-puff",
+    "names": [
+      {
+        "name": "Pollenknödel",
+        "language": "de"
+      },
+      {
+        "name": "Pollen Puff",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 7
+  },
+  {
+    "id": 679,
+    "name": "lunge",
+    "names": [
+      {
+        "name": "Anfallen",
+        "language": "de"
+      },
+      {
+        "name": "Lunge",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 7
+  },
+  {
+    "id": 681,
+    "name": "power-trip",
+    "names": [
+      {
+        "name": "Überheblichkeit",
+        "language": "de"
+      },
+      {
+        "name": "Power Trip",
+        "language": "en"
+      }
+    ],
+    "power": 20,
+    "typeId": 17
+  },
+  {
+    "id": 682,
+    "name": "burn-up",
+    "names": [
+      {
+        "name": "Ausbrennen",
+        "language": "de"
+      },
+      {
+        "name": "Burn Up",
+        "language": "en"
+      }
+    ],
+    "power": 130,
+    "typeId": 10
+  },
+  {
+    "id": 684,
+    "name": "smart-strike",
+    "names": [
+      {
+        "name": "Schmalhorn",
+        "language": "de"
+      },
+      {
+        "name": "Smart Strike",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 9
+  },
+  {
+    "id": 693,
+    "name": "brutal-swing",
+    "names": [
+      {
+        "name": "Wirbler",
+        "language": "de"
+      },
+      {
+        "name": "Brutal Swing",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 17
+  },
+  {
+    "id": 706,
+    "name": "psychic-fangs",
+    "names": [
+      {
+        "name": "Psychobeißer",
+        "language": "de"
+      },
+      {
+        "name": "Psychic Fangs",
+        "language": "en"
+      }
+    ],
+    "power": 85,
+    "typeId": 14
+  },
+  {
+    "id": 707,
+    "name": "stomping-tantrum",
+    "names": [
+      {
+        "name": "Fruststampfer",
+        "language": "de"
+      },
+      {
+        "name": "Stomping Tantrum",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 5
+  },
+  {
+    "id": 710,
+    "name": "liquidation",
+    "names": [
+      {
+        "name": "Aquadurchstoß",
+        "language": "de"
+      },
+      {
+        "name": "Liquidation",
+        "language": "en"
+      }
+    ],
+    "power": 85,
+    "typeId": 11
+  },
+  {
+    "id": 776,
+    "name": "body-press",
+    "names": [
+      {
+        "name": "Body Press",
+        "language": "de"
+      },
+      {
+        "name": "Body Press",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 2
+  },
+  {
+    "id": 784,
+    "name": "breaking-swipe",
+    "names": [
+      {
+        "name": "Breitseite",
+        "language": "de"
+      },
+      {
+        "name": "Breaking Swipe",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 16
+  },
+  {
+    "id": 796,
+    "name": "steel-beam",
+    "names": [
+      {
+        "name": "Stahlstrahl",
+        "language": "de"
+      },
+      {
+        "name": "Steel Beam",
+        "language": "en"
+      }
+    ],
+    "power": 140,
+    "typeId": 9
+  },
+  {
+    "id": 797,
+    "name": "expanding-force",
+    "names": [
+      {
+        "name": "Flächenmacht",
+        "language": "de"
+      },
+      {
+        "name": "Expanding Force",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 14
+  },
+  {
+    "id": 798,
+    "name": "steel-roller",
+    "names": [
+      {
+        "name": "Eisenwalze",
+        "language": "de"
+      },
+      {
+        "name": "Steel Roller",
+        "language": "en"
+      }
+    ],
+    "power": 130,
+    "typeId": 9
+  },
+  {
+    "id": 799,
+    "name": "scale-shot",
+    "names": [
+      {
+        "name": "Schuppenschuss",
+        "language": "de"
+      },
+      {
+        "name": "Scale Shot",
+        "language": "en"
+      }
+    ],
+    "power": 25,
+    "typeId": 16
+  },
+  {
+    "id": 800,
+    "name": "meteor-beam",
+    "names": [
+      {
+        "name": "Meteorstrahl",
+        "language": "de"
+      },
+      {
+        "name": "Meteor Beam",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 6
+  },
+  {
+    "id": 802,
+    "name": "misty-explosion",
+    "names": [
+      {
+        "name": "Nebelexplosion",
+        "language": "de"
+      },
+      {
+        "name": "Misty Explosion",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 18
+  },
+  {
+    "id": 803,
+    "name": "grassy-glide",
+    "names": [
+      {
+        "name": "Grasrutsche",
+        "language": "de"
+      },
+      {
+        "name": "Grassy Glide",
+        "language": "en"
+      }
+    ],
+    "power": 55,
+    "typeId": 12
+  },
+  {
+    "id": 804,
+    "name": "rising-voltage",
+    "names": [
+      {
+        "name": "Hochspannung",
+        "language": "de"
+      },
+      {
+        "name": "Rising Voltage",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 13
+  },
+  {
+    "id": 805,
+    "name": "terrain-pulse",
+    "names": [
+      {
+        "name": "Feldimpuls",
+        "language": "de"
+      },
+      {
+        "name": "Terrain Pulse",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 1
+  },
+  {
+    "id": 806,
+    "name": "skitter-smack",
+    "names": [
+      {
+        "name": "Krabbelkracher",
+        "language": "de"
+      },
+      {
+        "name": "Skitter Smack",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 7
+  },
+  {
+    "id": 807,
+    "name": "burning-jealousy",
+    "names": [
+      {
+        "name": "Neidflammen",
+        "language": "de"
+      },
+      {
+        "name": "Burning Jealousy",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 10
+  },
+  {
+    "id": 808,
+    "name": "lash-out",
+    "names": [
+      {
+        "name": "Frustventil",
+        "language": "de"
+      },
+      {
+        "name": "Lash Out",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 17
+  },
+  {
+    "id": 809,
+    "name": "poltergeist",
+    "names": [
+      {
+        "name": "Poltergeist",
+        "language": "de"
+      },
+      {
+        "name": "Poltergeist",
+        "language": "en"
+      }
+    ],
+    "power": 110,
+    "typeId": 8
+  },
+  {
+    "id": 812,
+    "name": "flip-turn",
+    "names": [
+      {
+        "name": "Rollwende",
+        "language": "de"
+      },
+      {
+        "name": "Flip Turn",
+        "language": "en"
+      }
+    ],
+    "power": 60,
+    "typeId": 11
+  },
+  {
+    "id": 813,
+    "name": "triple-axel",
+    "names": [
+      {
+        "name": "Dreifach-Axel",
+        "language": "de"
+      },
+      {
+        "name": "Triple Axel",
+        "language": "en"
+      }
+    ],
+    "power": 20,
+    "typeId": 15
+  },
+  {
+    "id": 814,
+    "name": "dual-wingbeat",
+    "names": [
+      {
+        "name": "Doppelflügel",
+        "language": "de"
+      },
+      {
+        "name": "Dual Wingbeat",
+        "language": "en"
+      }
+    ],
+    "power": 40,
+    "typeId": 3
+  },
+  {
+    "id": 815,
+    "name": "scorching-sands",
+    "names": [
+      {
+        "name": "Brandsand",
+        "language": "de"
+      },
+      {
+        "name": "Scorching Sands",
+        "language": "en"
+      }
+    ],
+    "power": 70,
+    "typeId": 5
+  },
+  {
+    "id": 833,
+    "name": "raging-fury",
+    "names": [
+      {
+        "name": "Raging Fury",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 10
+  },
+  {
+    "id": 834,
+    "name": "wave-crash",
+    "names": [
+      {
+        "name": "Wave Crash",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 11
+  },
+  {
+    "id": 851,
+    "name": "tera-blast",
+    "names": [
+      {
+        "name": "Tera Blast",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 1
+  },
+  {
+    "id": 853,
+    "name": "axe-kick",
+    "names": [
+      {
+        "name": "Axe Kick",
+        "language": "en"
+      }
+    ],
+    "power": 120,
+    "typeId": 2
+  },
+  {
+    "id": 861,
+    "name": "ice-spinner",
+    "names": [
+      {
+        "name": "Ice Spinner",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 15
+  },
+  {
+    "id": 873,
+    "name": "raging-bull",
+    "names": [
+      {
+        "name": "Raging Bull",
+        "language": "en"
+      }
+    ],
+    "power": 90,
+    "typeId": 1
+  },
+  {
+    "id": 884,
+    "name": "pounce",
+    "names": [
+      {
+        "name": "Pounce",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 7
+  },
+  {
+    "id": 885,
+    "name": "trailblaze",
+    "names": [
+      {
+        "name": "Trailblaze",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 12
+  },
+  {
+    "id": 886,
+    "name": "chilling-water",
+    "names": [
+      {
+        "name": "Chilling Water",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 11
+  },
+  {
+    "id": 889,
+    "name": "rage-fist",
+    "names": [
+      {
+        "name": "Rage Fist",
+        "language": "en"
+      }
+    ],
+    "power": 50,
+    "typeId": 8
+  },
+  {
+    "id": 914,
+    "name": "alluring-voice",
+    "names": [
+      {
+        "name": "Lockstimme",
+        "language": "de"
+      },
+      {
+        "name": "Alluring Voice",
+        "language": "en"
+      }
+    ],
+    "power": 80,
+    "typeId": 18
+  },
+  {
+    "id": 915,
+    "name": "temper-flare",
+    "names": [
+      {
+        "name": "Frustflamme",
+        "language": "de"
+      },
+      {
+        "name": "Temper Flare",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 10
+  },
+  {
+    "id": 916,
+    "name": "supercell-slam",
+    "names": [
+      {
+        "name": "Donnerstoß",
+        "language": "de"
+      },
+      {
+        "name": "Supercell Slam",
+        "language": "en"
+      }
+    ],
+    "power": 100,
+    "typeId": 13
+  },
+  {
+    "id": 917,
+    "name": "psychic-noise",
+    "names": [
+      {
+        "name": "Psycholärm",
+        "language": "de"
+      },
+      {
+        "name": "Psychic Noise",
+        "language": "en"
+      }
+    ],
+    "power": 75,
+    "typeId": 14
+  },
+  {
+    "id": 918,
+    "name": "upper-hand",
+    "names": [
+      {
+        "name": "Schnellkonter",
+        "language": "de"
+      },
+      {
+        "name": "Upper Hand",
+        "language": "en"
+      }
+    ],
+    "power": 65,
+    "typeId": 2
+  }
+]

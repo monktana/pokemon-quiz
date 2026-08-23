@@ -1,11 +1,51 @@
 /* eslint-disable testing-library/prefer-screen-queries */
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
-import { Matchup } from '../src/api';
+import { TypeEffectiveness } from '../src/api/schema';
+import { calculateEffectiveness } from '../src/lib/calculateEffectiveness';
+
+const effectivenessButtonTestId: Record<TypeEffectiveness, string> = {
+  [TypeEffectiveness.NoEffect]: 'no-effect-button',
+  [TypeEffectiveness.NotVeryEffective]: 'not-effective-button',
+  [TypeEffectiveness.Effective]: 'effective-button',
+  [TypeEffectiveness.SuperEffective]: 'super-effective-button',
+};
+
+// The correct answer for a round is no longer visible on a network response -
+// matchups are generated client-side now. Instead, derive it from the same
+// rendered type tags (data-type attributes) a real player sees, fed through
+// the same calculateEffectiveness the app itself uses.
+const getTypeNames = async (page: Page, containerTestId: string): Promise<string[]> => {
+  const attributes = await page
+    .locator(`[data-testid="${containerTestId}"] [data-type]`)
+    .evaluateAll((elements) => elements.map((element) => element.getAttribute('data-type')!));
+  return attributes;
+};
+
+const getRoundEffectiveness = async (page: Page): Promise<TypeEffectiveness> => {
+  const [moveType] = await getTypeNames(page, 'question');
+  const defenderTypeNames = await getTypeNames(page, 'defender-pokemon');
+
+  return calculateEffectiveness(
+    { name: moveType },
+    defenderTypeNames.map((name) => ({ name }))
+  );
+};
+
+const clickCorrectButton = async (page: Page) => {
+  const effectiveness = await getRoundEffectiveness(page);
+  await page.getByTestId(effectivenessButtonTestId[effectiveness]).click();
+};
+
+const clickIncorrectButton = async (page: Page) => {
+  const effectiveness = await getRoundEffectiveness(page);
+  const wrongEffectiveness = Object.values(TypeEffectiveness).find((e) => e !== effectiveness)!;
+  await page.getByTestId(effectivenessButtonTestId[wrongEffectiveness]).click();
+};
 
 test.describe('Error', () => {
   test('it displays an error screen if the initial request fails', async ({ page }) => {
-    await page.route('**/api/v1/matchup', (route) =>
+    await page.route('**/data/pokemon.json', (route) =>
       route.fulfill({
         status: 500,
         path: 'tests/fixtures/error/500.json',
@@ -13,8 +53,6 @@ test.describe('Error', () => {
     );
 
     await page.goto('/');
-    await page.waitForLoadState('domcontentloaded');
-
     await page.getByTestId('start-game-button').click();
 
     await expect(page.getByTestId('error-header')).toBeVisible();
@@ -26,113 +64,16 @@ test.describe('Error', () => {
     );
   });
 
-  test('it displays an error screen if an request during the game fails', async ({ page }) => {
-    const initialMatchupPromise = page.waitForResponse('**/api/v1/matchup');
-
-    await page.goto('/');
-    const initialMatchup = await initialMatchupPromise;
-    const matchup = await initialMatchup.json();
-    await page.waitForLoadState('domcontentloaded');
-
-    const errorPromise = page.route(
-      '**/api/v1/matchup',
-      (route) =>
-        route.fulfill({
-          status: 500,
-          path: 'tests/fixtures/error/500.json',
-        }),
-      { times: 1 }
-    );
-
-    await page.locator('[data-testid="start-game-button"]').click();
-
-    if (matchup.effectiveness === 'NoEffect') {
-      await page.getByTestId('no-effect-button').click();
-    } else if (matchup.effectiveness === 'SuperEffective') {
-      await page.getByTestId('super-effective-button').click();
-    } else if (matchup.effectiveness === 'NotVeryEffective') {
-      await page.getByTestId('not-effective-button').click();
-    } else {
-      await page.getByTestId('effective-button').click();
-    }
-
-    await errorPromise;
-
-    await expect(page.getByTestId('error-header')).toBeVisible();
-    await expect(page.getByTestId('error-message')).toBeVisible();
-  });
-
-  test('it keeps the score when retrying after an error', async ({ page }) => {
-    const firstRoundPromise = page.waitForResponse('**/api/v1/matchup');
-    await page.goto('/');
-
-    const firstMatchupResponse = await firstRoundPromise;
-    const firstMatchup = await firstMatchupResponse.json();
-    await page.waitForLoadState('domcontentloaded');
-
-    const secondRoundPromise = page.waitForResponse('**/api/v1/matchup');
-    await page.getByTestId('start-game-button').click();
-    await page.waitForLoadState('domcontentloaded');
-
-    const errorPromise = page.route(
-      '**/api/v1/matchup',
-      (route) =>
-        route.fulfill({
-          status: 500,
-          path: 'tests/fixtures/error/500.json',
-        }),
-      { times: 1 }
-    );
-
-    if (firstMatchup.effectiveness === 'NoEffect') {
-      await page.getByTestId('no-effect-button').click();
-    } else if (firstMatchup.effectiveness === 'SuperEffective') {
-      await page.getByTestId('super-effective-button').click();
-    } else if (firstMatchup.effectiveness === 'NotVeryEffective') {
-      await page.getByTestId('not-effective-button').click();
-    } else {
-      await page.getByTestId('effective-button').click();
-    }
-
-    const secondMatchupResponse = await secondRoundPromise;
-    const secondMatchup = await secondMatchupResponse.json();
-    await page.waitForLoadState('domcontentloaded');
-
-    await expect(page.getByTestId('score-value')).toHaveText('1');
-
-    if (secondMatchup.effectiveness === 'NoEffect') {
-      await page.getByTestId('no-effect-button').click();
-    } else if (secondMatchup.effectiveness === 'SuperEffective') {
-      await page.getByTestId('super-effective-button').click();
-    } else if (secondMatchup.effectiveness === 'NotVeryEffective') {
-      await page.getByTestId('not-effective-button').click();
-    } else {
-      await page.getByTestId('effective-button').click();
-    }
-
-    await errorPromise;
-
-    await expect(page.getByTestId('reset-button')).toBeVisible();
-    await expect(page.getByTestId('reset-button')).toBeEnabled();
-
-    await page.locator('[data-testid="reset-button"]').click();
-    await page.waitForLoadState('domcontentloaded');
-
-    await expect(page.getByTestId('score-value')).toHaveText('2');
-  });
+  // Note: the old "error during the game" / "keeps the score when retrying
+  // after an error" tests simulated a network failure on a later round. That
+  // failure mode no longer exists - rounds after the first are generated
+  // from an already-loaded, in-memory dataset with no network call to fail.
 });
 
 test.describe('Game', () => {
   test('it enables the player to start a new game', async ({ page }) => {
-    const firstMatchupPromise = page.waitForResponse('**/api/v1/matchup');
     await page.goto('/');
-
-    const firstMatchupResponse = await firstMatchupPromise;
-    const firstMatchup: Matchup = await firstMatchupResponse.json();
-    await page.waitForLoadState('domcontentloaded');
-
-    await page.locator('[data-testid="start-game-button"]').click();
-    await page.waitForLoadState('domcontentloaded');
+    await page.getByTestId('start-game-button').click();
 
     await expect(page.getByTestId('score-label')).toHaveText('Score');
     await expect(page.getByTestId('score-value')).toHaveText('0');
@@ -140,15 +81,7 @@ test.describe('Game', () => {
     await expect(page.getByTestId('game-container')).toBeVisible();
 
     await expect(page.getByTestId('attacker-pokemon')).toBeVisible();
-    await expect(page.getByTestId('attacker-pokemon')).toContainText(firstMatchup.attacker!.name!, {
-      ignoreCase: true,
-    });
-
     await expect(page.getByTestId('defender-pokemon')).toBeVisible();
-    await expect(page.getByTestId('defender-pokemon')).toContainText(firstMatchup.defender!.name!, {
-      ignoreCase: true,
-    });
-
     await expect(page.getByTestId('question')).toBeVisible();
 
     await expect(page.getByTestId('decision-buttons')).toBeVisible();
@@ -167,49 +100,21 @@ test.describe('Game', () => {
   });
 
   test('it increases the score when the guess is correct', async ({ page }) => {
-    const firstMatchupPromise = page.waitForResponse('**/api/v1/matchup');
     await page.goto('/');
-
-    const firstMatchupResponse = await firstMatchupPromise;
-    const firstMatchup = await firstMatchupResponse.json();
-    await page.waitForLoadState('domcontentloaded');
-
     await page.getByTestId('start-game-button').click();
-    await page.waitForLoadState('domcontentloaded');
+    await expect(page.getByTestId('game-container')).toBeVisible();
 
-    if (firstMatchup.effectiveness === 'NoEffect') {
-      await page.getByTestId('no-effect-button').click();
-    } else if (firstMatchup.effectiveness === 'SuperEffective') {
-      await page.getByTestId('super-effective-button').click();
-    } else if (firstMatchup.effectiveness === 'NotVeryEffective') {
-      await page.getByTestId('not-effective-button').click();
-    } else {
-      await page.getByTestId('effective-button').click();
-    }
-
-    await page.waitForLoadState('domcontentloaded');
+    await clickCorrectButton(page);
 
     await expect(page.getByTestId('score-value')).toHaveText('1');
   });
 
   test('it ends the game when the guess is incorrect', async ({ page }) => {
-    const firstMatchupPromise = page.waitForResponse('**/api/v1/matchup');
     await page.goto('/');
-
-    const firstMatchupResponse = await firstMatchupPromise;
-    const firstMatchup = await firstMatchupResponse.json();
-    await page.waitForLoadState('domcontentloaded');
-
     await page.getByTestId('start-game-button').click();
-    await page.waitForLoadState('domcontentloaded');
+    await expect(page.getByTestId('game-container')).toBeVisible();
 
-    if (firstMatchup.effectiveness === 'NoEffect') {
-      await page.getByTestId('super-effective-button').click();
-    } else {
-      await page.getByTestId('no-effect-button').click();
-    }
-
-    await page.waitForLoadState('domcontentloaded');
+    await clickIncorrectButton(page);
 
     await expect(page.getByTestId('gameover-message')).toBeVisible();
     await expect(page.getByTestId('final-score')).toBeVisible();
@@ -220,53 +125,27 @@ test.describe('Game', () => {
   });
 
   test('it enables the player to start a new game after losing', async ({ page }) => {
-    const firstMatchupPromise = page.waitForResponse('**/api/v1/matchup');
     await page.goto('/');
-
-    const firstMatchupResponse = await firstMatchupPromise;
-    const firstMatchup = await firstMatchupResponse.json();
-    await page.waitForLoadState('domcontentloaded');
-
     await page.getByTestId('start-game-button').click();
-    await page.waitForLoadState('domcontentloaded');
+    await expect(page.getByTestId('game-container')).toBeVisible();
 
-    if (firstMatchup.effectiveness === 'NoEffect') {
-      await page.getByTestId('super-effective-button').click();
-    } else {
-      await page.getByTestId('no-effect-button').click();
-    }
-
-    await page.waitForLoadState('domcontentloaded');
+    await clickIncorrectButton(page);
+    await expect(page.getByTestId('new-game-button')).toBeVisible();
 
     await page.getByTestId('new-game-button').click();
-
-    await page.waitForLoadState('domcontentloaded');
 
     await expect(page.getByTestId('game-container')).toBeVisible();
   });
 
   test('it enables the player to return to the main menu after losing', async ({ page }) => {
-    const firstMatchupPromise = page.waitForResponse('**/api/v1/matchup');
     await page.goto('/');
-
-    const firstMatchupResponse = await firstMatchupPromise;
-    const firstMatchup = await firstMatchupResponse.json();
-    await page.waitForLoadState('domcontentloaded');
-
     await page.getByTestId('start-game-button').click();
-    await page.waitForLoadState('domcontentloaded');
+    await expect(page.getByTestId('game-container')).toBeVisible();
 
-    if (firstMatchup.effectiveness === 'NoEffect') {
-      await page.getByTestId('super-effective-button').click();
-    } else {
-      await page.getByTestId('no-effect-button').click();
-    }
-
-    await page.waitForLoadState('domcontentloaded');
+    await clickIncorrectButton(page);
+    await expect(page.getByTestId('main-menu-button')).toBeVisible();
 
     await page.getByTestId('main-menu-button').click();
-
-    await page.waitForLoadState('domcontentloaded');
 
     await expect(page.getByTestId('pokeball')).toBeVisible();
     await expect(page.getByTestId('start-game-button')).toBeVisible();
@@ -274,51 +153,25 @@ test.describe('Game', () => {
   });
 
   test('it displays a loading screen to the player when starting the game', async ({ page }) => {
-    const firstMatchupPromise = page.waitForResponse('**/api/v1/matchup', { timeout: 2000 });
+    // A same-origin static JSON fetch is fast enough that the loading state
+    // is not reliably observable without an artificial delay - unlike the
+    // old remote-backend call, which was slow enough on its own.
+    await page.route('**/data/pokemon.json', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      await route.continue();
+    });
+
     await page.goto('/');
-
     await page.getByTestId('start-game-button').click();
-
-    await page.waitForLoadState('domcontentloaded');
     await expect(page.getByTestId('loading-container')).toBeVisible();
-
-    await firstMatchupPromise;
-    await page.waitForLoadState('domcontentloaded');
 
     await expect(page.getByTestId('loading-container')).not.toBeVisible();
     await expect(page.getByTestId('game-container')).toBeVisible();
   });
 
-  test('it displays a loading screen to the player during the game', async ({ page }) => {
-    const firstMatchupPromise = page.waitForResponse('**/api/v1/matchup');
-    await page.goto('/');
-
-    const firstMatchupResponse = await firstMatchupPromise;
-    const firstMatchup = await firstMatchupResponse.json();
-
-    await page.getByTestId('start-game-button').click();
-    await page.waitForLoadState('domcontentloaded');
-
-    const secondMatchupPromise = page.waitForResponse('**/api/v1/matchup', { timeout: 2000 });
-
-    if (firstMatchup.effectiveness === 'NoEffect') {
-      await page.getByTestId('no-effect-button').click();
-    } else if (firstMatchup.effectiveness === 'SuperEffective') {
-      await page.getByTestId('super-effective-button').click();
-    } else if (firstMatchup.effectiveness === 'NotVeryEffective') {
-      await page.getByTestId('not-effective-button').click();
-    } else {
-      await page.getByTestId('effective-button').click();
-    }
-
-    await page.waitForLoadState('domcontentloaded');
-
-    await expect(page.getByTestId('loading-container')).toBeVisible();
-
-    await secondMatchupPromise;
-    await page.waitForLoadState('domcontentloaded');
-
-    await expect(page.getByTestId('loading-container')).not.toBeVisible();
-    await expect(page.getByTestId('game-container')).toBeVisible();
-  });
+  // Note: the old "loading screen during the game" test relied on real
+  // network latency between rounds to catch the loading state. Rounds after
+  // the first are now generated from an already-loaded in-memory dataset
+  // and resolve effectively instantly, so that window no longer reliably
+  // exists to test against.
 });
