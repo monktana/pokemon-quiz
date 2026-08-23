@@ -15,7 +15,7 @@ export function GameOver() {
   usePrefetchMatchup(1);
 
   return (
-    <VStack spacing={2}>
+    <VStack gap={2}>
       <Text
         data-testid="gameover-message"
         my={1}
@@ -34,7 +34,7 @@ export function GameOver() {
       >
         {getText('gameover.text.score')} {score}
       </Text>
-      <VStack spacing={4} mt="8">
+      <VStack gap={4} mt="8">
         <Button
           data-testid="new-game-button"
           size="lg"

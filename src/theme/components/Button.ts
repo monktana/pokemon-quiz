@@ -1,4 +1,4 @@
-import { defineStyle, defineStyleConfig } from '@chakra-ui/styled-system';
+import { defineRecipe, defineStyle } from '@chakra-ui/react';
 
 const variantPrimary = defineStyle({
   bg: 'background.100',
@@ -18,13 +18,10 @@ const variantPrimary = defineStyle({
   },
 });
 
-const variants = {
-  primary: variantPrimary,
-};
-
-export const Button = defineStyleConfig({
-  variants,
-  defaultProps: {
-    variant: 'primary',
+export const Button = defineRecipe({
+  variants: {
+    variant: {
+      primary: variantPrimary,
+    },
   },
 });

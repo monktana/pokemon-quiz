@@ -1,12 +1,12 @@
 import React from 'react';
-import { Tag, TagLabel, TagLeftIcon, TagProps } from '@chakra-ui/react';
+import { Tag, type TagRootProps } from '@chakra-ui/react';
 
 import { InternationalName } from '@/api';
 import { TypeIcon, types } from '@/components';
 import { getResourceName } from '@/components/pokemon/util';
 import { useLanguage } from '@/stores';
 
-export interface TypeTagProps extends TagProps {
+export interface TypeTagProps extends TagRootProps {
   type: types;
   text: InternationalName[];
 }
@@ -14,9 +14,11 @@ export interface TypeTagProps extends TagProps {
 export const TypeTag = ({ type, text, ...tagProps }: TypeTagProps) => {
   const language = useLanguage();
   return (
-    <Tag data-testid={`${type}-type-tag`} colorScheme={type} {...tagProps}>
-      <TagLeftIcon as={TypeIcon} type={type} />
-      <TagLabel>{getResourceName(text, language)}</TagLabel>
-    </Tag>
+    <Tag.Root data-testid={`${type}-type-tag`} colorPalette={type} {...tagProps}>
+      <Tag.StartElement>
+        <TypeIcon type={type} />
+      </Tag.StartElement>
+      <Tag.Label>{getResourceName(text, language)}</Tag.Label>
+    </Tag.Root>
   );
 };

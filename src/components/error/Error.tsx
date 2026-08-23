@@ -19,7 +19,7 @@ export const Error = ({ reset }: ErrorProps) => {
         <Heading data-testid="error-header" as="h2" marginBottom={2} size="xl">
           {getText('error.title')}
         </Heading>
-        <Text data-testid="error-message" color={{ light: 'font.800', dark: 'font.100' }}>
+        <Text data-testid="error-message" color="font.800" _dark={{ color: 'font.100' }}>
           {getText('error.info')}
         </Text>
         <Button data-testid="reset-button" variant="primary" marginTop="8" onClick={reset}>
