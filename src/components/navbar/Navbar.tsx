@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, HStack, IconButton } from '@chakra-ui/react';
 
-import { LanguageMenu, TypeIcon } from '@/components';
+import { buttonVariants, LanguageMenu, TypeIcon } from '@/components';
 import { useLocalization } from '@/hooks';
+import { cn } from '@/lib/cn';
 import { useColorMode, useColorModeValue } from '@/providers/ColorModeProvider';
 
 export function Navbar() {
@@ -12,25 +12,22 @@ export function Navbar() {
   const iconName = useColorModeValue('dark', 'psychic');
 
   return (
-    <Box
-      position="fixed"
-      zIndex="overlay"
-      width="full"
-      backgroundColor="background.100"
-      _dark={{ backgroundColor: 'background.900' }}
-    >
-      <HStack align="center" justify="end" paddingY={2} paddingX={4} gap={2}>
+    <div className="bg-background-100 dark:bg-background-900 fixed z-50 w-full">
+      <div className="flex items-center justify-end gap-2 px-4 py-2">
         <LanguageMenu />
-        <IconButton
+        <button
           data-testid="color-mode-switch"
+          data-type={iconName}
           aria-label={getText('navbar.color.label')}
-          variant="solid"
-          colorPalette={iconName}
           onClick={toggleColorMode}
+          className={cn(
+            buttonVariants({ size: 'icon' }),
+            'bg-(--type-solid) text-(--type-contrast) hover:opacity-90'
+          )}
         >
-          <TypeIcon type={iconName} color="current" />
-        </IconButton>
-      </HStack>
-    </Box>
+          <TypeIcon type={iconName} className="h-5 w-5" />
+        </button>
+      </div>
+    </div>
   );
 }

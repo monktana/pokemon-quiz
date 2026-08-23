@@ -1,17 +1,17 @@
-import React from 'react';
-import { Text, TextProps } from '@chakra-ui/react';
+import React, { HTMLAttributes } from 'react';
 import { getResourceName, usePokemonContext } from '@/components';
+import { cn } from '@/lib/cn';
 import { useLanguage } from '@/stores';
 
-type PokemonNameProps = TextProps
+type PokemonNameProps = HTMLAttributes<HTMLSpanElement>;
 
-export const PokemonName = ({...props}: PokemonNameProps) => {
+export const PokemonName = ({ className, ...props }: PokemonNameProps) => {
   const language = useLanguage();
   const pokemon = usePokemonContext();
 
   return (
-    <Text {...props} fontWeight="bold" fontSize="2xl">
+    <span {...props} className={cn('text-2xl font-bold', className)}>
       {getResourceName(pokemon.species!.names!, language)}
-    </Text>
-  )
-}
+    </span>
+  );
+};

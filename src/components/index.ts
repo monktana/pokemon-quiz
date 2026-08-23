@@ -9,3 +9,4 @@ export * from './navbar';
 export * from './pokemon';
 export * from './question';
 export * from './score';
+export * from './ui';

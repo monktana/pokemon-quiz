@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button, Text, VStack } from '@chakra-ui/react';
 
 import { useCancelMatchup, usePrefetchMatchup } from '@/api';
+import { Button } from '@/components';
 import { useLocalization } from '@/hooks';
 import { useAppStateActions, useScore, useScoreActions } from '@/stores';
 
@@ -15,31 +15,19 @@ export function GameOver() {
   usePrefetchMatchup(1);
 
   return (
-    <VStack gap={2}>
-      <Text
-        data-testid="gameover-message"
-        my={1}
-        fontSize="2xl"
-        color="font.800"
-        _dark={{ color: 'font.100' }}
-      >
+    <div className="flex flex-col items-center gap-2">
+      <p data-testid="gameover-message" className="text-foreground my-1 text-2xl">
         {getText('gameover.text.blackout')}
-      </Text>
-      <Text
-        data-testid="final-score"
-        my={2}
-        fontSize="sm"
-        color="font.500"
-        _dark={{ color: 'font.300' }}
-      >
+      </p>
+      <p data-testid="final-score" className="text-muted-foreground my-2 text-sm">
         {getText('gameover.text.score')} {score}
-      </Text>
-      <VStack gap={4} mt="8">
+      </p>
+      <div className="mt-8 flex flex-col items-center gap-4">
         <Button
           data-testid="new-game-button"
           size="lg"
           variant="primary"
-          width="full"
+          className="w-full"
           onClick={() => {
             reset();
             startQuiz();
@@ -51,7 +39,7 @@ export function GameOver() {
           data-testid="main-menu-button"
           size="lg"
           variant="primary"
-          width="full"
+          className="w-full"
           onClick={() => {
             reset();
             openMenu();
@@ -59,7 +47,7 @@ export function GameOver() {
         >
           {getText('gameover.button.mainmenu').toUpperCase()}
         </Button>
-      </VStack>
-    </VStack>
+      </div>
+    </div>
   );
 }

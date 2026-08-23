@@ -1,31 +1,21 @@
 import React from 'react';
-import { Center, Grid, Skeleton, VStack } from '@chakra-ui/react';
+import { Skeleton } from '@/components';
 
 export const Loading = () => {
   return (
-    <Center height="100vh">
-      <VStack data-testid="loading-container" width="360px">
-        <Skeleton variant="quiz" height={12} width="full" />
-        <Skeleton variant="quiz" height="218px" width="full" />
-        <Skeleton variant="quiz" height="218px" width="full" />
-        <Skeleton variant="quiz" height={12} width="full" />
-        <Grid
-          gridTemplateColumns="repeat(2, 1fr)"
-          gap={2}
-          padding={2}
-          width="full"
-          rounded="md"
-          backgroundColor="background.200"
-          _dark={{
-            backgroundColor: 'background.800',
-          }}
-        >
-          <Skeleton variant="quiz" height={10} width="full" />
-          <Skeleton variant="quiz" height={10} width="full" />
-          <Skeleton variant="quiz" height={10} width="full" />
-          <Skeleton variant="quiz" height={10} width="full" />
-        </Grid>
-      </VStack>
-    </Center>
+    <div className="flex h-screen items-center justify-center">
+      <div data-testid="loading-container" className="flex w-90 flex-col gap-2">
+        <Skeleton className="h-12 w-full" />
+        <Skeleton className="h-54.5 w-full" />
+        <Skeleton className="h-54.5 w-full" />
+        <Skeleton className="h-12 w-full" />
+        <div className="bg-background-200 dark:bg-background-800 grid w-full grid-cols-2 gap-2 rounded-md p-2">
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
+        </div>
+      </div>
+    </div>
   );
 };

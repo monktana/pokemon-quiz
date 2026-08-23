@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { SVGProps } from 'react';
 import * as Sentry from '@sentry/react';
-import { IconProps } from '@chakra-ui/react';
 
 import { BugIcon } from './Bug';
 import { DarkIcon } from './Dark';
@@ -44,44 +43,44 @@ export const Types = [
 
 export type types = (typeof Types)[number];
 
-export const TypeIcon = ({ type, ...rest }: { type: types } & IconProps) => {
+export const TypeIcon = ({ type, ...rest }: { type: types } & SVGProps<SVGSVGElement>) => {
   switch (type) {
     case 'bug':
-      return <BugIcon name={type} {...rest} />;
+      return <BugIcon {...rest} />;
     case 'dark':
-      return <DarkIcon name={type} {...rest} />;
+      return <DarkIcon {...rest} />;
     case 'dragon':
-      return <DragonIcon name={type} {...rest} />;
+      return <DragonIcon {...rest} />;
     case 'electric':
-      return <ElectricIcon name={type} {...rest} />;
+      return <ElectricIcon {...rest} />;
     case 'fairy':
-      return <FairyIcon name={type} {...rest} />;
+      return <FairyIcon {...rest} />;
     case 'fighting':
-      return <FightingIcon name={type} {...rest} />;
+      return <FightingIcon {...rest} />;
     case 'fire':
-      return <FireIcon name={type} {...rest} />;
+      return <FireIcon {...rest} />;
     case 'flying':
-      return <FlyingIcon name={type} {...rest} />;
+      return <FlyingIcon {...rest} />;
     case 'ghost':
-      return <GhostIcon name={type} {...rest} />;
+      return <GhostIcon {...rest} />;
     case 'grass':
-      return <GrassIcon name={type} {...rest} />;
+      return <GrassIcon {...rest} />;
     case 'ground':
-      return <GroundIcon name={type} {...rest} />;
+      return <GroundIcon {...rest} />;
     case 'ice':
-      return <IceIcon name={type} {...rest} />;
+      return <IceIcon {...rest} />;
     case 'normal':
-      return <NormalIcon name={type} {...rest} />;
+      return <NormalIcon {...rest} />;
     case 'poison':
-      return <PoisonIcon name={type} {...rest} />;
+      return <PoisonIcon {...rest} />;
     case 'psychic':
-      return <PsychicIcon name={type} {...rest} />;
+      return <PsychicIcon {...rest} />;
     case 'rock':
-      return <RockIcon name={type} {...rest} />;
+      return <RockIcon {...rest} />;
     case 'steel':
-      return <SteelIcon name={type} {...rest} />;
+      return <SteelIcon {...rest} />;
     case 'water':
-      return <WaterIcon name={type} {...rest} />;
+      return <WaterIcon {...rest} />;
     default:
       Sentry.captureException(new Error(`no type icon found for: ${type}`));
       break;

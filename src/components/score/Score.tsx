@@ -1,19 +1,18 @@
-import React from 'react';
-import { HStack, Stat, type StatRootProps } from '@chakra-ui/react';
+import React, { HTMLAttributes } from 'react';
 
 import { useLocalization } from '@/hooks';
 import { useScore } from '@/stores';
 
-export function Score(props: StatRootProps) {
+export function Score(props: HTMLAttributes<HTMLDivElement>) {
   const score = useScore();
   const { getText } = useLocalization();
 
   return (
-    <Stat.Root {...props}>
-      <HStack color="font.800" _dark={{ color: 'font.100' }}>
-        <Stat.Label data-testid="score-label">{getText('score.label')}</Stat.Label>
-        <Stat.ValueText data-testid="score-value">{score}</Stat.ValueText>
-      </HStack>
-    </Stat.Root>
+    <div {...props}>
+      <div className="text-foreground flex items-center gap-2">
+        <span data-testid="score-label">{getText('score.label')}</span>
+        <span data-testid="score-value">{score}</span>
+      </div>
+    </div>
   );
 }

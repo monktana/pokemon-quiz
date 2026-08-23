@@ -1,8 +1,7 @@
-import React from 'react';
-import { Icon, IconProps } from '@chakra-ui/react';
+import React, { SVGProps } from 'react';
 
-export const IceIcon = (props: IconProps) => (
-  <Icon asChild={false} fill="none" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" {...props}>
+export const IceIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg fill="none" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -39,5 +38,5 @@ export const IceIcon = (props: IconProps) => (
       d="M128.525 474.77L126.949 336.42L247.62 278.493L249.108 409.121L128.525 474.77Z"
       fill="white"
     />
-  </Icon>
+  </svg>
 );

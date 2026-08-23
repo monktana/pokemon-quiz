@@ -1,5 +1,4 @@
 import React, { ReactElement, useCallback } from 'react';
-import { Text } from '@chakra-ui/react';
 
 import { useLanguage } from '@/stores';
 import { geti18nText, TextKey } from '@/util';
@@ -17,7 +16,7 @@ export const useLocalization = () => {
       const text = geti18nText(language, key).split(' ');
       return text.map((string) => {
         if (string === '%s') return replacements.shift();
-        return <Text key={string}>{string}</Text>;
+        return <span key={string}>{string}</span>;
       });
     },
     [language]

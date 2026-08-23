@@ -1,34 +1,27 @@
-import React, { ReactNode } from 'react';
-import { Flex, FlexProps } from '@chakra-ui/react';
+import React, { HTMLAttributes, ReactNode } from 'react';
 
 import type { Pokemon } from '@/api/schema';
 
 import { PokemonContextProvider } from '@/components/pokemon/pokemon-context';
+import { cn } from '@/lib/cn';
 
-export type PokemonProps = FlexProps & {
+export type PokemonProps = HTMLAttributes<HTMLDivElement> & {
   pokemon: Pokemon;
-  children?: ReactNode | undefined
+  children?: ReactNode | undefined;
 };
 
-export function Pokemon({ pokemon, children, ...flexProps }: PokemonProps) {
+export function Pokemon({ pokemon, children, className, ...props }: PokemonProps) {
   return (
     <PokemonContextProvider value={pokemon}>
-      <Flex
-        alignItems="center"
-        width="full"
-        padding={2}
-        borderRadius="md"
-        borderWidth="1px"
-        borderColor="border.500"
-        backgroundColor="background.200"
-        _dark={{
-          borderColor: "border.100",
-          backgroundColor: "background.800"
-        }}
-        {...flexProps}
+      <div
+        className={cn(
+          'border-border-500 bg-background-200 dark:border-border-100 dark:bg-background-800 flex w-full items-center rounded-md border p-2',
+          className
+        )}
+        {...props}
       >
         {children}
-      </Flex>
+      </div>
     </PokemonContextProvider>
   );
 }

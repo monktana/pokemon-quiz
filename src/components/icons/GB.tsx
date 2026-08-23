@@ -1,8 +1,7 @@
-import React from 'react';
-import { Icon, IconProps } from '@chakra-ui/react';
+import React, { SVGProps } from 'react';
 
-export const GBIcon = (props: IconProps) => (
-  <Icon asChild={false} fill="none" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" {...props}>
+export const GBIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg fill="none" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path fill="#012169" d="M0 0h640v480H0z" />
     <path
       fill="#FFF"
@@ -14,5 +13,5 @@ export const GBIcon = (props: IconProps) => (
     />
     <path fill="#FFF" d="M241 0v480h160V0H241zM0 160v160h640V160H0z" />
     <path fill="#C8102E" d="M0 193v96h640v-96H0zM273 0v480h96V0h-96z" />
-  </Icon>
+  </svg>
 );

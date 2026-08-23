@@ -1,22 +1,17 @@
-import React from 'react';
-import { Flex, FlexProps } from '@chakra-ui/react';
+import React, { HTMLAttributes } from 'react';
 import { types, TypeTag, usePokemonContext } from '@/components';
+import { cn } from '@/lib/cn';
 
-type PokemonTagsProps = FlexProps;
+type PokemonTagsProps = HTMLAttributes<HTMLDivElement>;
 
-export const PokemonTags = ({...props}: PokemonTagsProps) => {
+export const PokemonTags = ({ className, ...props }: PokemonTagsProps) => {
   const pokemon = usePokemonContext();
 
   return (
-    <Flex gap={1} {...props}>
+    <div className={cn('flex gap-1', className)} {...props}>
       {pokemon.types?.map((type) => (
-        <TypeTag
-          key={type.id}
-          type={type.name! as types}
-          text={type.names!}
-          borderRadius="md"
-        />
+        <TypeTag key={type.id} type={type.name! as types} text={type.names!} />
       ))}
-    </Flex>
-  )
-}
+    </div>
+  );
+};
