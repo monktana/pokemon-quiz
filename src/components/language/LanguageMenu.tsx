@@ -1,10 +1,11 @@
 import React from 'react';
-import { HStack, IconButton, Menu, Text } from '@chakra-ui/react';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-import { LanguageIcon } from '@/components';
+import { buttonVariants, LanguageIcon } from '@/components';
 import { useLocalization } from '@/hooks';
+import { cn } from '@/lib/cn';
 import { useLanguage, useLanguageActions } from '@/stores';
-import { Languages } from '@/util';
+import { Language, Languages } from '@/util';
 
 export const LanguageMenu = () => {
   const language = useLanguage();
@@ -12,45 +13,43 @@ export const LanguageMenu = () => {
   const { setLanguage } = useLanguageActions();
 
   return (
-    <Menu.Root data-testid="language-menu">
-      <Menu.Trigger asChild>
-        <IconButton data-testid="language-switch" aria-label={getText('navbar.language.label')}>
-          <LanguageIcon type={language} aria-label={language} />
-        </IconButton>
-      </Menu.Trigger>
-      <Menu.Positioner>
-        <Menu.Content
-          minWidth="12rem"
-          backgroundColor="background.200"
-          _dark={{ backgroundColor: 'background.800' }}
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger asChild>
+        <button
+          data-testid="language-switch"
+          aria-label={getText('navbar.language.label')}
+          className={cn(
+            buttonVariants({ size: 'icon' }),
+            'hover:bg-background-200 dark:hover:bg-background-800'
+          )}
         >
-          <Menu.RadioItemGroup value={language}>
+          <LanguageIcon type={language} aria-label={language} className="h-5 w-5" />
+        </button>
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Portal>
+        <DropdownMenu.Content
+          align="end"
+          sideOffset={4}
+          className="bg-background-200 dark:bg-background-800 min-w-48 rounded-md p-1 shadow-md"
+        >
+          <DropdownMenu.RadioGroup
+            value={language}
+            onValueChange={(value) => setLanguage(value as Language)}
+          >
             {Languages.map((language) => (
-              <Menu.RadioItem
+              <DropdownMenu.RadioItem
                 key={language}
                 value={language}
                 data-testid={`${language}-language`}
-                backgroundColor="background.200"
-                onClick={() => setLanguage(language)}
-                _hover={{
-                  backgroundColor: 'background.300',
-                }}
-                _dark={{
-                  backgroundColor: 'background.800',
-                  _hover: {
-                    backgroundColor: 'background.700',
-                  },
-                }}
+                className="hover:bg-background-300 dark:hover:bg-background-700 flex cursor-pointer items-center gap-2 rounded px-2 py-1.5 outline-none"
               >
-                <HStack>
-                  <LanguageIcon type={language} />
-                  <Text>{getText(language)}</Text>
-                </HStack>
-              </Menu.RadioItem>
+                <LanguageIcon type={language} className="h-4 w-4" />
+                <span>{getText(language)}</span>
+              </DropdownMenu.RadioItem>
             ))}
-          </Menu.RadioItemGroup>
-        </Menu.Content>
-      </Menu.Positioner>
-    </Menu.Root>
+          </DropdownMenu.RadioGroup>
+        </DropdownMenu.Content>
+      </DropdownMenu.Portal>
+    </DropdownMenu.Root>
   );
 };

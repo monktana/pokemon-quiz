@@ -1,5 +1,4 @@
-import React from 'react';
-import { IconProps } from '@chakra-ui/react';
+import React, { SVGProps } from 'react';
 import * as Sentry from '@sentry/react';
 
 import { Language } from '@/util';
@@ -7,12 +6,15 @@ import { Language } from '@/util';
 import { DEIcon } from './DE';
 import { GBIcon } from './GB';
 
-export const LanguageIcon = ({ type, ...rest }: { type: Language } & IconProps) => {
+export const LanguageIcon = ({
+  type,
+  ...rest
+}: { type: Language } & SVGProps<SVGSVGElement>) => {
   switch (type) {
     case 'de':
-      return <DEIcon name={type} {...rest} />;
+      return <DEIcon {...rest} />;
     case 'en':
-      return <GBIcon name={type} {...rest} />;
+      return <GBIcon {...rest} />;
     default:
       Sentry.captureException(new Error(`no language icon found for: ${type}`));
       break;

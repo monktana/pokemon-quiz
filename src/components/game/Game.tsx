@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button, Flex, Grid, VStack } from '@chakra-ui/react';
 import { useCallback, useState } from 'react';
 
 import { useInvalidateMatchup, useMatchup, usePrefetchMatchup } from '@/api';
@@ -7,7 +6,16 @@ import { TypeEffectiveness } from '@/api/schema';
 import { useLocalization } from '@/hooks';
 import { useAppStateActions, useScoreActions } from '@/stores';
 
-import { Pokemon, PokemonName, PokemonSprite, PokemonTags, Question, Score, useGuess } from '../';
+import {
+  Button,
+  Pokemon,
+  PokemonName,
+  PokemonSprite,
+  PokemonTags,
+  Question,
+  Score,
+  useGuess,
+} from '../';
 
 export function Game() {
   const [round, setRound] = useState<number>(1);
@@ -33,37 +41,26 @@ export function Game() {
   );
 
   return (
-    <VStack data-testid="game-container" align="start">
+    <div data-testid="game-container" className="flex w-full flex-col items-start gap-2">
       <Score />
-      <Pokemon pokemon={matchup.defender!} flexDirection="row-reverse" data-testid="defender-pokemon">
-        <PokemonSprite data-testid="defender-sprite" src={matchup.defender!.sprites?.front_default ?? ""} />
-        <Flex flexDirection="column" alignItems="flex-start" width="full" color="font.800" _dark={{color: "font.100"}}>
+      <Pokemon pokemon={matchup.defender!} className="flex-row-reverse" data-testid="defender-pokemon">
+        <PokemonSprite data-testid="defender-sprite" src={matchup.defender!.sprites?.front_default ?? ''} />
+        <div className="text-foreground flex w-full flex-col items-start">
           <PokemonName data-testid="defender-name" />
           <PokemonTags />
-        </Flex>
+        </div>
       </Pokemon>
-      <Pokemon pokemon={matchup.attacker!} flexDirection="row" data-testid="attacker-pokemon">
-        <PokemonSprite data-testid="attacker-sprite" src={matchup.attacker!.sprites?.back_default ?? ""} />
-        <Flex flexDirection="column" alignItems="flex-start" width="full" color="font.800" _dark={{color: "font.100"}}>
+      <Pokemon pokemon={matchup.attacker!} className="flex-row" data-testid="attacker-pokemon">
+        <PokemonSprite data-testid="attacker-sprite" src={matchup.attacker!.sprites?.back_default ?? ''} />
+        <div className="text-foreground flex w-full flex-col items-start">
           <PokemonName data-testid="attacker-name" />
           <PokemonTags />
-        </Flex>
+        </div>
       </Pokemon>
       <Question pokemon={matchup.attacker!} move={matchup.move!} />
-      <Grid
+      <div
         data-testid="decision-buttons"
-        gridTemplateColumns="repeat(2, 1fr)"
-        gap={2}
-        padding={2}
-        width="full"
-        rounded="md"
-        border="1px solid"
-        borderColor="border.500"
-        backgroundColor="background.200"
-        _dark={{
-          borderColor: 'border.100',
-          backgroundColor: 'background.800',
-        }}
+        className="border-border-500 bg-background-200 dark:border-border-100 dark:bg-background-800 grid w-full grid-cols-2 gap-2 rounded-md border p-2"
       >
         <Button
           data-testid="no-effect-button"
@@ -93,7 +90,7 @@ export function Game() {
         >
           {getText('types.effectiveness.supereffective')}
         </Button>
-      </Grid>
-    </VStack>
+      </div>
+    </div>
   );
 }

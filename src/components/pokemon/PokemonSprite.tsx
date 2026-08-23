@@ -1,17 +1,11 @@
-import React from 'react';
-import { Image, ImageProps } from '@chakra-ui/react';
+import React, { ImgHTMLAttributes } from 'react';
 import { usePokemonContext } from '@/components';
+import { cn } from '@/lib/cn';
 
-type PokemonSpriteProps = ImageProps;
+type PokemonSpriteProps = ImgHTMLAttributes<HTMLImageElement>;
 
-export const PokemonSprite = ({...props}: PokemonSpriteProps) => {
+export const PokemonSprite = ({ className, ...props }: PokemonSpriteProps) => {
   const pokemon = usePokemonContext();
 
-  return (
-    <Image
-      boxSize="200px"
-      alt={pokemon.name!}
-      {...props}
-    />
-  )
-}
+  return <img alt={pokemon.name!} className={cn('h-50 w-50', className)} {...props} />;
+};

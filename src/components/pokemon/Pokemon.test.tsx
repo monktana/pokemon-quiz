@@ -8,7 +8,6 @@ import * as TypeFixtures from '@/lib/testing/fixtures/type';
 
 import { Pokemon } from './Pokemon';
 import { TypeTag } from './TypeTag';
-import { Flex } from '@chakra-ui/react';
 
 const it = base.extend({
   pokemon: bulbasaur,
@@ -18,12 +17,12 @@ const it = base.extend({
 describe('<Pokemon />', () => {
   it('displays the pokemon name', ({ pokemon }) => {
     render(
-      <Pokemon pokemon={pokemon} flexDirection="row-reverse" data-testid="attacker-pokemon">
+      <Pokemon pokemon={pokemon} className="flex-row-reverse" data-testid="attacker-pokemon">
         <PokemonSprite data-testid="attacker-sprite" src={pokemon.sprites?.back_default ?? ""} />
-        <Flex flexDirection="column" alignItems="flex-start" width="full" color="font.800" _dark={{color: "font.100"}}>
+        <div className="text-foreground flex w-full flex-col items-start">
           <PokemonName data-testid="attacker-name" />
           <PokemonTags />
-        </Flex>
+        </div>
       </Pokemon>
     );
     expect(screen.getByTestId('attacker-name')).toBeVisible();
@@ -34,12 +33,12 @@ describe('<Pokemon />', () => {
 
   it('displays the back sprite when attacking', ({ pokemon }) => {
     render(
-      <Pokemon pokemon={pokemon} flexDirection="row-reverse" data-testid="attacker-pokemon">
+      <Pokemon pokemon={pokemon} className="flex-row-reverse" data-testid="attacker-pokemon">
         <PokemonSprite data-testid="attacker-sprite" src={pokemon.sprites?.back_default ?? ""} />
-        <Flex flexDirection="column" alignItems="flex-start" width="full" color="font.800" _dark={{color: "font.100"}}>
+        <div className="text-foreground flex w-full flex-col items-start">
           <PokemonName data-testid="attacker-name" />
           <PokemonTags />
-        </Flex>
+        </div>
       </Pokemon>
     );
 
@@ -52,12 +51,12 @@ describe('<Pokemon />', () => {
 
   it('displays the front sprite when defending', ({ pokemon }) => {
     render(
-      <Pokemon pokemon={pokemon} flexDirection="row-reverse" data-testid="defender-pokemon">
+      <Pokemon pokemon={pokemon} className="flex-row-reverse" data-testid="defender-pokemon">
         <PokemonSprite data-testid="defender-sprite" src={pokemon.sprites?.front_default ?? ""} />
-        <Flex flexDirection="column" alignItems="flex-start" width="full" color="font.800" _dark={{color: "font.100"}}>
+        <div className="text-foreground flex w-full flex-col items-start">
           <PokemonName data-testid="defender-name" />
           <PokemonTags />
-        </Flex>
+        </div>
       </Pokemon>
     );
 
@@ -70,12 +69,12 @@ describe('<Pokemon />', () => {
 
   it('displays the types of the pokemon', ({ pokemon }) => {
     render(
-      <Pokemon pokemon={pokemon} flexDirection="row-reverse" data-testid="attacker-pokemon">
+      <Pokemon pokemon={pokemon} className="flex-row-reverse" data-testid="attacker-pokemon">
         <PokemonSprite data-testid="attacker-sprite" src={pokemon.sprites?.back_default ?? ""} />
-        <Flex flexDirection="column" alignItems="flex-start" width="full" color="font.800" _dark={{color: "font.100"}}>
+        <div className="text-foreground flex w-full flex-col items-start">
           <PokemonName data-testid="attacker-name" />
           <PokemonTags />
-        </Flex>
+        </div>
       </Pokemon>
     );
 

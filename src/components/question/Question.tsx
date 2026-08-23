@@ -1,5 +1,4 @@
 import React from 'react';
-import { Flex, Text } from '@chakra-ui/react';
 
 import { Move, Pokemon } from '@/api/schema';
 import { getResourceName, types, TypeTag } from '@/components';
@@ -16,37 +15,19 @@ export function Question({ pokemon: attacker, move }: AttackProps) {
   const { getTemplatedText } = useLocalization();
 
   return (
-    <Flex
+    <div
       data-testid="question"
-      gap={1}
-      alignItems="center"
-      padding={2}
-      width="full"
-      rounded="md"
-      color="font.800"
-      border="1px solid"
-      borderColor="border.500"
-      backgroundColor="background.200"
-      _dark={{
-        color: 'font.100',
-        borderColor: 'border.100',
-        backgroundColor: 'background.800',
-      }}
+      className="text-foreground border-border-500 bg-background-200 dark:border-border-100 dark:bg-background-800 flex w-full items-center gap-1 rounded-md border p-2"
     >
-      <Flex gap={2} fontSize="xl">
+      <div className="flex gap-2 text-xl">
         {getTemplatedText(
           'game.question.effectiveness',
-          <Text key={attacker.species!.name}>
+          <span key={attacker.species!.name}>
             {getResourceName(attacker.species!.names!, language)!}
-          </Text>,
-          <TypeTag
-            key={move.type!.name}
-            type={move.type!.name as types}
-            text={move.names!}
-            borderRadius="md"
-          />
+          </span>,
+          <TypeTag key={move.type!.name} type={move.type!.name as types} text={move.names!} />
         )}
-      </Flex>
-    </Flex>
+      </div>
+    </div>
   );
 }

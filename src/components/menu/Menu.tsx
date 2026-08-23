@@ -1,12 +1,9 @@
 import React from 'react';
-import { Box, Button, Center, VStack } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
 
 import { usePrefetchMatchup } from '@/api';
+import { Button } from '@/components';
 import { useLocalization } from '@/hooks';
 import { useAppStateActions, useScoreActions } from '@/stores';
-
-const animation = 'pokeball 4s ease-in-out infinite';
 
 export function Menu() {
   const { startQuiz } = useAppStateActions();
@@ -21,37 +18,18 @@ export function Menu() {
   };
 
   return (
-    <VStack gap={2}>
-      <Box
+    <div className="flex flex-col items-center gap-2">
+      <div
         data-testid="pokeball"
-        as={motion.div}
-        animation={animation}
-        position="relative"
-        width="xs"
-        height="xs"
-        rounded="full"
-        borderWidth="6px"
-        borderColor="black"
-        background="linear-gradient(var(--chakra-colors-red-500) 0%, var(--chakra-colors-red-500) 50%, white 50%)"
+        className="animate-pokeball relative h-80 w-80 rounded-full border-[6px] border-black [background:linear-gradient(var(--color-red-500)_0%,var(--color-red-500)_50%,white_50%)]"
       >
-        <Box
-          position="absolute"
-          top="50%"
-          left="50%"
-          transform={'translate(-50%, -50%)'}
-          width="4rem"
-          height="4rem"
-          bg="white"
-          rounded="full"
-          borderWidth="6px"
-          borderColor="black"
-        />
-      </Box>
-      <Center>
-        <Button data-testid="start-game-button" size="lg" marginTop={8} onClick={startGame}>
+        <div className="absolute top-1/2 left-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-black bg-white" />
+      </div>
+      <div className="flex items-center justify-center">
+        <Button data-testid="start-game-button" size="lg" className="mt-8" onClick={startGame}>
           {getText('mainmenu.button.newgame').toUpperCase()}
         </Button>
-      </Center>
-    </VStack>
+      </div>
+    </div>
   );
 }
