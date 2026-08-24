@@ -28,6 +28,7 @@ type PokemonRecord = {
 
 export type PokemonDataset = {
   pokemon: PokemonRecord[];
+  pokemonById: Map<number, PokemonRecord>;
   movesById: Map<number, MoveRecord>;
   typesById: Map<number, TypeRecord>;
 };
@@ -51,6 +52,7 @@ const loadDataset = async (): Promise<PokemonDataset> => {
 
   return {
     pokemon,
+    pokemonById: new Map(pokemon.map((record) => [record.id, record])),
     movesById: new Map(moves.map((move) => [move.id, move])),
     typesById: new Map(types.map((type) => [type.id, type])),
   };

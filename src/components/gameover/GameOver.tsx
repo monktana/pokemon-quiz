@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useCancelMatchup, usePrefetchMatchup } from '@/api';
+import { useCancelMatchup, useResetTeam } from '@/api';
 import { Button } from '@/components';
 import { useLocalization } from '@/hooks';
 import { useAppStateActions, useScore, useScoreActions } from '@/stores';
@@ -12,7 +12,6 @@ export function GameOver() {
   const { getText } = useLocalization();
 
   useCancelMatchup();
-  usePrefetchMatchup(1);
 
   return (
     <div className="flex flex-col items-center gap-2">
@@ -30,6 +29,7 @@ export function GameOver() {
           className="w-full"
           onClick={() => {
             reset();
+            useResetTeam();
             startQuiz();
           }}
         >

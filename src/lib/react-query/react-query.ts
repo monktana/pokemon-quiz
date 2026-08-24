@@ -9,6 +9,7 @@ declare module '@tanstack/react-query' {
 const queryConfig: DefaultOptions = {
   queries: {
     refetchOnWindowFocus: false,
+    retry: false,
   },
 };
 

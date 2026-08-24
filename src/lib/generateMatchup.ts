@@ -9,11 +9,11 @@ const pickDefenderRecord = (dataset: PokemonDataset, attackerId: number) => {
   return randomItem(candidates.length > 0 ? candidates : dataset.pokemon);
 };
 
-export const generateMatchup = async (): Promise<Matchup> => {
+export const generateMatchup = async (attackerId: number): Promise<Matchup> => {
   const dataset = await getPokemonDataset();
 
-  const attackerRecord = randomItem(dataset.pokemon);
-  const defenderRecord = pickDefenderRecord(dataset, attackerRecord.id);
+  const attackerRecord = dataset.pokemonById.get(attackerId)!;
+  const defenderRecord = pickDefenderRecord(dataset, attackerId);
   const moveId = randomItem(attackerRecord.moveIds);
 
   const attacker = hydratePokemon(dataset, attackerRecord);

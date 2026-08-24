@@ -32,15 +32,46 @@ const getRoundEffectiveness = async (page: Page): Promise<TypeEffectiveness> => 
   );
 };
 
+// The decision buttons are disabled while the next round's matchup is being
+// fetched. Waiting for them to be enabled avoids reading a round's data and
+// clicking after the app has already moved on to the next one.
+const waitForRoundReady = async (page: Page) => {
+  await expect(page.getByTestId('no-effect-button')).toBeEnabled();
+};
+
 const clickCorrectButton = async (page: Page) => {
+  await waitForRoundReady(page);
   const effectiveness = await getRoundEffectiveness(page);
   await page.getByTestId(effectivenessButtonTestId[effectiveness]).click();
 };
 
 const clickIncorrectButton = async (page: Page) => {
+  await waitForRoundReady(page);
   const effectiveness = await getRoundEffectiveness(page);
   const wrongEffectiveness = Object.values(TypeEffectiveness).find((e) => e !== effectiveness)!;
   await page.getByTestId(effectivenessButtonTestId[wrongEffectiveness]).click();
+};
+
+// The team has 6 Pokemon; the game only ends once all of them have fainted.
+// Answering incorrectly repeatedly (up to the team size) reliably reaches game over.
+const TEAM_SIZE = 6;
+
+const loseGame = async (page: Page) => {
+  for (let i = 0; i < TEAM_SIZE; i++) {
+    const koCountBefore = await page.locator('[data-testid="team-pokeball"][data-status="ko"]').count();
+
+    await clickIncorrectButton(page);
+
+    if (await page.getByTestId('gameover-message').isVisible()) {
+      return;
+    }
+
+    // Wait for the KO to actually register before reading the next round's
+    // state, so a fast click loop can't race a still-in-flight round change.
+    await expect(page.locator('[data-testid="team-pokeball"][data-status="ko"]')).toHaveCount(
+      koCountBefore + 1
+    );
+  }
 };
 
 test.describe('Error', () => {
@@ -97,6 +128,10 @@ test.describe('Game', () => {
 
     await expect(page.getByTestId('super-effective-button')).toBeVisible();
     await expect(page.getByTestId('super-effective-button')).toBeEnabled();
+
+    await expect(page.getByTestId('team-status')).toBeVisible();
+    await expect(page.getByTestId('team-pokeball')).toHaveCount(TEAM_SIZE);
+    await expect(page.locator('[data-testid="team-pokeball"][data-status="ok"]')).toHaveCount(TEAM_SIZE);
   });
 
   test('it increases the score when the guess is correct', async ({ page }) => {
@@ -109,12 +144,26 @@ test.describe('Game', () => {
     await expect(page.getByTestId('score-value')).toHaveText('1');
   });
 
-  test('it ends the game when the guess is incorrect', async ({ page }) => {
+  test('it knocks out one team Pokemon on an incorrect guess but keeps the game going', async ({
+    page,
+  }) => {
     await page.goto('/');
     await page.getByTestId('start-game-button').click();
     await expect(page.getByTestId('game-container')).toBeVisible();
 
     await clickIncorrectButton(page);
+
+    await expect(page.getByTestId('game-container')).toBeVisible();
+    await expect(page.getByTestId('gameover-message')).not.toBeVisible();
+    await expect(page.locator('[data-testid="team-pokeball"][data-status="ko"]')).toHaveCount(1);
+  });
+
+  test('it ends the game once every team Pokemon has fainted', async ({ page }) => {
+    await page.goto('/');
+    await page.getByTestId('start-game-button').click();
+    await expect(page.getByTestId('game-container')).toBeVisible();
+
+    await loseGame(page);
 
     await expect(page.getByTestId('gameover-message')).toBeVisible();
     await expect(page.getByTestId('final-score')).toBeVisible();
@@ -129,7 +178,7 @@ test.describe('Game', () => {
     await page.getByTestId('start-game-button').click();
     await expect(page.getByTestId('game-container')).toBeVisible();
 
-    await clickIncorrectButton(page);
+    await loseGame(page);
     await expect(page.getByTestId('new-game-button')).toBeVisible();
 
     await page.getByTestId('new-game-button').click();
@@ -142,7 +191,7 @@ test.describe('Game', () => {
     await page.getByTestId('start-game-button').click();
     await expect(page.getByTestId('game-container')).toBeVisible();
 
-    await clickIncorrectButton(page);
+    await loseGame(page);
     await expect(page.getByTestId('main-menu-button')).toBeVisible();
 
     await page.getByTestId('main-menu-button').click();
