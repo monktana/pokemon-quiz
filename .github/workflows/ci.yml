@@ -1,4 +1,4 @@
-name: check-and-build
+name: CI
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  check:
+  check-and-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
