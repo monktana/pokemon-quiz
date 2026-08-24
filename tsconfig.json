@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
     "target": "esnext",
     "lib": [
       "dom",
@@ -26,12 +25,13 @@
     "jsx": "react-jsx",
     "paths": {
       "@/*": [
-        "*"
+        "./src/*"
       ]
     }
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "./scripts/**/*"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

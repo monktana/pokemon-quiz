@@ -1,4 +1,4 @@
-name: Run Tests
+name: CI
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  check-and-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -36,17 +36,6 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [test]
 
-    steps:
-      - name: Deploy to Coolify
-        run: |
-          curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
-
-      - name: Show Response
-        run: |
-          echo ${{ steps.deployRequest.outputs.response }}
-          echo ${{ steps.deployRequest.outputs.headers }}
-          echo ${{ steps.deployRequest.outputs.status }}
+      - name: Build
+        run: npm run build

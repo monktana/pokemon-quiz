@@ -1,17 +1,12 @@
-FROM node:latest as build
+FROM node:22-slim AS build
 
 WORKDIR /app
 COPY . /app
 
-ARG VITE_POKE_API_URL
-ENV VITE_POKE_API_URL=$VITE_POKE_API_URL
-
-RUN npm install
+RUN npm ci
 RUN npm run build
 
-FROM ubuntu:latest
-RUN apt-get update
-RUN apt-get install nginx -y
-COPY --from=build /app/dist /var/www/html/
+FROM nginx:stable-alpine
+COPY --from=build /app/dist /usr/share/nginx/html/
 EXPOSE 80
-CMD ["nginx","-g","daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]

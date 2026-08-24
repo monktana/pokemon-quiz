@@ -41,7 +41,7 @@ test.describe('language Select', () => {
 test.describe('Color Mode', () => {
   test.describe('Light Mode', () => {
     test('enables the player to change the color theme from light to dark', async ({ page }) => {
-      await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+      await expect(page.locator('html')).toHaveClass('light');
       // eslint-disable-next-line jest-dom/prefer-to-have-style
       await expect(page.locator('html')).toHaveAttribute('style', 'color-scheme: light;');
 
@@ -54,20 +54,20 @@ test.describe('Color Mode', () => {
 
       await page.getByTestId('color-mode-switch').click();
 
-      await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+      await expect(page.locator('html')).toHaveClass('dark');
     });
   });
 
   test.describe('Dark Mode', () => {
     test.use({ colorScheme: 'dark' });
     test('enables the player to change the color theme from dark to light', async ({ page }) => {
-      await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+      await expect(page.locator('html')).toHaveClass('dark');
       // eslint-disable-next-line jest-dom/prefer-to-have-style
       await expect(page.locator('html')).toHaveAttribute('style', 'color-scheme: dark;');
 
       await page.getByTestId('color-mode-switch').click();
 
-      await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+      await expect(page.locator('html')).toHaveClass('light');
     });
   });
 });
