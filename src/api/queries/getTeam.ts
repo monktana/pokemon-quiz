@@ -12,7 +12,7 @@ export const useTeamQuery = () => {
   return useSuspenseQuery({
     queryKey,
     queryFn: getTeam,
-    staleTime: Infinity
+    staleTime: Infinity,
   });
 };
 

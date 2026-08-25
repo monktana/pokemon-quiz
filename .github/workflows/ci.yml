@@ -22,7 +22,14 @@ jobs:
         run: npm ci
 
       - name: Run Unit Tests
-        run: npm run test:unit:ci
+        run: npm run test:unit:coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          fail_ci_if_error: true
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps

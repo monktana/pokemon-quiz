@@ -26,8 +26,6 @@ coverage
 *.sln
 *.sw?
 
-# Sentry Auth Token
-.env.sentry-build-plugin
 /tests/results/*
 /playwright-report/
 /blob-report/

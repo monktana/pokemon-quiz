@@ -2,7 +2,7 @@ import { Matchup } from '@/api/schema';
 import { calculateEffectiveness } from '@/lib/calculateEffectiveness';
 import { getPokemonDataset, hydrateMove, hydratePokemon, PokemonDataset } from '@/lib/pokemonData';
 
-export const randomItem = <T,>(items: T[]): T => items[Math.floor(Math.random() * items.length)];
+export const randomItem = <T>(items: T[]): T => items[Math.floor(Math.random() * items.length)];
 
 const pickDefenderRecord = (dataset: PokemonDataset, attackerId: number) => {
   const candidates = dataset.pokemon.filter((pokemon) => pokemon.id !== attackerId);

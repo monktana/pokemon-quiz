@@ -18,7 +18,7 @@ describe('<Pokemon />', () => {
   it('displays the pokemon name', ({ pokemon }) => {
     render(
       <Pokemon pokemon={pokemon} className="flex-row-reverse" data-testid="attacker-pokemon">
-        <PokemonSprite data-testid="attacker-sprite" src={pokemon.sprites?.back_default ?? ""} />
+        <PokemonSprite data-testid="attacker-sprite" src={pokemon.sprites?.back_default ?? ''} />
         <div className="text-foreground flex w-full flex-col items-start">
           <PokemonName data-testid="attacker-name" />
           <PokemonTags />
@@ -34,7 +34,7 @@ describe('<Pokemon />', () => {
   it('displays the back sprite when attacking', ({ pokemon }) => {
     render(
       <Pokemon pokemon={pokemon} className="flex-row-reverse" data-testid="attacker-pokemon">
-        <PokemonSprite data-testid="attacker-sprite" src={pokemon.sprites?.back_default ?? ""} />
+        <PokemonSprite data-testid="attacker-sprite" src={pokemon.sprites?.back_default ?? ''} />
         <div className="text-foreground flex w-full flex-col items-start">
           <PokemonName data-testid="attacker-name" />
           <PokemonTags />
@@ -52,7 +52,7 @@ describe('<Pokemon />', () => {
   it('displays the front sprite when defending', ({ pokemon }) => {
     render(
       <Pokemon pokemon={pokemon} className="flex-row-reverse" data-testid="defender-pokemon">
-        <PokemonSprite data-testid="defender-sprite" src={pokemon.sprites?.front_default ?? ""} />
+        <PokemonSprite data-testid="defender-sprite" src={pokemon.sprites?.front_default ?? ''} />
         <div className="text-foreground flex w-full flex-col items-start">
           <PokemonName data-testid="defender-name" />
           <PokemonTags />
@@ -70,7 +70,7 @@ describe('<Pokemon />', () => {
   it('displays the types of the pokemon', ({ pokemon }) => {
     render(
       <Pokemon pokemon={pokemon} className="flex-row-reverse" data-testid="attacker-pokemon">
-        <PokemonSprite data-testid="attacker-sprite" src={pokemon.sprites?.back_default ?? ""} />
+        <PokemonSprite data-testid="attacker-sprite" src={pokemon.sprites?.back_default ?? ''} />
         <div className="text-foreground flex w-full flex-col items-start">
           <PokemonName data-testid="attacker-name" />
           <PokemonTags />

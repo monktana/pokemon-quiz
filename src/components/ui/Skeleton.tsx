@@ -18,8 +18,7 @@ const skeletonVariants = cva(
 );
 
 export interface SkeletonProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof skeletonVariants> {}
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof skeletonVariants> {}
 
 export const Skeleton = ({ className, variant, ...props }: SkeletonProps) => (
   <div className={cn(skeletonVariants({ variant }), className)} {...props} />

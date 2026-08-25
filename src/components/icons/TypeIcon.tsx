@@ -1,5 +1,4 @@
 import React, { SVGProps } from 'react';
-import * as Sentry from '@sentry/react';
 
 import { BugIcon } from './Bug';
 import { DarkIcon } from './Dark';
@@ -82,7 +81,7 @@ export const TypeIcon = ({ type, ...rest }: { type: types } & SVGProps<SVGSVGEle
     case 'water':
       return <WaterIcon {...rest} />;
     default:
-      Sentry.captureException(new Error(`no type icon found for: ${type}`));
+      console.error(`no type icon found for: ${type}`);
       break;
   }
 };

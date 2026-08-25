@@ -6,10 +6,7 @@ import { geti18nText, TextKey } from '@/util';
 export const useLocalization = () => {
   const language = useLanguage();
 
-  const getText = useCallback(
-    (key: TextKey) => geti18nText(language, key),
-    [language]
-  );
+  const getText = useCallback((key: TextKey) => geti18nText(language, key), [language]);
 
   const getTemplatedText = useCallback(
     (key: TextKey, ...replacements: ReactElement[]) => {

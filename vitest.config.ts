@@ -15,6 +15,7 @@ export default defineConfig((configEnv) =>
         exclude: [...defaultExclude, './tests/**'],
         coverage: {
           exclude: [...coverageConfigDefaults.exclude, './tests/**'],
+          reporter: ['text', 'lcov'],
         },
       },
     })

@@ -1,8 +1,7 @@
 import React, { Suspense } from 'react';
-import * as Sentry from '@sentry/react';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 
-import { Error, Game, GameOver, Loading, Menu, Navbar } from '@/components';
+import { Error, ErrorBoundary, Game, GameOver, Loading, Menu, Navbar } from '@/components';
 import { useAppState } from '@/stores';
 
 export const App = () => {
@@ -11,10 +10,7 @@ export const App = () => {
   const appState = useAppState();
 
   return (
-    <Sentry.ErrorBoundary
-      onReset={reset}
-      fallback={({ resetError }) => <Error reset={resetError} />}
-    >
+    <ErrorBoundary onReset={reset} fallback={({ resetError }) => <Error reset={resetError} />}>
       <Suspense fallback={<Loading />}>
         <Navbar />
         <div className="mx-auto flex h-screen max-w-3xl items-center justify-center px-4">
@@ -23,6 +19,6 @@ export const App = () => {
           {appState === 'gameover' && <GameOver />}
         </div>
       </Suspense>
-    </Sentry.ErrorBoundary>
+    </ErrorBoundary>
   );
 };

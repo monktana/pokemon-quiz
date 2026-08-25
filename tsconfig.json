@@ -1,16 +1,9 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "useDefineForClassFields": true,
-    "types": [
-      "node",
-      "vitest/globals"
-    ],
+    "types": ["node", "vitest/globals"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -24,14 +17,9 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "./src/**/*",
-    "./scripts/**/*"
-  ],
+  "include": ["./src/**/*", "./scripts/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
