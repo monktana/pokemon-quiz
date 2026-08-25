@@ -11,6 +11,7 @@
     "test:e2e:ui": "npx playwright test --ui",
     "test:unit": "vitest",
     "test:unit:ci": "vitest --run",
+    "test:unit:coverage": "vitest --run --coverage",
     "gen:pokemon-data": "tsx scripts/pokemon-data/generate.ts",
     "lint": "npx eslint --fix src/",
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\"",
