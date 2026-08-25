@@ -1,8 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import type { Pokemon } from '@/api/schema';
-
-const randomItem = <T,>(items: T[]): T => items[Math.floor(Math.random() * items.length)];
+import { randomItem } from '@/lib/generateMatchup';
 
 export const useTeam = (team: Pokemon[]) => {
   const [koIds, setKoIds] = useState<number[]>([]);

@@ -23,6 +23,7 @@ type PokemonRecord = {
   };
   sprites: PokemonSprites;
   typeIds: number[];
+  /** IDs into movesById. Only attacking moves (power > 0) are ever included, see generate.ts. */
   moveIds: number[];
 };
 
