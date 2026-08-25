@@ -35,5 +35,6 @@ export type PokemonRecord = {
     back_shiny_female: string | null;
   };
   typeIds: number[];
+  /** IDs into moves.json. Only attacking moves (see isAttackingMove) are ever included. */
   moveIds: number[];
 };
