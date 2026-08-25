@@ -75,14 +75,20 @@ export function Battle({ team }: BattleProps) {
         className="flex-row-reverse"
         data-testid="defender-pokemon"
       >
-        <PokemonSprite data-testid="defender-sprite" src={matchup.defender!.sprites?.front_default ?? ''} />
+        <PokemonSprite
+          data-testid="defender-sprite"
+          src={matchup.defender!.sprites?.front_default ?? ''}
+        />
         <div className="text-foreground flex w-full flex-col items-start">
           <PokemonName data-testid="defender-name" />
           <PokemonTags />
         </div>
       </PokemonPanel>
       <PokemonPanel pokemon={matchup.attacker!} className="flex-row" data-testid="attacker-pokemon">
-        <PokemonSprite data-testid="attacker-sprite" src={matchup.attacker!.sprites?.back_default ?? ''} />
+        <PokemonSprite
+          data-testid="attacker-sprite"
+          src={matchup.attacker!.sprites?.back_default ?? ''}
+        />
         <div className="text-foreground flex w-full flex-col items-start">
           <PokemonName data-testid="attacker-name" />
           <PokemonTags />

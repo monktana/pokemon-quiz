@@ -13,7 +13,7 @@ export const useMatchup = (round: number, attackerId: number) => {
   return useSuspenseQuery({
     queryKey: [queryKey, round, attackerId],
     queryFn: () => getMatchup(attackerId),
-    staleTime: staleTime
+    staleTime: staleTime,
   });
 };
 
@@ -21,7 +21,7 @@ export const usePrefetchMatchup = async (round: number, attackerId: number) => {
   return await queryClient.prefetchQuery({
     queryKey: [queryKey, round, attackerId],
     queryFn: () => getMatchup(attackerId),
-    staleTime: staleTime
+    staleTime: staleTime,
   });
 };
 

@@ -39,8 +39,7 @@ const innerCircleVariants = cva(
 );
 
 export interface PokeballProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof pokeballVariants> {}
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof pokeballVariants> {}
 
 export function Pokeball({ className, size, fainted, ...props }: PokeballProps) {
   return (

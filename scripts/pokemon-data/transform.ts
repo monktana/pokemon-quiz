@@ -1,5 +1,11 @@
 import { Languages } from '../../src/util/localization/i18n';
-import type { PokeApiMove, PokeApiName, PokeApiPokemon, PokeApiSpecies, PokeApiType } from './pokeapi';
+import type {
+  PokeApiMove,
+  PokeApiName,
+  PokeApiPokemon,
+  PokeApiSpecies,
+  PokeApiType,
+} from './pokeapi';
 import type { InternationalName, MoveRecord, PokemonRecord, TypeRecord } from './types';
 
 // Only keep names for languages the app actually renders (see getResourceName) -

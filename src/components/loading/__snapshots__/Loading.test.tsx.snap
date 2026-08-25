@@ -9,8 +9,6 @@ exports[`Loading > matches the snapshot 1`] = `
   </script>
   <div
     class="flex h-screen items-center justify-center"
-    data-sentry-component="Loading"
-    data-sentry-source-file="Loading.tsx"
   >
     <div
       class="flex w-90 flex-col gap-2"
@@ -18,54 +16,30 @@ exports[`Loading > matches the snapshot 1`] = `
     >
       <div
         class="animate-pulse rounded-md border [animation-duration:var(--duration,1.2s)] border-border-500 bg-background-300 dark:border-border-100 dark:bg-background-700 h-12 w-full"
-        data-sentry-component="Skeleton"
-        data-sentry-element="Skeleton"
-        data-sentry-source-file="Skeleton.tsx"
       />
       <div
         class="animate-pulse rounded-md border [animation-duration:var(--duration,1.2s)] border-border-500 bg-background-300 dark:border-border-100 dark:bg-background-700 h-54.5 w-full"
-        data-sentry-component="Skeleton"
-        data-sentry-element="Skeleton"
-        data-sentry-source-file="Skeleton.tsx"
       />
       <div
         class="animate-pulse rounded-md border [animation-duration:var(--duration,1.2s)] border-border-500 bg-background-300 dark:border-border-100 dark:bg-background-700 h-54.5 w-full"
-        data-sentry-component="Skeleton"
-        data-sentry-element="Skeleton"
-        data-sentry-source-file="Skeleton.tsx"
       />
       <div
         class="animate-pulse rounded-md border [animation-duration:var(--duration,1.2s)] border-border-500 bg-background-300 dark:border-border-100 dark:bg-background-700 h-12 w-full"
-        data-sentry-component="Skeleton"
-        data-sentry-element="Skeleton"
-        data-sentry-source-file="Skeleton.tsx"
       />
       <div
         class="bg-background-200 dark:bg-background-800 grid w-full grid-cols-2 gap-2 rounded-md p-2"
       >
         <div
           class="animate-pulse rounded-md border [animation-duration:var(--duration,1.2s)] border-border-500 bg-background-300 dark:border-border-100 dark:bg-background-700 h-10 w-full"
-          data-sentry-component="Skeleton"
-          data-sentry-element="Skeleton"
-          data-sentry-source-file="Skeleton.tsx"
         />
         <div
           class="animate-pulse rounded-md border [animation-duration:var(--duration,1.2s)] border-border-500 bg-background-300 dark:border-border-100 dark:bg-background-700 h-10 w-full"
-          data-sentry-component="Skeleton"
-          data-sentry-element="Skeleton"
-          data-sentry-source-file="Skeleton.tsx"
         />
         <div
           class="animate-pulse rounded-md border [animation-duration:var(--duration,1.2s)] border-border-500 bg-background-300 dark:border-border-100 dark:bg-background-700 h-10 w-full"
-          data-sentry-component="Skeleton"
-          data-sentry-element="Skeleton"
-          data-sentry-source-file="Skeleton.tsx"
         />
         <div
           class="animate-pulse rounded-md border [animation-duration:var(--duration,1.2s)] border-border-500 bg-background-300 dark:border-border-100 dark:bg-background-700 h-10 w-full"
-          data-sentry-component="Skeleton"
-          data-sentry-element="Skeleton"
-          data-sentry-source-file="Skeleton.tsx"
         />
       </div>
     </div>

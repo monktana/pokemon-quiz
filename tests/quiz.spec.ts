@@ -58,7 +58,9 @@ const TEAM_SIZE = 6;
 
 const loseGame = async (page: Page) => {
   for (let i = 0; i < TEAM_SIZE; i++) {
-    const koCountBefore = await page.locator('[data-testid="team-pokeball"][data-status="ko"]').count();
+    const koCountBefore = await page
+      .locator('[data-testid="team-pokeball"][data-status="ko"]')
+      .count();
 
     await clickIncorrectButton(page);
 
@@ -131,7 +133,9 @@ test.describe('Game', () => {
 
     await expect(page.getByTestId('team-status')).toBeVisible();
     await expect(page.getByTestId('team-pokeball')).toHaveCount(TEAM_SIZE);
-    await expect(page.locator('[data-testid="team-pokeball"][data-status="ok"]')).toHaveCount(TEAM_SIZE);
+    await expect(page.locator('[data-testid="team-pokeball"][data-status="ok"]')).toHaveCount(
+      TEAM_SIZE
+    );
   });
 
   test('it increases the score when the guess is correct', async ({ page }) => {
