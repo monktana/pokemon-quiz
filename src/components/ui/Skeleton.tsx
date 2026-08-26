@@ -8,7 +8,7 @@ const skeletonVariants = cva(
   {
     variants: {
       variant: {
-        quiz: 'border-border-500 bg-background-300 dark:border-border-100 dark:bg-background-700',
+        quiz: 'border-bezel-border/40 bg-bezel',
       },
     },
     defaultVariants: {

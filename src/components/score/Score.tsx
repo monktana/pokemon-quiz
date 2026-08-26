@@ -11,7 +11,9 @@ export function Score(props: HTMLAttributes<HTMLDivElement>) {
     <div {...props}>
       <div className="text-foreground flex items-center gap-2">
         <span data-testid="score-label">{getText('score.label')}</span>
-        <span data-testid="score-value">{score}</span>
+        <span data-testid="score-value" className="text-xl font-bold tabular-nums normal-case">
+          {score}
+        </span>
       </div>
     </div>
   );

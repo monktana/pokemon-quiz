@@ -21,8 +21,9 @@ export function Navbar() {
           aria-label={getText('navbar.color.label')}
           onClick={toggleColorMode}
           className={cn(
-            buttonVariants({ size: 'icon' }),
-            'bg-(--type-solid) text-(--type-contrast) hover:opacity-90'
+            buttonVariants({ size: 'icon', variant: 'unstyled' }),
+            'bg-(--type-solid) text-(--type-contrast)',
+            '[@media(hover:hover)]:hover:opacity-90'
           )}
         >
           <TypeIcon type={iconName} className="h-5 w-5" />

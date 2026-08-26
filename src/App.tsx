@@ -13,7 +13,7 @@ export const App = () => {
     <ErrorBoundary onReset={reset} fallback={({ resetError }) => <Error reset={resetError} />}>
       <Suspense fallback={<Loading />}>
         <Navbar />
-        <div className="mx-auto flex h-screen max-w-3xl items-center justify-center px-4">
+        <div className="mx-auto flex min-h-screen max-w-3xl items-center justify-center px-4 pt-14">
           {appState === 'menu' && <Menu />}
           {appState === 'quiz' && <Game />}
           {appState === 'gameover' && <GameOver />}

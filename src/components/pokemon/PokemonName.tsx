@@ -10,7 +10,13 @@ export const PokemonName = ({ className, ...props }: PokemonNameProps) => {
   const pokemon = usePokemonContext();
 
   return (
-    <span {...props} className={cn('text-2xl font-bold', className)}>
+    <span
+      {...props}
+      className={cn(
+        'block w-full truncate text-2xl leading-[1.1] font-bold tracking-[-0.012em]',
+        className
+      )}
+    >
       {getResourceName(pokemon.species!.names!, language)}
     </span>
   );

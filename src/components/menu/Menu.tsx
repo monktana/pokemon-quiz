@@ -21,7 +21,7 @@ export function Menu() {
       <Pokeball data-testid="pokeball" size="lg" className="animate-pokeball" />
       <div className="flex items-center justify-center">
         <Button data-testid="start-game-button" size="lg" className="mt-8" onClick={startGame}>
-          {getText('mainmenu.button.newgame').toUpperCase()}
+          {getText('mainmenu.button.newgame')}
         </Button>
       </div>
     </div>

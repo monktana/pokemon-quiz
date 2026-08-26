@@ -4,6 +4,27 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --font-sans: 'Chakra Petch', ui-sans-serif, system-ui, sans-serif;
+
+  /* Battle-terminal surfaces: page canvas, the console bezel around the
+     Battle screen, and neutral (non type-tinted) panels within it. Warm-
+     neutral tint (chroma 0.004-0.008 toward hue 30) ties them to the Poké
+     Ball red brand accent per the OKLCH neutral-tinting rule. */
+  --color-canvas: oklch(97.5% 0.004 30);
+  --color-bezel: oklch(93% 0.006 30);
+  --color-bezel-border: oklch(55% 0.01 30);
+  --color-surface: oklch(100% 0 0);
+  --color-surface-border: oklch(85% 0.005 30);
+
+  /* Guess-result feedback, distinct from the type-color system so a "wrong
+     guess" flash is never mistaken for a type accent. */
+  --color-feedback-correct: oklch(72% 0.15 165);
+  --color-feedback-incorrect: var(--color-red-500);
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
   /* UI scales — ported verbatim from theme/foundations/Colors.ts */
   --color-border-100: #484848;
   --color-border-500: #bbbbbb;
@@ -223,28 +244,91 @@
   --color-fairy-800: #571d3a;
   --color-fairy-900: #341123;
 
-  --animate-pokeball: pokeball 4s ease-in-out infinite;
+  --animate-pokeball: pokeball 5s ease-in-out infinite;
+  --animate-panel-enter: panel-enter 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-pokeball,
+  .animate-panel-enter {
+    animation: none;
+  }
+}
+
+/* Plays once whenever a Pokemon panel mounts fresh (keyed by pokemon id in
+   Battle.tsx), so a matchup change reads as one deliberate materialization
+   instead of text updating first and the sprite popping in once it's
+   fetched. */
+@keyframes panel-enter {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+/* Dark overrides for the battle-terminal surfaces. Canvas goes near-black;
+   the bezel and neutral surfaces step up via semi-transparent white
+   overlays on that canvas (0.04 / 0.08), per the dark-mode surface-
+   hierarchy rule — traditional drop shadows are nearly invisible here. */
+.dark {
+  --color-canvas: oklch(16% 0.006 30);
+  --color-bezel: oklch(21% 0.008 30);
+  --color-bezel-border: oklch(38% 0.01 30);
+  --color-surface: oklch(100% 0 0 / 0.04);
+  --color-surface-border: oklch(100% 0 0 / 0.08);
+  --color-feedback-correct: oklch(78% 0.15 165);
+}
+
+/* A caught Pokémon straining against the ball: three short shake bursts,
+   each settling back to rest, with a held pause after every burst for the
+   "is it going to stay caught?" beat before it tries again. */
 @keyframes pokeball {
-  0% {
+  0%,
+  3% {
     transform: rotate(0);
   }
-  10% {
-    transform: rotate(-25deg);
+  5% {
+    transform: rotate(-18deg);
   }
+  7% {
+    transform: rotate(16deg);
+  }
+  9% {
+    transform: rotate(-6deg);
+  }
+  11%,
   30% {
-    transform: rotate(17deg);
-  }
-  60% {
-    transform: rotate(-10deg);
-  }
-  80% {
-    transform: rotate(5deg);
-  }
-  90% {
     transform: rotate(0);
   }
+  32% {
+    transform: rotate(-18deg);
+  }
+  34% {
+    transform: rotate(16deg);
+  }
+  36% {
+    transform: rotate(-6deg);
+  }
+  38%,
+  57% {
+    transform: rotate(0);
+  }
+  59% {
+    transform: rotate(-18deg);
+  }
+  61% {
+    transform: rotate(16deg);
+  }
+  63% {
+    transform: rotate(-6deg);
+  }
+  65%,
   100% {
     transform: rotate(0);
   }
@@ -257,16 +341,14 @@
     box-sizing: border-box;
   }
 
-  html,
-  body {
-    background-color: var(--color-background-300);
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  .dark html,
-  .dark body,
-  html.dark,
-  body.dark {
-    background-color: var(--color-background-900);
+  html,
+  body {
+    background-color: var(--color-canvas);
   }
 
   img {
