@@ -1,5 +1,5 @@
 import { render, RenderOptions } from '@testing-library/react';
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode, Suspense } from 'react';
 
 import { AppProvider } from '@/providers';
 
@@ -8,7 +8,13 @@ type WithProviderProps = {
 };
 
 const WithProviders = ({ children }: WithProviderProps) => {
-  return <AppProvider browserLanguage="en">{children}</AppProvider>;
+  return (
+    <AppProvider browserLanguage="en">
+      {/* Mirrors App.tsx's real tree: anything using a Suspense query
+          (useTeamQuery, useMatchup) needs a boundary to render into. */}
+      <Suspense fallback={null}>{children}</Suspense>
+    </AppProvider>
+  );
 };
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { TypeEffectiveness } from '@/api/schema';
 import { calculateEffectiveness } from '@/lib/calculateEffectiveness';
-import { fire, flying, ghost, grass, ice, normal, water } from '@/lib/testing/fixtures/type';
+import { dragon, fire, flying, ghost, grass, ice, normal, water } from '@/lib/testing/fixtures/type';
 
 describe('calculateEffectiveness', () => {
   it('returns SuperEffective for a single-type advantage', () => {
@@ -21,8 +21,18 @@ describe('calculateEffectiveness', () => {
     expect(calculateEffectiveness(normal, [normal])).toBe(TypeEffectiveness.Effective);
   });
 
-  it('multiplies effectiveness across dual defending types', () => {
+  it('multiplies effectiveness across dual defending types (4x)', () => {
     // ice vs grass (2x) * flying (2x) = 4x -> SuperEffective
     expect(calculateEffectiveness(ice, [grass, flying])).toBe(TypeEffectiveness.SuperEffective);
+  });
+
+  it('multiplies effectiveness across dual defending types (0.25x)', () => {
+    // fire vs fire (0.5x) * dragon (0.5x) = 0.25x -> NotVeryEffective
+    expect(calculateEffectiveness(fire, [fire, dragon])).toBe(TypeEffectiveness.NotVeryEffective);
+  });
+
+  it('defaults to a neutral multiplier when the defending type is missing from the matrix row', () => {
+    const unknown = { id: 999, name: 'cosmic', names: [] };
+    expect(calculateEffectiveness(fire, [unknown])).toBe(TypeEffectiveness.Effective);
   });
 });
