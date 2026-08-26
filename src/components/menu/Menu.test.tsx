@@ -1,10 +1,17 @@
-import { screen } from '@testing-library/react';
+import { fireEvent, renderHook, screen } from '@testing-library/react';
 import React from 'react';
-import { describe, expect } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
+import { useResetTeam } from '@/api';
 import { Menu } from '@/components';
 import { render } from '@/lib';
+import { useAppState } from '@/stores';
 import { geti18nText } from '@/util';
+
+vi.mock('@/api', async () => {
+  const actual = await vi.importActual<typeof import('@/api')>('@/api');
+  return { ...actual, useResetTeam: vi.fn() };
+});
 
 describe('<Menu />', () => {
   it('displays the start game button', () => {
@@ -21,5 +28,16 @@ describe('<Menu />', () => {
     render(<Menu />);
 
     expect(screen.getByTestId('pokeball')).toBeVisible();
+  });
+
+  it('resets the team and starts the quiz on click', () => {
+    render(<Menu />);
+
+    fireEvent.click(screen.getByTestId('start-game-button'));
+
+    expect(useResetTeam).toHaveBeenCalled();
+
+    const { result } = renderHook(() => useAppState());
+    expect(result.current).toEqual('quiz');
   });
 });
