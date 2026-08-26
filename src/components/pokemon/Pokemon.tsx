@@ -17,7 +17,7 @@ export function Pokemon({ pokemon, children, className, ...props }: PokemonProps
     <PokemonContextProvider value={pokemon}>
       <div
         data-type={primaryType}
-        className="border-(--type-muted) bg-(--type-subtle) relative overflow-hidden rounded-lg border"
+        className="border-(--type-muted) bg-(--type-subtle) animate-panel-enter relative overflow-hidden rounded-lg border"
       >
         <div className="bg-(--type-solid) h-1 w-full" />
         <div

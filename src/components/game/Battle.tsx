@@ -5,9 +5,10 @@ import { useMatchup, usePrefetchMatchup } from '@/api';
 import { TypeEffectiveness, type Pokemon } from '@/api/schema';
 import { useLocalization } from '@/hooks';
 import { cn } from '@/lib/cn';
-import { useAppStateActions, useScoreActions } from '@/stores';
+import { useAppStateActions, useLanguage, useScoreActions } from '@/stores';
 
 import {
+  getResourceName,
   Pokemon as PokemonPanel,
   PokemonName,
   PokemonSprite,
@@ -20,6 +21,8 @@ import {
 } from '../';
 
 const FEEDBACK_DURATION_MS = 400;
+const FAINT_MESSAGE_DURATION_MS = 1100;
+const GAME_OVER_DELAY_MS = 500;
 
 type Feedback = { guess: TypeEffectiveness; correct: boolean };
 
@@ -31,12 +34,15 @@ export function Battle({ team }: BattleProps) {
   const [round, setRound] = useState<number>(1);
   const [isPending, startTransition] = useTransition();
   const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const [faintMessage, setFaintMessage] = useState<React.ReactNode>(null);
+  const [isGameOverPending, setIsGameOverPending] = useState(false);
   const { activeId, koIds, faintActive } = useTeam(team);
 
   const { data: matchup, isFetching } = useMatchup(round, activeId);
   usePrefetchMatchup(round + 1, activeId);
 
-  const { getText } = useLocalization();
+  const language = useLanguage();
+  const { getText, getTemplatedText } = useLocalization();
   const { endQuiz } = useAppStateActions();
   const { increase } = useScoreActions();
   const { makeGuess } = useGuess(matchup);
@@ -60,22 +66,39 @@ export function Battle({ team }: BattleProps) {
         return;
       }
 
-      // A wrong guess always switches to a different team member, so the
-      // next round's matchup query was never prefetched for it. Running the
-      // resulting state updates as a transition keeps the current round on
-      // screen instead of flashing the whole app to the Suspense fallback
-      // while that fresh query resolves.
-      startTransition(() => {
-        const nextActiveId = faintActive();
-        if (nextActiveId === null) {
-          endQuiz();
-          return;
-        }
+      const faintedName = getResourceName(matchup.attacker!.species!.names!, language);
+      setFaintMessage(
+        getTemplatedText('game.status.fainted', <span key="fainted-name">{faintedName}</span>)
+      );
 
-        setRound((round) => round + 1);
-      });
+      // Hold the fainted Pokemon and its message on screen for a beat
+      // before resolving faintActive()/advancing the round, so the KO
+      // reads as an event instead of an instant, unexplained swap. A wrong
+      // guess always switches to a different team member, so the next
+      // round's matchup query was never prefetched for it either way;
+      // wrapping the resolution in a transition keeps whatever's on screen
+      // stable instead of flashing to the Suspense fallback while it loads.
+      setTimeout(() => {
+        startTransition(() => {
+          setFaintMessage(null);
+          const nextActiveId = faintActive();
+          if (nextActiveId === null) {
+            // Give the last Pokemon's now-fainted team indicator its own
+            // paint before cutting to Game Over: setting koIds and calling
+            // endQuiz() in the same commit would let React batch both
+            // together and skip straight past the "all 6 fainted" frame.
+            // isGameOverPending keeps the buttons locked through this gap,
+            // since faintMessage itself was already cleared above.
+            setIsGameOverPending(true);
+            setTimeout(() => startTransition(() => endQuiz()), GAME_OVER_DELAY_MS);
+            return;
+          }
+
+          setRound((round) => round + 1);
+        });
+      }, FAINT_MESSAGE_DURATION_MS);
     },
-    [makeGuess, increase, faintActive, endQuiz]
+    [makeGuess, increase, faintActive, endQuiz, matchup, language, getTemplatedText]
   );
 
   const answerButton = (guess: TypeEffectiveness, testId: string, label: string) => {
@@ -85,7 +108,7 @@ export function Battle({ team }: BattleProps) {
       <button
         type="button"
         data-testid={testId}
-        disabled={isFetching || isPending}
+        disabled={isFetching || isPending || faintMessage !== null || isGameOverPending}
         onClick={() => handleGuess(guess)}
         className={cn(
           'border-surface-border bg-surface text-foreground min-h-14 cursor-pointer rounded-md border text-sm font-semibold tracking-[0.03em] uppercase',
@@ -113,7 +136,14 @@ export function Battle({ team }: BattleProps) {
   return (
     <div
       data-testid="game-container"
-      className="bg-bezel border-bezel-border w-full rounded-lg border-2 p-3 sm:p-4"
+      className={cn(
+        'bg-bezel w-full rounded-lg border-2 p-3 ring-4 transition-[border-color,box-shadow] duration-300 sm:p-4',
+        feedback
+          ? feedback.correct
+            ? 'border-feedback-correct ring-feedback-correct/30'
+            : 'border-feedback-incorrect ring-feedback-incorrect/30'
+          : 'border-bezel-border ring-transparent'
+      )}
     >
       <div className="bg-canvas flex w-full flex-col gap-4 rounded-md p-2 sm:p-3">
         <div className="flex w-full items-center justify-between">
@@ -121,6 +151,7 @@ export function Battle({ team }: BattleProps) {
           <Team team={team} koIds={koIds} activeId={activeId} />
         </div>
         <PokemonPanel
+          key={matchup.defender!.id}
           pokemon={matchup.defender!}
           className="flex-row-reverse"
           data-testid="defender-pokemon"
@@ -135,6 +166,7 @@ export function Battle({ team }: BattleProps) {
           </div>
         </PokemonPanel>
         <PokemonPanel
+          key={matchup.attacker!.id}
           pokemon={matchup.attacker!}
           className="flex-row"
           data-testid="attacker-pokemon"
@@ -148,7 +180,16 @@ export function Battle({ team }: BattleProps) {
             <PokemonTags />
           </div>
         </PokemonPanel>
-        <Question pokemon={matchup.attacker!} move={matchup.move!} />
+        {faintMessage ? (
+          <div
+            data-testid="fainted-message"
+            className="text-foreground border-surface-border bg-surface flex w-full items-center justify-center gap-1 rounded-md border p-4 text-center text-lg shadow-[0_1px_3px_rgba(0,0,0,0.10)] sm:p-5 dark:shadow-none"
+          >
+            {faintMessage}
+          </div>
+        ) : (
+          <Question pokemon={matchup.attacker!} move={matchup.move!} />
+        )}
         <div data-testid="decision-buttons" className="grid w-full grid-cols-2 gap-2">
           {answerButton(
             TypeEffectiveness.NoEffect,
