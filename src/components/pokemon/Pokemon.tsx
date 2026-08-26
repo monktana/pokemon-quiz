@@ -11,16 +11,24 @@ export type PokemonProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 export function Pokemon({ pokemon, children, className, ...props }: PokemonProps) {
+  const primaryType = pokemon.types?.[0]?.name;
+
   return (
     <PokemonContextProvider value={pokemon}>
       <div
-        className={cn(
-          'border-border-500 bg-background-200 dark:border-border-100 dark:bg-background-800 flex w-full items-center rounded-md border p-2',
-          className
-        )}
-        {...props}
+        data-type={primaryType}
+        className="border-(--type-muted) bg-(--type-subtle) relative overflow-hidden rounded-lg border"
       >
-        {children}
+        <div className="bg-(--type-solid) h-1 w-full" />
+        <div
+          className={cn(
+            'flex w-full items-center justify-center gap-4 p-4 sm:gap-6 sm:p-6',
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </div>
       </div>
     </PokemonContextProvider>
   );

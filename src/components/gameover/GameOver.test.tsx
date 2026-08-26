@@ -25,7 +25,7 @@ describe('<GameOver />', () => {
     expect(screen.getByTestId('new-game-button')).toBeVisible();
     expect(screen.getByTestId('new-game-button')).toBeEnabled();
     expect(screen.getByTestId('new-game-button')).toHaveTextContent(
-      geti18nText('en', 'gameover.button.newgame').toUpperCase()
+      geti18nText('en', 'gameover.button.newgame')
     );
   });
 
@@ -35,7 +35,7 @@ describe('<GameOver />', () => {
     expect(screen.getByTestId('main-menu-button')).toBeVisible();
     expect(screen.getByTestId('main-menu-button')).toBeEnabled();
     expect(screen.getByTestId('main-menu-button')).toHaveTextContent(
-      geti18nText('en', 'gameover.button.mainmenu').toUpperCase()
+      geti18nText('en', 'gameover.button.mainmenu')
     );
   });
 });

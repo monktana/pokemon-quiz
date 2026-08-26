@@ -13,7 +13,7 @@ describe('<Menu />', () => {
     expect(screen.getByTestId('start-game-button')).toBeVisible();
     expect(screen.getByTestId('start-game-button')).toBeEnabled();
     expect(screen.getByTestId('start-game-button')).toHaveTextContent(
-      geti18nText('en', 'mainmenu.button.newgame').toUpperCase()
+      geti18nText('en', 'mainmenu.button.newgame')
     );
   });
 

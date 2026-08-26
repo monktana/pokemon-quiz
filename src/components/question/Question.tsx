@@ -17,9 +17,9 @@ export function Question({ pokemon: attacker, move }: AttackProps) {
   return (
     <div
       data-testid="question"
-      className="text-foreground border-border-500 bg-background-200 dark:border-border-100 dark:bg-background-800 flex w-full items-center gap-1 rounded-md border p-2"
+      className="text-foreground border-surface-border bg-surface flex w-full items-center justify-center gap-1 rounded-md border p-4 shadow-[0_1px_3px_rgba(0,0,0,0.10)] sm:p-5 dark:shadow-none"
     >
-      <div className="flex gap-2 text-xl">
+      <div className="flex flex-wrap items-center justify-center gap-2 text-center text-lg text-pretty">
         {getTemplatedText(
           'game.question.effectiveness',
           <span key={attacker.species!.name}>

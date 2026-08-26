@@ -14,14 +14,20 @@ export function GameOver() {
   useCancelMatchup();
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <p data-testid="gameover-message" className="text-foreground my-1 text-2xl">
+    <div className="flex flex-col items-center gap-2 text-center">
+      <p
+        data-testid="gameover-message"
+        className="text-foreground my-1 text-3xl leading-[1.1] font-bold tracking-[-0.012em] text-balance"
+      >
         {getText('gameover.text.blackout')}
       </p>
-      <p data-testid="final-score" className="text-muted-foreground my-2 text-sm">
+      <p
+        data-testid="final-score"
+        className="text-muted-foreground my-2 text-sm tracking-[0.02em] tabular-nums"
+      >
         {getText('gameover.text.score')} {score}
       </p>
-      <div className="mt-8 flex flex-col items-center gap-4">
+      <div className="mt-8 flex w-64 flex-col items-center gap-4">
         <Button
           data-testid="new-game-button"
           size="lg"
@@ -33,7 +39,7 @@ export function GameOver() {
             startQuiz();
           }}
         >
-          {getText('gameover.button.newgame').toUpperCase()}
+          {getText('gameover.button.newgame')}
         </Button>
         <Button
           data-testid="main-menu-button"
@@ -45,7 +51,7 @@ export function GameOver() {
             openMenu();
           }}
         >
-          {getText('gameover.button.mainmenu').toUpperCase()}
+          {getText('gameover.button.mainmenu')}
         </Button>
       </div>
     </div>

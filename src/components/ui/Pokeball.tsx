@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/cn';
 
 export const pokeballVariants = cva(
-  'relative rounded-full border-black [background:linear-gradient(var(--color-red-500)_0%,var(--color-red-500)_50%,white_50%)]',
+  'relative rounded-full border-black [background:linear-gradient(var(--color-red-500)_0%,var(--color-red-500)_50%,white_50%)] transition-[scale,opacity] duration-200 ease-out',
   {
     variants: {
       size: {
@@ -12,8 +12,8 @@ export const pokeballVariants = cva(
         sm: 'h-6 w-6 border-2',
       },
       fainted: {
-        true: 'grayscale opacity-40',
-        false: '',
+        true: 'grayscale-100 scale-90 opacity-40',
+        false: 'scale-100 opacity-100',
       },
     },
     defaultVariants: {

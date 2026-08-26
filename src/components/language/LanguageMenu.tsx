@@ -3,7 +3,6 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { buttonVariants, LanguageIcon } from '@/components';
 import { useLocalization } from '@/hooks';
-import { cn } from '@/lib/cn';
 import { useLanguage, useLanguageActions } from '@/stores';
 import { Language, Languages } from '@/util';
 
@@ -18,10 +17,7 @@ export const LanguageMenu = () => {
         <button
           data-testid="language-switch"
           aria-label={getText('navbar.language.label')}
-          className={cn(
-            buttonVariants({ size: 'icon' }),
-            'hover:bg-background-200 dark:hover:bg-background-800'
-          )}
+          className={buttonVariants({ size: 'icon' })}
         >
           <LanguageIcon type={language} aria-label={language} className="h-5 w-5" />
         </button>
