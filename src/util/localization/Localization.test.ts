@@ -6,10 +6,10 @@ import {
   geti18nText,
   isSupportedLanguage,
   Language,
+  languageNames,
   Languages,
   TextKey,
 } from './i18n';
-import { texts } from './texts';
 
 const languagesGetter = vi.spyOn(navigator, 'languages', 'get');
 const languageGetter = vi.spyOn(navigator, 'language', 'get');
@@ -45,6 +45,14 @@ describe('app language', () => {
     expect(getAppLanguage('de-CH')).toBe('de');
   });
 
+  it('reads a newly added language with region subtag as a supported language', () => {
+    expect(getAppLanguage('ja-JP')).toBe('ja');
+  });
+
+  it('reads a newly added language with a lowercase-normalized code', () => {
+    expect(getAppLanguage('KO')).toBe('ko');
+  });
+
   it('reads the browser language with variant subtag as a supported language', () => {
     expect(getAppLanguage('de-1996')).toBe('de');
   });
@@ -58,19 +66,28 @@ describe('app language', () => {
   });
 
   it('detects a supported language', () => {
-    expect(isSupportedLanguage('en')).toBe(true);
-    expect(isSupportedLanguage('de')).toBe(true);
+    Languages.forEach((language) => {
+      expect(isSupportedLanguage(language)).toBe(true);
+    });
   });
 
   it('detects an unsupported language', () => {
-    expect(isSupportedLanguage('ja')).toBe(false);
+    expect(isSupportedLanguage('pt')).toBe(false);
+  });
+});
+
+describe('language names', () => {
+  it('has an endonym for every supported language', () => {
+    Languages.forEach((language) => {
+      expect(languageNames[language]).toBeTruthy();
+    });
   });
 });
 
 describe('localized texts', () => {
   Languages.forEach((language) => {
     it(`reads a ${language} localized text`, () => {
-      expect(geti18nText(language, language)).toBe(texts[language][language]);
+      expect(geti18nText(language, 'score.label')).toBeTruthy();
     });
   });
 

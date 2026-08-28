@@ -15,16 +15,41 @@ describe('<LanguageIcon />', () => {
     expect(screen.getByTestId('language-icon')).toBeVisible();
   });
 
+  it('renders the Spanish flag for es', () => {
+    render(<LanguageIcon type="es" data-testid="language-icon" />);
+    expect(screen.getByTestId('language-icon')).toBeVisible();
+  });
+
+  it('renders the French flag for fr', () => {
+    render(<LanguageIcon type="fr" data-testid="language-icon" />);
+    expect(screen.getByTestId('language-icon')).toBeVisible();
+  });
+
+  it('renders the Italian flag for it', () => {
+    render(<LanguageIcon type="it" data-testid="language-icon" />);
+    expect(screen.getByTestId('language-icon')).toBeVisible();
+  });
+
+  it('renders the Japanese flag for ja', () => {
+    render(<LanguageIcon type="ja" data-testid="language-icon" />);
+    expect(screen.getByTestId('language-icon')).toBeVisible();
+  });
+
+  it('renders the South Korean flag for ko', () => {
+    render(<LanguageIcon type="ko" data-testid="language-icon" />);
+    expect(screen.getByTestId('language-icon')).toBeVisible();
+  });
+
   it('logs an error and renders nothing for an unsupported language', () => {
     const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
 
     const { container } = render(
       // @ts-expect-error intentionally passing an unsupported language
-      <LanguageIcon type="fr" data-testid="language-icon" />
+      <LanguageIcon type="pt" data-testid="language-icon" />
     );
 
     expect(container).toBeEmptyDOMElement();
-    expect(consoleError).toHaveBeenCalledWith(expect.stringContaining('fr'));
+    expect(consoleError).toHaveBeenCalledWith(expect.stringContaining('pt'));
 
     consoleError.mockRestore();
   });

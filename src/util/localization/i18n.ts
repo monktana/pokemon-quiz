@@ -1,12 +1,29 @@
 import { texts } from './texts';
 
 //https://datatracker.ietf.org/doc/html/rfc5646
-export const Languages = ['en', 'de'] as const;
+export const Languages = ['de', 'en', 'es', 'fr', 'it', 'ja', 'ko'] as const;
 export type Language = (typeof Languages)[number];
 export const isSupportedLanguage = (language: string): language is Language =>
   Languages.includes(language as Language);
 
 export type TextKey = keyof (typeof texts)[Language];
+
+/**
+ * Each language's own name for itself (endonym), independent of the currently
+ * active UI language. Used for the language picker so options stay
+ * recognizable regardless of which language is currently active - the
+ * standard convention (see GitHub, YouTube, etc.), and avoids an N*N
+ * translation matrix as more languages are added.
+ */
+export const languageNames: Record<Language, string> = {
+  de: 'Deutsch',
+  en: 'English',
+  es: 'Español',
+  fr: 'Français',
+  it: 'Italiano',
+  ja: '日本語',
+  ko: '한국어',
+};
 
 /**
  * Reads the localized text of the given language and key.

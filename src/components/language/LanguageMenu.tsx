@@ -4,7 +4,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { buttonVariants, LanguageIcon } from '@/components';
 import { useLocalization } from '@/hooks';
 import { useLanguage, useLanguageActions } from '@/stores';
-import { Language, Languages } from '@/util';
+import { Language, languageNames, Languages } from '@/util';
 
 export const LanguageMenu = () => {
   const language = useLanguage();
@@ -40,7 +40,7 @@ export const LanguageMenu = () => {
                 className="hover:bg-background-300 dark:hover:bg-background-700 flex cursor-pointer items-center gap-2 rounded px-2 py-1.5 outline-none"
               >
                 <LanguageIcon type={language} className="h-4 w-4" />
-                <span>{getText(language)}</span>
+                <span>{languageNames[language]}</span>
               </DropdownMenu.RadioItem>
             ))}
           </DropdownMenu.RadioGroup>

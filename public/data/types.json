@@ -4,12 +4,32 @@
     "name": "normal",
     "names": [
       {
+        "name": "노말",
+        "language": "ko"
+      },
+      {
+        "name": "Normal",
+        "language": "fr"
+      },
+      {
         "name": "Normal",
         "language": "de"
       },
       {
         "name": "Normal",
+        "language": "es"
+      },
+      {
+        "name": "Normale",
+        "language": "it"
+      },
+      {
+        "name": "Normal",
         "language": "en"
+      },
+      {
+        "name": "ノーマル",
+        "language": "ja"
       }
     ]
   },
@@ -18,12 +38,32 @@
     "name": "fighting",
     "names": [
       {
+        "name": "격투",
+        "language": "ko"
+      },
+      {
+        "name": "Combat",
+        "language": "fr"
+      },
+      {
         "name": "Kampf",
         "language": "de"
       },
       {
+        "name": "Lucha",
+        "language": "es"
+      },
+      {
+        "name": "Lotta",
+        "language": "it"
+      },
+      {
         "name": "Fighting",
         "language": "en"
+      },
+      {
+        "name": "かくとう",
+        "language": "ja"
       }
     ]
   },
@@ -32,12 +72,32 @@
     "name": "flying",
     "names": [
       {
+        "name": "비행",
+        "language": "ko"
+      },
+      {
+        "name": "Vol",
+        "language": "fr"
+      },
+      {
         "name": "Flug",
         "language": "de"
       },
       {
+        "name": "Volador",
+        "language": "es"
+      },
+      {
+        "name": "Volante",
+        "language": "it"
+      },
+      {
         "name": "Flying",
         "language": "en"
+      },
+      {
+        "name": "ひこう",
+        "language": "ja"
       }
     ]
   },
@@ -46,12 +106,32 @@
     "name": "poison",
     "names": [
       {
+        "name": "독",
+        "language": "ko"
+      },
+      {
+        "name": "Poison",
+        "language": "fr"
+      },
+      {
         "name": "Gift",
         "language": "de"
       },
       {
+        "name": "Veneno",
+        "language": "es"
+      },
+      {
+        "name": "Veleno",
+        "language": "it"
+      },
+      {
         "name": "Poison",
         "language": "en"
+      },
+      {
+        "name": "どく",
+        "language": "ja"
       }
     ]
   },
@@ -60,12 +140,32 @@
     "name": "ground",
     "names": [
       {
+        "name": "땅",
+        "language": "ko"
+      },
+      {
+        "name": "Sol",
+        "language": "fr"
+      },
+      {
         "name": "Boden",
         "language": "de"
       },
       {
+        "name": "Tierra",
+        "language": "es"
+      },
+      {
+        "name": "Terra",
+        "language": "it"
+      },
+      {
         "name": "Ground",
         "language": "en"
+      },
+      {
+        "name": "じめん",
+        "language": "ja"
       }
     ]
   },
@@ -74,12 +174,32 @@
     "name": "rock",
     "names": [
       {
+        "name": "바위",
+        "language": "ko"
+      },
+      {
+        "name": "Roche",
+        "language": "fr"
+      },
+      {
         "name": "Gestein",
         "language": "de"
       },
       {
+        "name": "Roca",
+        "language": "es"
+      },
+      {
+        "name": "Roccia",
+        "language": "it"
+      },
+      {
         "name": "Rock",
         "language": "en"
+      },
+      {
+        "name": "いわ",
+        "language": "ja"
       }
     ]
   },
@@ -88,12 +208,32 @@
     "name": "bug",
     "names": [
       {
+        "name": "벌레",
+        "language": "ko"
+      },
+      {
+        "name": "Insecte",
+        "language": "fr"
+      },
+      {
         "name": "Käfer",
         "language": "de"
       },
       {
+        "name": "Bicho",
+        "language": "es"
+      },
+      {
+        "name": "Coleottero",
+        "language": "it"
+      },
+      {
         "name": "Bug",
         "language": "en"
+      },
+      {
+        "name": "むし",
+        "language": "ja"
       }
     ]
   },
@@ -102,12 +242,32 @@
     "name": "ghost",
     "names": [
       {
+        "name": "고스트",
+        "language": "ko"
+      },
+      {
+        "name": "Spectre",
+        "language": "fr"
+      },
+      {
         "name": "Geist",
         "language": "de"
       },
       {
+        "name": "Fantasma",
+        "language": "es"
+      },
+      {
+        "name": "Spettro",
+        "language": "it"
+      },
+      {
         "name": "Ghost",
         "language": "en"
+      },
+      {
+        "name": "ゴースト",
+        "language": "ja"
       }
     ]
   },
@@ -116,12 +276,32 @@
     "name": "steel",
     "names": [
       {
+        "name": "강철",
+        "language": "ko"
+      },
+      {
+        "name": "Acier",
+        "language": "fr"
+      },
+      {
         "name": "Stahl",
         "language": "de"
       },
       {
+        "name": "Acero",
+        "language": "es"
+      },
+      {
+        "name": "Acciaio",
+        "language": "it"
+      },
+      {
         "name": "Steel",
         "language": "en"
+      },
+      {
+        "name": "はがね",
+        "language": "ja"
       }
     ]
   },
@@ -130,12 +310,32 @@
     "name": "fire",
     "names": [
       {
+        "name": "불꽃",
+        "language": "ko"
+      },
+      {
+        "name": "Feu",
+        "language": "fr"
+      },
+      {
         "name": "Feuer",
         "language": "de"
       },
       {
+        "name": "Fuego",
+        "language": "es"
+      },
+      {
+        "name": "Fuoco",
+        "language": "it"
+      },
+      {
         "name": "Fire",
         "language": "en"
+      },
+      {
+        "name": "ほのお",
+        "language": "ja"
       }
     ]
   },
@@ -144,12 +344,32 @@
     "name": "water",
     "names": [
       {
+        "name": "물",
+        "language": "ko"
+      },
+      {
+        "name": "Eau",
+        "language": "fr"
+      },
+      {
         "name": "Wasser",
         "language": "de"
       },
       {
+        "name": "Agua",
+        "language": "es"
+      },
+      {
+        "name": "Acqua",
+        "language": "it"
+      },
+      {
         "name": "Water",
         "language": "en"
+      },
+      {
+        "name": "みず",
+        "language": "ja"
       }
     ]
   },
@@ -158,12 +378,32 @@
     "name": "grass",
     "names": [
       {
+        "name": "풀",
+        "language": "ko"
+      },
+      {
+        "name": "Plante",
+        "language": "fr"
+      },
+      {
         "name": "Pflanze",
         "language": "de"
       },
       {
+        "name": "Planta",
+        "language": "es"
+      },
+      {
+        "name": "Erba",
+        "language": "it"
+      },
+      {
         "name": "Grass",
         "language": "en"
+      },
+      {
+        "name": "くさ",
+        "language": "ja"
       }
     ]
   },
@@ -172,12 +412,32 @@
     "name": "electric",
     "names": [
       {
+        "name": "전기",
+        "language": "ko"
+      },
+      {
+        "name": "Électrik",
+        "language": "fr"
+      },
+      {
         "name": "Elektro",
         "language": "de"
       },
       {
+        "name": "Eléctrico",
+        "language": "es"
+      },
+      {
+        "name": "Elettro",
+        "language": "it"
+      },
+      {
         "name": "Electric",
         "language": "en"
+      },
+      {
+        "name": "でんき",
+        "language": "ja"
       }
     ]
   },
@@ -186,12 +446,32 @@
     "name": "psychic",
     "names": [
       {
+        "name": "에스퍼",
+        "language": "ko"
+      },
+      {
+        "name": "Psy",
+        "language": "fr"
+      },
+      {
         "name": "Psycho",
         "language": "de"
       },
       {
+        "name": "Psíquico",
+        "language": "es"
+      },
+      {
+        "name": "Psico",
+        "language": "it"
+      },
+      {
         "name": "Psychic",
         "language": "en"
+      },
+      {
+        "name": "エスパー",
+        "language": "ja"
       }
     ]
   },
@@ -200,12 +480,32 @@
     "name": "ice",
     "names": [
       {
+        "name": "얼음",
+        "language": "ko"
+      },
+      {
+        "name": "Glace",
+        "language": "fr"
+      },
+      {
         "name": "Eis",
         "language": "de"
       },
       {
+        "name": "Hielo",
+        "language": "es"
+      },
+      {
+        "name": "Ghiaccio",
+        "language": "it"
+      },
+      {
         "name": "Ice",
         "language": "en"
+      },
+      {
+        "name": "こおり",
+        "language": "ja"
       }
     ]
   },
@@ -214,12 +514,32 @@
     "name": "dragon",
     "names": [
       {
+        "name": "드래곤",
+        "language": "ko"
+      },
+      {
+        "name": "Dragon",
+        "language": "fr"
+      },
+      {
         "name": "Drache",
         "language": "de"
       },
       {
+        "name": "Dragón",
+        "language": "es"
+      },
+      {
+        "name": "Drago",
+        "language": "it"
+      },
+      {
         "name": "Dragon",
         "language": "en"
+      },
+      {
+        "name": "ドラゴン",
+        "language": "ja"
       }
     ]
   },
@@ -228,12 +548,32 @@
     "name": "dark",
     "names": [
       {
+        "name": "악",
+        "language": "ko"
+      },
+      {
+        "name": "Ténèbres",
+        "language": "fr"
+      },
+      {
         "name": "Unlicht",
         "language": "de"
       },
       {
+        "name": "Siniestro",
+        "language": "es"
+      },
+      {
+        "name": "Buio",
+        "language": "it"
+      },
+      {
         "name": "Dark",
         "language": "en"
+      },
+      {
+        "name": "あく",
+        "language": "ja"
       }
     ]
   },
@@ -242,12 +582,32 @@
     "name": "fairy",
     "names": [
       {
+        "name": "페어리",
+        "language": "ko"
+      },
+      {
+        "name": "Fée",
+        "language": "fr"
+      },
+      {
         "name": "Fee",
         "language": "de"
       },
       {
+        "name": "Hada",
+        "language": "es"
+      },
+      {
+        "name": "Folletto",
+        "language": "it"
+      },
+      {
         "name": "Fairy",
         "language": "en"
+      },
+      {
+        "name": "フェアリー",
+        "language": "ja"
       }
     ]
   }
