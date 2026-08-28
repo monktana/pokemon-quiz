@@ -14,6 +14,6 @@ describe('getResourceName', () => {
 
   it('returns a fallback string when the locale is not present', () => {
     // @ts-expect-error intentionally passing an unsupported locale
-    expect(getResourceName(names, 'fr')).toBe('getResourceName: locale (fr) not present in names');
+    expect(getResourceName(names, 'pt')).toBe('getResourceName: locale (pt) not present in names');
   });
 });
