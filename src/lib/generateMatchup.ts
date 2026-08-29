@@ -1,5 +1,5 @@
 import { Matchup } from '@/api/schema';
-import { calculateEffectiveness } from '@/lib/calculateEffectiveness';
+import { bucketizeEffectiveness, calculateEffectivenessMultiplier } from '@/lib/calculateEffectiveness';
 import { getPokemonDataset, hydrateMove, hydratePokemon, PokemonDataset } from '@/lib/pokemonData';
 
 export const randomItem = <T>(items: T[]): T => items[Math.floor(Math.random() * items.length)];
@@ -20,10 +20,14 @@ export const generateMatchup = async (attackerId: number): Promise<Matchup> => {
   const defender = hydratePokemon(dataset, defenderRecord);
   const move = hydrateMove(dataset, moveId);
 
+  const multiplier = calculateEffectivenessMultiplier(move.type!, defender.types!);
+
   return {
     attacker,
     defender,
     move,
-    effectiveness: calculateEffectiveness(move.type!, defender.types!),
+    multiplier,
+    effectiveness: bucketizeEffectiveness(multiplier),
+    stabEligible: attacker.types!.some((type) => type.id === move.type!.id),
   };
 };

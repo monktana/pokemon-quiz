@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { queryClient } from '@/lib';
 import { ColorModeProvider } from '@/providers/ColorModeProvider';
-import { LanguageStoreProvider, ScoreStoreProvider } from '@/stores';
+import { DifficultyStoreProvider, LanguageStoreProvider, ScoreStoreProvider } from '@/stores';
 import { getBrowserLanguage } from '@/util';
 
 type AppProviderProps = {
@@ -18,8 +18,10 @@ export const AppProvider = ({ children, browserLanguage }: AppProviderProps) => 
       <QueryClientProvider client={queryClient}>
         <LanguageStoreProvider initialLanguage={browserLanguage}>
           <ScoreStoreProvider initialScore={0}>
-            {children}
-            <ReactQueryDevtools />
+            <DifficultyStoreProvider>
+              {children}
+              <ReactQueryDevtools />
+            </DifficultyStoreProvider>
           </ScoreStoreProvider>
         </LanguageStoreProvider>
       </QueryClientProvider>

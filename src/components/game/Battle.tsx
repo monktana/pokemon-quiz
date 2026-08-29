@@ -1,11 +1,17 @@
 import React from 'react';
-import { useCallback, useEffect, useState, useTransition } from 'react';
+import { useCallback, useEffect, useMemo, useState, useTransition } from 'react';
 
 import { useMatchup, usePrefetchMatchup } from '@/api';
 import { TypeEffectiveness, type Pokemon } from '@/api/schema';
 import { useLocalization } from '@/hooks';
 import { cn } from '@/lib/cn';
-import { useAppStateActions, useLanguage, useScoreActions } from '@/stores';
+import {
+  useAppStateActions,
+  useDifficultyMode,
+  useIncludeStab,
+  useLanguage,
+  useScoreActions,
+} from '@/stores';
 
 import {
   getResourceName,
@@ -18,13 +24,26 @@ import {
   Team,
   useGuess,
   useTeam,
+  type Guess,
 } from '../';
 
 const FEEDBACK_DURATION_MS = 400;
 const FAINT_MESSAGE_DURATION_MS = 1100;
 const GAME_OVER_DELAY_MS = 500;
 
-type Feedback = { guess: TypeEffectiveness; correct: boolean };
+// The precise multiplier a defending type combination can ever produce, per
+// calculateEffectivenessMultiplier - shown as answer buttons in expert mode.
+const MULTIPLIER_VALUES = [0, 0.25, 0.5, 1, 2, 4] as const;
+const MULTIPLIER_LABELS: Record<(typeof MULTIPLIER_VALUES)[number], string> = {
+  0: '×0',
+  0.25: '×¼',
+  0.5: '×½',
+  1: '×1',
+  2: '×2',
+  4: '×4',
+};
+
+type Feedback = { guess: Guess; correct: boolean };
 
 export type BattleProps = {
   team: Pokemon[];
@@ -45,7 +64,25 @@ export function Battle({ team }: BattleProps) {
   const { getText, getTemplatedText } = useLocalization();
   const { endQuiz } = useAppStateActions();
   const { increase } = useScoreActions();
-  const { makeGuess } = useGuess(matchup);
+  const mode = useDifficultyMode();
+  const includeStab = useIncludeStab();
+
+  // Decided once per round (not per render) so it stays stable while the
+  // round is in progress. Only ever a STAB round when the player opted in.
+  // Keyed on `round`, not `matchup`, so the question type is picked before
+  // the round's data arrives and stays fixed for the round's duration.
+  const questionType = useMemo<'effectiveness' | 'stab'>(() => {
+    if (!includeStab) return 'effectiveness';
+    return Math.random() < 0.5 ? 'stab' : 'effectiveness';
+  }, [round, includeStab]);
+
+  const correctAnswer: Guess =
+    questionType === 'stab'
+      ? matchup.stabEligible!
+      : mode === 'expert'
+        ? matchup.multiplier!
+        : matchup.effectiveness!;
+  const { makeGuess } = useGuess(correctAnswer);
 
   useEffect(() => {
     if (!feedback) return;
@@ -54,7 +91,7 @@ export function Battle({ team }: BattleProps) {
   }, [feedback]);
 
   const handleGuess = useCallback(
-    (guess: TypeEffectiveness) => {
+    (guess: Guess) => {
       const correct = makeGuess(guess);
       setFeedback({ guess, correct });
 
@@ -101,7 +138,7 @@ export function Battle({ team }: BattleProps) {
     [makeGuess, increase, faintActive, endQuiz, matchup, language, getTemplatedText]
   );
 
-  const answerButton = (guess: TypeEffectiveness, testId: string, label: string) => {
+  const answerButton = (guess: Guess, testId: string, label: string) => {
     const isAnswered = feedback?.guess === guess;
 
     return (
@@ -190,28 +227,49 @@ export function Battle({ team }: BattleProps) {
         ) : (
           <Question pokemon={matchup.attacker!} move={matchup.move!} />
         )}
-        <div data-testid="decision-buttons" className="grid w-full grid-cols-2 gap-2">
-          {answerButton(
-            TypeEffectiveness.NoEffect,
-            'no-effect-button',
-            getText('types.effectiveness.noeffect')
-          )}
-          {answerButton(
-            TypeEffectiveness.NotVeryEffective,
-            'not-effective-button',
-            getText('types.effectiveness.noteffective')
-          )}
-          {answerButton(
-            TypeEffectiveness.Effective,
-            'effective-button',
-            getText('types.effectiveness.effective')
-          )}
-          {answerButton(
-            TypeEffectiveness.SuperEffective,
-            'super-effective-button',
-            getText('types.effectiveness.supereffective')
-          )}
-        </div>
+        {questionType === 'stab' && !faintMessage ? (
+          <div
+            data-testid="stab-prompt"
+            className="text-foreground text-center text-sm font-semibold tracking-[0.03em] uppercase"
+          >
+            {getText('game.question.stab')}
+          </div>
+        ) : null}
+        {questionType === 'stab' ? (
+          <div data-testid="decision-buttons" className="grid w-full grid-cols-2 gap-2">
+            {answerButton(true, 'stab-yes-button', getText('game.answer.yes'))}
+            {answerButton(false, 'stab-no-button', getText('game.answer.no'))}
+          </div>
+        ) : mode === 'expert' ? (
+          <div data-testid="decision-buttons" className="grid w-full grid-cols-3 gap-2">
+            {MULTIPLIER_VALUES.map((value) =>
+              answerButton(value, `multiplier-${value}-button`, MULTIPLIER_LABELS[value])
+            )}
+          </div>
+        ) : (
+          <div data-testid="decision-buttons" className="grid w-full grid-cols-2 gap-2">
+            {answerButton(
+              TypeEffectiveness.NoEffect,
+              'no-effect-button',
+              getText('types.effectiveness.noeffect')
+            )}
+            {answerButton(
+              TypeEffectiveness.NotVeryEffective,
+              'not-effective-button',
+              getText('types.effectiveness.noteffective')
+            )}
+            {answerButton(
+              TypeEffectiveness.Effective,
+              'effective-button',
+              getText('types.effectiveness.effective')
+            )}
+            {answerButton(
+              TypeEffectiveness.SuperEffective,
+              'super-effective-button',
+              getText('types.effectiveness.supereffective')
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { calculateEffectiveness } from '@/lib/calculateEffectiveness';
+import { calculateEffectiveness, calculateEffectivenessMultiplier } from '@/lib/calculateEffectiveness';
 import { generateMatchup } from '@/lib/generateMatchup';
-import type { PokemonDataset } from '@/lib/pokemonData';
+import { getPokemonDataset, type PokemonDataset } from '@/lib/pokemonData';
 
 const pokemonRecords = [
   {
@@ -50,7 +50,7 @@ vi.mock('@/lib/pokemonData', async () => {
   const actual = await vi.importActual<typeof import('@/lib/pokemonData')>('@/lib/pokemonData');
   return {
     ...actual,
-    getPokemonDataset: () => Promise.resolve(fakeDataset),
+    getPokemonDataset: vi.fn(() => Promise.resolve(fakeDataset)),
   };
 });
 
@@ -81,5 +81,56 @@ describe('generateMatchup', () => {
     const matchup = await generateMatchup(attackerId);
     expect(matchup.attacker!.moves).toBeUndefined();
     expect(matchup.defender!.moves).toBeUndefined();
+  });
+
+  it('computes the raw multiplier consistently with calculateEffectivenessMultiplier', async () => {
+    const matchup = await generateMatchup(attackerId);
+    const expected = calculateEffectivenessMultiplier(matchup.move!.type!, matchup.defender!.types!);
+    expect(matchup.multiplier).toBe(expected);
+  });
+
+  it("marks stabEligible when the move's type is among the attacker's types", async () => {
+    // Every fakemon in this dataset only knows a move matching its own type.
+    const matchup = await generateMatchup(attackerId);
+    expect(matchup.stabEligible).toBe(true);
+  });
+
+  it("marks stabEligible false when the move's type is not among the attacker's types", async () => {
+    const offTypeRecords = [
+      {
+        id: 1,
+        name: 'off-type-attacker',
+        species: { id: 1, names: [{ name: 'Off Type Attacker', language: 'en' }] },
+        sprites: {},
+        typeIds: [1],
+        moveIds: [11],
+      },
+      {
+        id: 2,
+        name: 'off-type-defender',
+        species: { id: 2, names: [{ name: 'Off Type Defender', language: 'en' }] },
+        sprites: {},
+        typeIds: [2],
+        moveIds: [10],
+      },
+    ];
+    const offTypeDataset: PokemonDataset = {
+      pokemon: offTypeRecords,
+      pokemonById: new Map(offTypeRecords.map((record) => [record.id, record])),
+      movesById: new Map([
+        [10, { id: 10, name: 'move-one', names: [], power: 50, typeId: 1 }],
+        [11, { id: 11, name: 'move-two', names: [], power: 40, typeId: 2 }],
+      ]),
+      typesById: new Map([
+        [1, { id: 1, name: 'fire', names: [] }],
+        [2, { id: 2, name: 'water', names: [] }],
+      ]),
+    } as unknown as PokemonDataset;
+
+    vi.mocked(getPokemonDataset).mockResolvedValueOnce(offTypeDataset);
+
+    // Attacker (fire) knows move-two, a water move -> no STAB.
+    const matchup = await generateMatchup(1);
+    expect(matchup.stabEligible).toBe(false);
   });
 });

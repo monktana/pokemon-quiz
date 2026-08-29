@@ -1,12 +1,12 @@
 import { renderHook, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { Pokemon } from '@/api/schema';
-import { Battle } from '@/components';
+import { Battle, type BattleProps } from '@/components';
 import { queryClient, render } from '@/lib';
-import { useAppState, useAppStateActions } from '@/stores';
+import { useAppState, useAppStateActions, useDifficultyActions } from '@/stores';
 
 // Real integration test through the actual useMatchup/usePrefetchMatchup/
 // useTeam/useGuess hooks - only the pure data-generation function is
@@ -57,15 +57,20 @@ const { teamMemberOne, teamMemberTwo, spritelessAttacker, generateMatchupMock } 
         defender: spritelessDefender,
         move,
         effectiveness: 'SuperEffective' as const,
+        multiplier: 2,
+        stabEligible: true,
       };
     }
     return {
       attacker: [teamMemberOne, teamMemberTwo].find((pokemon) => pokemon.id === attackerId)!,
       defender: enemy,
       move,
-      // Constant across rounds/attackers: 'super-effective-button' is always
-      // the correct guess, everything else is always wrong.
+      // Constant across rounds/attackers: 'super-effective-button' /
+      // 'multiplier-2-button' / 'stab-yes-button' are always the correct
+      // guess, everything else is always wrong.
       effectiveness: 'SuperEffective' as const,
+      multiplier: 2,
+      stabEligible: true,
     };
   };
 
@@ -175,4 +180,50 @@ describe('<Battle />', () => {
     },
     8000
   );
+
+  it('renders precise multiplier buttons and scores a correct guess in expert mode', async () => {
+    function ExpertBattle(props: BattleProps) {
+      const { setMode } = useDifficultyActions();
+      useEffect(() => setMode('expert'), [setMode]);
+      return <Battle {...props} />;
+    }
+
+    const user = userEvent.setup();
+    render(<ExpertBattle team={[teamMemberOne, teamMemberTwo]} />);
+
+    expect(await screen.findByTestId('defender-name')).toHaveTextContent('Enemy Mon');
+    expect(screen.getByTestId('multiplier-0-button')).toBeEnabled();
+    expect(screen.getByTestId('multiplier-0.25-button')).toBeEnabled();
+    expect(screen.getByTestId('multiplier-0.5-button')).toBeEnabled();
+    expect(screen.getByTestId('multiplier-1-button')).toBeEnabled();
+    expect(screen.getByTestId('multiplier-2-button')).toBeEnabled();
+    expect(screen.getByTestId('multiplier-4-button')).toBeEnabled();
+
+    await user.click(screen.getByTestId('multiplier-2-button'));
+
+    expect(screen.getByTestId('score-value')).toHaveTextContent('1');
+  });
+
+  it('asks a STAB question with Yes/No buttons when STAB questions are enabled', async () => {
+    function StabBattle(props: BattleProps) {
+      const { setIncludeStab } = useDifficultyActions();
+      useEffect(() => setIncludeStab(true), [setIncludeStab]);
+      return <Battle {...props} />;
+    }
+    // Force the round's 50/50 pick into the STAB branch.
+    const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0);
+
+    const user = userEvent.setup();
+    render(<StabBattle team={[teamMemberOne, teamMemberTwo]} />);
+
+    expect(await screen.findByTestId('stab-prompt')).toBeVisible();
+    expect(screen.getByTestId('stab-yes-button')).toBeEnabled();
+    expect(screen.getByTestId('stab-no-button')).toBeEnabled();
+
+    await user.click(screen.getByTestId('stab-yes-button'));
+
+    expect(screen.getByTestId('score-value')).toHaveTextContent('1');
+
+    randomSpy.mockRestore();
+  });
 });

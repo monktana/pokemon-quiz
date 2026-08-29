@@ -40,4 +40,23 @@ describe('<Menu />', () => {
     const { result } = renderHook(() => useAppState());
     expect(result.current).toEqual('quiz');
   });
+
+  it('defaults to simple difficulty with STAB questions disabled', () => {
+    render(<Menu />);
+
+    expect(screen.getByTestId('difficulty-simple-button')).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByTestId('difficulty-expert-button')).toHaveAttribute('aria-pressed', 'false');
+    expect(screen.getByTestId('difficulty-stab-checkbox')).not.toBeChecked();
+  });
+
+  it('switches difficulty mode and toggles STAB questions on click', () => {
+    render(<Menu />);
+
+    fireEvent.click(screen.getByTestId('difficulty-expert-button'));
+    expect(screen.getByTestId('difficulty-expert-button')).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByTestId('difficulty-simple-button')).toHaveAttribute('aria-pressed', 'false');
+
+    fireEvent.click(screen.getByTestId('difficulty-stab-checkbox'));
+    expect(screen.getByTestId('difficulty-stab-checkbox')).toBeChecked();
+  });
 });

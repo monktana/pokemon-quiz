@@ -1,14 +1,11 @@
 import { useCallback } from 'react';
 
-import { Matchup, TypeEffectiveness } from '@/api/schema';
+import { TypeEffectiveness } from '@/api/schema';
 
-export const useGuess = (matchup: Matchup) => {
-  const makeGuess = useCallback(
-    (guess: TypeEffectiveness) => {
-      return matchup.effectiveness === guess;
-    },
-    [matchup.effectiveness]
-  );
+export type Guess = TypeEffectiveness | number | boolean;
+
+export const useGuess = (correctAnswer: Guess) => {
+  const makeGuess = useCallback((guess: Guess) => guess === correctAnswer, [correctAnswer]);
 
   return { makeGuess };
 };

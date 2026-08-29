@@ -15,6 +15,10 @@ export interface Matchup {
   defender?: Pokemon;
   move?: Move;
   effectiveness?: TypeEffectiveness;
+  /** Raw effectiveness multiplier (0/0.25/0.5/1/2/4) that `effectiveness` was bucketed from. */
+  multiplier?: number;
+  /** Whether `move`'s type is among `attacker`'s types (same-type attack bonus). */
+  stabEligible?: boolean;
 }
 
 export interface Move {
