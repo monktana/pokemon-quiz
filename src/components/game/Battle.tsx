@@ -45,6 +45,13 @@ const MULTIPLIER_LABELS: Record<(typeof MULTIPLIER_VALUES)[number], string> = {
 
 type Feedback = { guess: Guess; correct: boolean };
 
+// Bundles "what kind of question this round asks" with its correct answer,
+// so consumers read `kind` off one value instead of re-deriving it.
+type RoundQuestion =
+  | { kind: 'stab'; correctAnswer: boolean }
+  | { kind: 'multiplier'; correctAnswer: number }
+  | { kind: 'bucket'; correctAnswer: TypeEffectiveness };
+
 export type BattleProps = {
   team: Pokemon[];
 };
@@ -76,13 +83,16 @@ export function Battle({ team }: BattleProps) {
     return Math.random() < 0.5 ? 'stab' : 'effectiveness';
   }, [round, includeStab]);
 
-  const correctAnswer: Guess =
+  // Single source of truth for "what kind of question is this round", so the
+  // answer-correctness check and the answer buttons below can't drift apart
+  // by independently re-deriving it from questionType/mode.
+  const question: RoundQuestion =
     questionType === 'stab'
-      ? matchup.stabEligible!
+      ? { kind: 'stab', correctAnswer: matchup.stabEligible! }
       : mode === 'expert'
-        ? matchup.multiplier!
-        : matchup.effectiveness!;
-  const { makeGuess } = useGuess(correctAnswer);
+        ? { kind: 'multiplier', correctAnswer: matchup.multiplier! }
+        : { kind: 'bucket', correctAnswer: matchup.effectiveness! };
+  const { makeGuess } = useGuess(question.correctAnswer);
 
   useEffect(() => {
     if (!feedback) return;
@@ -227,7 +237,7 @@ export function Battle({ team }: BattleProps) {
         ) : (
           <Question pokemon={matchup.attacker!} move={matchup.move!} />
         )}
-        {questionType === 'stab' && !faintMessage ? (
+        {question.kind === 'stab' && !faintMessage ? (
           <div
             data-testid="stab-prompt"
             className="text-foreground text-center text-sm font-semibold tracking-[0.03em] uppercase"
@@ -235,12 +245,12 @@ export function Battle({ team }: BattleProps) {
             {getText('game.question.stab')}
           </div>
         ) : null}
-        {questionType === 'stab' ? (
+        {question.kind === 'stab' ? (
           <div data-testid="decision-buttons" className="grid w-full grid-cols-2 gap-2">
             {answerButton(true, 'stab-yes-button', getText('game.answer.yes'))}
             {answerButton(false, 'stab-no-button', getText('game.answer.no'))}
           </div>
-        ) : mode === 'expert' ? (
+        ) : question.kind === 'multiplier' ? (
           <div data-testid="decision-buttons" className="grid w-full grid-cols-3 gap-2">
             {MULTIPLIER_VALUES.map((value) =>
               answerButton(value, `multiplier-${value}-button`, MULTIPLIER_LABELS[value])
