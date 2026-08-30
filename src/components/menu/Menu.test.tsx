@@ -41,22 +41,26 @@ describe('<Menu />', () => {
     expect(result.current).toEqual('quiz');
   });
 
-  it('defaults to simple difficulty with STAB questions disabled', () => {
+  it('defaults to simple difficulty, with the STAB option hidden since it is expert-only', () => {
     render(<Menu />);
 
     expect(screen.getByTestId('difficulty-simple-button')).toHaveAttribute('aria-pressed', 'true');
     expect(screen.getByTestId('difficulty-expert-button')).toHaveAttribute('aria-pressed', 'false');
-    expect(screen.getByTestId('difficulty-stab-checkbox')).not.toBeChecked();
+    expect(screen.queryByTestId('difficulty-stab-checkbox')).not.toBeInTheDocument();
   });
 
-  it('switches difficulty mode and toggles STAB questions on click', () => {
+  it('reveals STAB questions only after switching to expert difficulty, and toggles them on click', () => {
     render(<Menu />);
 
     fireEvent.click(screen.getByTestId('difficulty-expert-button'));
     expect(screen.getByTestId('difficulty-expert-button')).toHaveAttribute('aria-pressed', 'true');
     expect(screen.getByTestId('difficulty-simple-button')).toHaveAttribute('aria-pressed', 'false');
 
+    expect(screen.getByTestId('difficulty-stab-checkbox')).not.toBeChecked();
     fireEvent.click(screen.getByTestId('difficulty-stab-checkbox'));
     expect(screen.getByTestId('difficulty-stab-checkbox')).toBeChecked();
+
+    fireEvent.click(screen.getByTestId('difficulty-simple-button'));
+    expect(screen.queryByTestId('difficulty-stab-checkbox')).not.toBeInTheDocument();
   });
 });

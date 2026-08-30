@@ -50,15 +50,17 @@ export function Menu() {
         </button>
       </div>
 
-      <label className="text-foreground flex items-center gap-2 text-sm">
-        <input
-          type="checkbox"
-          data-testid="difficulty-stab-checkbox"
-          checked={includeStab}
-          onChange={(event) => setIncludeStab(event.target.checked)}
-        />
-        {getText('mainmenu.difficulty.stab')}
-      </label>
+      {mode === 'expert' ? (
+        <label className="text-foreground flex items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            data-testid="difficulty-stab-checkbox"
+            checked={includeStab}
+            onChange={(event) => setIncludeStab(event.target.checked)}
+          />
+          {getText('mainmenu.difficulty.stab')}
+        </label>
+      ) : null}
 
       <div className="flex items-center justify-center">
         <Button data-testid="start-game-button" size="lg" className="mt-8" onClick={startGame}>

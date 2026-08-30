@@ -74,7 +74,9 @@ const { teamMemberOne, teamMemberTwo, spritelessAttacker, generateMatchupMock } 
     };
   };
 
-  const generateMatchupMock = vi.fn((attackerId: number) => Promise.resolve(matchupFor(attackerId)));
+  const generateMatchupMock = vi.fn((attackerId: number) =>
+    Promise.resolve(matchupFor(attackerId))
+  );
 
   return { teamMemberOne, teamMemberTwo, spritelessAttacker, generateMatchupMock };
 });
@@ -104,58 +106,50 @@ describe('<Battle />', () => {
     expect(screen.getByTestId('super-effective-button')).toBeEnabled();
   });
 
-  it(
-    'increases the score and advances the round on a correct guess',
-    async () => {
-      const user = userEvent.setup();
-      render(<Battle team={[teamMemberOne, teamMemberTwo]} />);
-      await screen.findByTestId('defender-name');
+  it('increases the score and advances the round on a correct guess', async () => {
+    const user = userEvent.setup();
+    render(<Battle team={[teamMemberOne, teamMemberTwo]} />);
+    await screen.findByTestId('defender-name');
 
-      await user.click(screen.getByTestId('super-effective-button'));
+    await user.click(screen.getByTestId('super-effective-button'));
 
-      expect(screen.getByTestId('score-value')).toHaveTextContent('1');
+    expect(screen.getByTestId('score-value')).toHaveTextContent('1');
 
-      await waitFor(
-        () => expect(queryClient.getQueryData(['matchup', 2, teamMemberOne.id])).toBeDefined(),
-        { timeout: 3000 }
-      );
-      await waitFor(() => expect(screen.getByTestId('super-effective-button')).toBeEnabled(), {
-        timeout: 3000,
-      });
-      // A correct guess never switches the active team member.
-      expect(screen.getByTestId('attacker-name')).toHaveTextContent('Team One');
-    },
-    8000
-  );
+    await waitFor(
+      () => expect(queryClient.getQueryData(['matchup', 2, teamMemberOne.id])).toBeDefined(),
+      { timeout: 3000 }
+    );
+    await waitFor(() => expect(screen.getByTestId('super-effective-button')).toBeEnabled(), {
+      timeout: 3000,
+    });
+    // A correct guess never switches the active team member.
+    expect(screen.getByTestId('attacker-name')).toHaveTextContent('Team One');
+  }, 8000);
 
-  it(
-    'faints the active member and switches to the next on a wrong guess',
-    async () => {
-      const user = userEvent.setup();
-      render(<Battle team={[teamMemberOne, teamMemberTwo]} />);
-      await screen.findByTestId('defender-name');
+  it('faints the active member and switches to the next on a wrong guess', async () => {
+    const user = userEvent.setup();
+    render(<Battle team={[teamMemberOne, teamMemberTwo]} />);
+    await screen.findByTestId('defender-name');
 
-      await user.click(screen.getByTestId('effective-button'));
+    await user.click(screen.getByTestId('effective-button'));
 
-      const faintedMessage = screen.getByTestId('fainted-message').textContent;
-      expect(faintedMessage).toContain('Team One');
-      expect(faintedMessage).toContain('fainted');
-      expect(screen.getByTestId('no-effect-button')).toBeDisabled();
+    const faintedMessage = screen.getByTestId('fainted-message').textContent;
+    expect(faintedMessage).toContain('Team One');
+    expect(faintedMessage).toContain('fainted');
+    expect(screen.getByTestId('no-effect-button')).toBeDisabled();
 
-      await waitFor(
-        () => expect(screen.getAllByTestId('team-pokeball')[0]).toHaveAttribute('data-status', 'ko'),
-        { timeout: 3000 }
-      );
+    await waitFor(
+      () => expect(screen.getAllByTestId('team-pokeball')[0]).toHaveAttribute('data-status', 'ko'),
+      { timeout: 3000 }
+    );
 
-      await waitFor(() => expect(screen.getByTestId('attacker-name')).toHaveTextContent('Team Two'), {
-        timeout: 3000,
-      });
-      await waitFor(() => expect(screen.getByTestId('no-effect-button')).toBeEnabled(), {
-        timeout: 3000,
-      });
-    },
-    8000
-  );
+    await waitFor(() => expect(screen.getByTestId('attacker-name')).toHaveTextContent('Team Two'), {
+      timeout: 3000,
+    });
+    await waitFor(() => expect(screen.getByTestId('no-effect-button')).toBeEnabled(), {
+      timeout: 3000,
+    });
+  }, 8000);
 
   it('falls back to an empty sprite src when a Pokemon has no sprites', async () => {
     render(<Battle team={[spritelessAttacker]} />);
@@ -166,20 +160,16 @@ describe('<Battle />', () => {
     expect(screen.getByTestId('attacker-sprite')).not.toHaveAttribute('src');
   });
 
-  it(
-    'ends the quiz once the last team member faints',
-    async () => {
-      const user = userEvent.setup();
-      render(<Battle team={[teamMemberOne]} />);
-      await screen.findByTestId('defender-name');
+  it('ends the quiz once the last team member faints', async () => {
+    const user = userEvent.setup();
+    render(<Battle team={[teamMemberOne]} />);
+    await screen.findByTestId('defender-name');
 
-      await user.click(screen.getByTestId('effective-button'));
+    await user.click(screen.getByTestId('effective-button'));
 
-      const { result } = renderHook(() => useAppState());
-      await waitFor(() => expect(result.current).toEqual('gameover'), { timeout: 3000 });
-    },
-    8000
-  );
+    const { result } = renderHook(() => useAppState());
+    await waitFor(() => expect(result.current).toEqual('gameover'), { timeout: 3000 });
+  }, 8000);
 
   it('renders precise multiplier buttons and scores a correct guess in expert mode', async () => {
     function ExpertBattle(props: BattleProps) {
@@ -204,13 +194,16 @@ describe('<Battle />', () => {
     expect(screen.getByTestId('score-value')).toHaveTextContent('1');
   });
 
-  it('asks a STAB question with Yes/No buttons when STAB questions are enabled', async () => {
+  it('asks a STAB question with Yes/No buttons when STAB questions are enabled in expert mode', async () => {
     function StabBattle(props: BattleProps) {
-      const { setIncludeStab } = useDifficultyActions();
-      useEffect(() => setIncludeStab(true), [setIncludeStab]);
+      const { setMode, setIncludeStab } = useDifficultyActions();
+      useEffect(() => {
+        setMode('expert');
+        setIncludeStab(true);
+      }, [setMode, setIncludeStab]);
       return <Battle {...props} />;
     }
-    // Force the round's 50/50 pick into the STAB branch.
+    // Force the round's chance roll into the STAB branch.
     const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0);
 
     const user = userEvent.setup();
@@ -225,5 +218,65 @@ describe('<Battle />', () => {
     expect(screen.getByTestId('score-value')).toHaveTextContent('1');
 
     randomSpy.mockRestore();
+  });
+
+  it('never asks a STAB question outside expert mode, even when STAB questions are enabled', async () => {
+    function StabSimpleBattle(props: BattleProps) {
+      const { setIncludeStab } = useDifficultyActions();
+      useEffect(() => setIncludeStab(true), [setIncludeStab]);
+      return <Battle {...props} />;
+    }
+    const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0);
+
+    render(<StabSimpleBattle team={[teamMemberOne, teamMemberTwo]} />);
+
+    await screen.findByTestId('defender-name');
+    expect(screen.queryByTestId('stab-prompt')).not.toBeInTheDocument();
+    expect(screen.getByTestId('effective-button')).toBeEnabled();
+
+    randomSpy.mockRestore();
+  });
+
+  it('highlights the correct answer button when a wrong guess is made', async () => {
+    const user = userEvent.setup();
+    render(<Battle team={[teamMemberOne, teamMemberTwo]} />);
+    await screen.findByTestId('defender-name');
+
+    await user.click(screen.getByTestId('effective-button'));
+
+    expect(screen.getByTestId('effective-button')).toHaveClass('bg-feedback-incorrect');
+    expect(screen.getByTestId('super-effective-button')).toHaveClass('bg-feedback-correct');
+  });
+
+  it('explains the per-type effectiveness breakdown in simple mode on a wrong guess', async () => {
+    const user = userEvent.setup();
+    render(<Battle team={[teamMemberOne, teamMemberTwo]} />);
+    await screen.findByTestId('defender-name');
+
+    await user.click(screen.getByTestId('effective-button'));
+
+    // Move is normal-type against a single grass-type defender - the real
+    // typeMatrix (not the mocked matchup) says that's neutral ("Effective"),
+    // independent of whatever the mocked matchup claims the bucket answer is.
+    const explanation = await screen.findByTestId('effectiveness-explanation');
+    expect(explanation).toHaveTextContent('Normal');
+    expect(explanation).toHaveTextContent('Grass');
+    expect(explanation).toHaveTextContent('Effective');
+  });
+
+  it('does not show a type-effectiveness explanation in expert mode', async () => {
+    function ExpertBattle(props: BattleProps) {
+      const { setMode } = useDifficultyActions();
+      useEffect(() => setMode('expert'), [setMode]);
+      return <Battle {...props} />;
+    }
+    const user = userEvent.setup();
+    render(<ExpertBattle team={[teamMemberOne, teamMemberTwo]} />);
+    await screen.findByTestId('defender-name');
+
+    await user.click(screen.getByTestId('multiplier-0-button'));
+
+    expect(await screen.findByTestId('fainted-message')).toBeVisible();
+    expect(screen.queryByTestId('effectiveness-explanation')).not.toBeInTheDocument();
   });
 });
