@@ -1,11 +1,22 @@
 import React from 'react';
-import { useCallback, useEffect, useState, useTransition } from 'react';
+import { useCallback, useEffect, useMemo, useState, useTransition } from 'react';
 
 import { useMatchup, usePrefetchMatchup } from '@/api';
 import { TypeEffectiveness, type Pokemon } from '@/api/schema';
 import { useLocalization } from '@/hooks';
+import {
+  bucketizeEffectiveness,
+  calculateEffectivenessMultiplier,
+} from '@/lib/calculateEffectiveness';
 import { cn } from '@/lib/cn';
-import { useAppStateActions, useLanguage, useScoreActions } from '@/stores';
+import {
+  useAppStateActions,
+  useDifficultyMode,
+  useIncludeStab,
+  useLanguage,
+  useScoreActions,
+} from '@/stores';
+import { type TextKey } from '@/util';
 
 import {
   getResourceName,
@@ -16,15 +27,49 @@ import {
   Question,
   Score,
   Team,
+  TypeTag,
   useGuess,
   useTeam,
+  type Guess,
+  type types,
 } from '../';
 
 const FEEDBACK_DURATION_MS = 400;
-const FAINT_MESSAGE_DURATION_MS = 1100;
+// Long enough to read both the fainted message and which answer button lit
+// up as the correct one (see the wrong-guess feedback handling below).
+const FAINT_MESSAGE_DURATION_MS = 1600;
 const GAME_OVER_DELAY_MS = 500;
+// Kept low: STAB questions are a bonus layer on top of the effectiveness
+// question, not a coin flip - most rounds should still be effectiveness.
+const STAB_QUESTION_CHANCE = 0.2;
 
-type Feedback = { guess: TypeEffectiveness; correct: boolean };
+// The precise multiplier a defending type combination can ever produce, per
+// calculateEffectivenessMultiplier - shown as answer buttons in expert mode.
+const MULTIPLIER_VALUES = [0, 0.25, 0.5, 1, 2, 4] as const;
+const MULTIPLIER_LABELS: Record<(typeof MULTIPLIER_VALUES)[number], string> = {
+  0: '×0',
+  0.25: '×¼',
+  0.5: '×½',
+  1: '×1',
+  2: '×2',
+  4: '×4',
+};
+
+const EFFECTIVENESS_TEXT_KEYS: Record<TypeEffectiveness, TextKey> = {
+  [TypeEffectiveness.NoEffect]: 'types.effectiveness.noeffect',
+  [TypeEffectiveness.NotVeryEffective]: 'types.effectiveness.noteffective',
+  [TypeEffectiveness.Effective]: 'types.effectiveness.effective',
+  [TypeEffectiveness.SuperEffective]: 'types.effectiveness.supereffective',
+};
+
+type Feedback = { guess: Guess; correct: boolean };
+
+// Bundles "what kind of question this round asks" with its correct answer,
+// so consumers read `kind` off one value instead of re-deriving it.
+type RoundQuestion =
+  | { kind: 'stab'; correctAnswer: boolean }
+  | { kind: 'multiplier'; correctAnswer: number }
+  | { kind: 'bucket'; correctAnswer: TypeEffectiveness };
 
 export type BattleProps = {
   team: Pokemon[];
@@ -45,16 +90,41 @@ export function Battle({ team }: BattleProps) {
   const { getText, getTemplatedText } = useLocalization();
   const { endQuiz } = useAppStateActions();
   const { increase } = useScoreActions();
-  const { makeGuess } = useGuess(matchup);
+  const mode = useDifficultyMode();
+  const includeStab = useIncludeStab();
+
+  // Decided once per round (not per render) so it stays stable while the
+  // round is in progress. Only ever a STAB round when the player opted in
+  // and is in expert mode - STAB is an expert-only bonus layer, not a
+  // simple-mode concept. Keyed on `round`, not `matchup`, so the question
+  // type is picked before the round's data arrives and stays fixed for the
+  // round's duration.
+  const questionType = useMemo<'effectiveness' | 'stab'>(() => {
+    if (!includeStab || mode !== 'expert') return 'effectiveness';
+    return Math.random() < STAB_QUESTION_CHANCE ? 'stab' : 'effectiveness';
+  }, [round, includeStab, mode]);
+
+  // Single source of truth for "what kind of question is this round", so the
+  // answer-correctness check and the answer buttons below can't drift apart
+  // by independently re-deriving it from questionType/mode.
+  const question: RoundQuestion =
+    questionType === 'stab'
+      ? { kind: 'stab', correctAnswer: matchup.stabEligible! }
+      : mode === 'expert'
+        ? { kind: 'multiplier', correctAnswer: matchup.multiplier! }
+        : { kind: 'bucket', correctAnswer: matchup.effectiveness! };
+  const { makeGuess } = useGuess(question.correctAnswer);
 
   useEffect(() => {
-    if (!feedback) return;
+    // Wrong-guess feedback stays up (to keep showing the correct answer)
+    // until the fainted-message timeout below clears it explicitly.
+    if (!feedback || !feedback.correct) return;
     const timeout = setTimeout(() => setFeedback(null), FEEDBACK_DURATION_MS);
     return () => clearTimeout(timeout);
   }, [feedback]);
 
   const handleGuess = useCallback(
-    (guess: TypeEffectiveness) => {
+    (guess: Guess) => {
       const correct = makeGuess(guess);
       setFeedback({ guess, correct });
 
@@ -81,6 +151,7 @@ export function Battle({ team }: BattleProps) {
       setTimeout(() => {
         startTransition(() => {
           setFaintMessage(null);
+          setFeedback(null);
           const nextActiveId = faintActive();
           if (nextActiveId === null) {
             // Give the last Pokemon's now-fainted team indicator its own
@@ -101,8 +172,14 @@ export function Battle({ team }: BattleProps) {
     [makeGuess, increase, faintActive, endQuiz, matchup, language, getTemplatedText]
   );
 
-  const answerButton = (guess: TypeEffectiveness, testId: string, label: string) => {
+  const answerButton = (guess: Guess, testId: string, label: string) => {
     const isAnswered = feedback?.guess === guess;
+    // On a wrong guess, also reveal which button was the correct answer -
+    // otherwise a miss only shows "wrong" without teaching the matchup.
+    const revealsCorrectAnswer =
+      feedback !== null && !feedback.correct && guess === question.correctAnswer;
+    const isHighlighted = isAnswered || revealsCorrectAnswer;
+    const isCorrectHighlight = isAnswered ? feedback!.correct : revealsCorrectAnswer;
 
     return (
       <button
@@ -115,13 +192,15 @@ export function Battle({ team }: BattleProps) {
           'transition-[scale,background-color,border-color] duration-120 ease-out active:scale-[0.96]',
           'disabled:cursor-not-allowed',
           'focus-visible:ring-border-500 focus-visible:ring-2 focus-visible:outline-none',
-          // Excluded (not just overridden) while this button shows its guess
+          // Excluded (not just overridden) while this button shows a guess
           // result: :hover has higher specificity than a plain bg-* utility
           // and stays matched on a disabled button if the cursor never left
           // it, which otherwise painted over the feedback color right after
           // the click that triggered it.
-          isAnswered
-            ? (feedback!.correct ? 'bg-feedback-correct' : 'bg-feedback-incorrect text-white')
+          isHighlighted
+            ? isCorrectHighlight
+              ? 'bg-feedback-correct'
+              : 'bg-feedback-incorrect text-white'
             : [
                 '[@media(hover:hover)]:hover:bg-bezel [@media(hover:hover)]:hover:border-bezel-border',
                 'disabled:opacity-60',
@@ -183,35 +262,88 @@ export function Battle({ team }: BattleProps) {
         {faintMessage ? (
           <div
             data-testid="fainted-message"
-            className="text-foreground border-surface-border bg-surface flex w-full items-center justify-center gap-1 rounded-md border p-4 text-center text-lg shadow-[0_1px_3px_rgba(0,0,0,0.10)] sm:p-5 dark:shadow-none"
+            className="text-foreground border-surface-border bg-surface flex w-full flex-col items-center gap-2 rounded-md border p-4 text-center shadow-[0_1px_3px_rgba(0,0,0,0.10)] sm:p-5 dark:shadow-none"
           >
-            {faintMessage}
+            <div className="flex flex-wrap items-center justify-center gap-1 text-lg">
+              {faintMessage}
+            </div>
+            {question.kind === 'bucket' ? (
+              // Simple mode only asks for the combined bucket, so a miss
+              // doesn't explain itself - break the combined result back down
+              // per defending type (e.g. dual-type Pokemon, where one type's
+              // resistance can hide behind the other's weakness).
+              <div
+                data-testid="effectiveness-explanation"
+                className="flex flex-col items-center gap-1 text-sm"
+              >
+                {matchup.defender!.types!.map((defendingType) => {
+                  const bucket = bucketizeEffectiveness(
+                    calculateEffectivenessMultiplier(matchup.move!.type!, [defendingType])
+                  );
+                  return (
+                    <div
+                      key={defendingType.id}
+                      className="flex flex-wrap items-center justify-center gap-1"
+                    >
+                      <TypeTag
+                        type={matchup.move!.type!.name as types}
+                        text={matchup.move!.type!.names!}
+                      />
+                      <span aria-hidden="true">→</span>
+                      <TypeTag type={defendingType.name as types} text={defendingType.names!} />
+                      <span>: {getText(EFFECTIVENESS_TEXT_KEYS[bucket])}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : null}
           </div>
         ) : (
           <Question pokemon={matchup.attacker!} move={matchup.move!} />
         )}
-        <div data-testid="decision-buttons" className="grid w-full grid-cols-2 gap-2">
-          {answerButton(
-            TypeEffectiveness.NoEffect,
-            'no-effect-button',
-            getText('types.effectiveness.noeffect')
-          )}
-          {answerButton(
-            TypeEffectiveness.NotVeryEffective,
-            'not-effective-button',
-            getText('types.effectiveness.noteffective')
-          )}
-          {answerButton(
-            TypeEffectiveness.Effective,
-            'effective-button',
-            getText('types.effectiveness.effective')
-          )}
-          {answerButton(
-            TypeEffectiveness.SuperEffective,
-            'super-effective-button',
-            getText('types.effectiveness.supereffective')
-          )}
-        </div>
+        {question.kind === 'stab' && !faintMessage ? (
+          <div
+            data-testid="stab-prompt"
+            className="text-foreground text-center text-sm font-semibold tracking-[0.03em] uppercase"
+          >
+            {getText('game.question.stab')}
+          </div>
+        ) : null}
+        {question.kind === 'stab' ? (
+          <div data-testid="decision-buttons" className="grid w-full grid-cols-2 gap-2">
+            {answerButton(true, 'stab-yes-button', getText('game.answer.yes'))}
+            {answerButton(false, 'stab-no-button', getText('game.answer.no'))}
+          </div>
+        ) : question.kind === 'multiplier' ? (
+          <div data-testid="decision-buttons" className="grid w-full grid-cols-3 gap-2">
+            {MULTIPLIER_VALUES.map((value) =>
+              answerButton(value, `multiplier-${value}-button`, MULTIPLIER_LABELS[value])
+            )}
+          </div>
+        ) : (
+          <div data-testid="decision-buttons" className="grid w-full grid-cols-2 gap-2">
+            {answerButton(
+              TypeEffectiveness.NoEffect,
+              'no-effect-button',
+              getText('types.effectiveness.noeffect')
+            )}
+            {answerButton(
+              TypeEffectiveness.NotVeryEffective,
+              'not-effective-button',
+              getText('types.effectiveness.noteffective')
+            )}
+            {answerButton(
+              TypeEffectiveness.Effective,
+              'effective-button',
+              getText('types.effectiveness.effective')
+            )}
+            {answerButton(
+              TypeEffectiveness.SuperEffective,
+              'super-effective-button',
+              getText('types.effectiveness.supereffective')
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

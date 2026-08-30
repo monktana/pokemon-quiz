@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { getResourceName } from '@/components';
 
@@ -12,8 +12,22 @@ describe('getResourceName', () => {
     expect(getResourceName(names, 'de')).toBe('Feuer');
   });
 
-  it('returns a fallback string when the locale is not present', () => {
+  it('falls back to English and warns when the locale is not present', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
     // @ts-expect-error intentionally passing an unsupported locale
-    expect(getResourceName(names, 'pt')).toBe('getResourceName: locale (pt) not present in names');
+    expect(getResourceName(names, 'pt')).toBe('Fire');
+    expect(warnSpy).toHaveBeenCalledOnce();
+
+    warnSpy.mockRestore();
+  });
+
+  it('returns undefined when neither the locale nor English is present', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    // @ts-expect-error intentionally passing an unsupported locale
+    expect(getResourceName([{ name: 'Feuer', language: 'de' }], 'pt')).toBeUndefined();
+
+    warnSpy.mockRestore();
   });
 });

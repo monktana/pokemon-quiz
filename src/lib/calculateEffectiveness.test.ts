@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import { TypeEffectiveness } from '@/api/schema';
-import { calculateEffectiveness } from '@/lib/calculateEffectiveness';
+import {
+  calculateEffectiveness,
+  calculateEffectivenessMultiplier,
+} from '@/lib/calculateEffectiveness';
 import { dragon, fire, flying, ghost, grass, ice, normal, water } from '@/lib/testing/fixtures/type';
 
 describe('calculateEffectiveness', () => {
@@ -34,5 +37,24 @@ describe('calculateEffectiveness', () => {
   it('defaults to a neutral multiplier when the defending type is missing from the matrix row', () => {
     const unknown = { id: 999, name: 'cosmic', names: [] };
     expect(calculateEffectiveness(fire, [unknown])).toBe(TypeEffectiveness.Effective);
+  });
+});
+
+describe('calculateEffectivenessMultiplier', () => {
+  it('returns the raw multiplier for a single-type advantage', () => {
+    expect(calculateEffectivenessMultiplier(water, [fire])).toBe(2);
+  });
+
+  it('returns the raw multiplier for a single-type disadvantage', () => {
+    expect(calculateEffectivenessMultiplier(fire, [water])).toBe(0.5);
+  });
+
+  it('returns 0 for an immunity', () => {
+    expect(calculateEffectivenessMultiplier(normal, [ghost])).toBe(0);
+  });
+
+  it('multiplies across dual defending types', () => {
+    expect(calculateEffectivenessMultiplier(ice, [grass, flying])).toBe(4);
+    expect(calculateEffectivenessMultiplier(fire, [fire, dragon])).toBe(0.25);
   });
 });
