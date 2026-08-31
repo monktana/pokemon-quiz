@@ -39,6 +39,9 @@ const FEEDBACK_DURATION_MS = 400;
 // up as the correct one (see the wrong-guess feedback handling below).
 const FAINT_MESSAGE_DURATION_MS = 1600;
 const GAME_OVER_DELAY_MS = 500;
+// Shorter than the faint message: a voluntary switch has nothing to explain,
+// just enough time to read "Go! <name>" before the next round loads.
+const SWITCH_MESSAGE_DURATION_MS = 900;
 // Kept low: STAB questions are a bonus layer on top of the effectiveness
 // question, not a coin flip - most rounds should still be effectiveness.
 const STAB_QUESTION_CHANCE = 0.2;
@@ -80,8 +83,9 @@ export function Battle({ team }: BattleProps) {
   const [isPending, startTransition] = useTransition();
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [faintMessage, setFaintMessage] = useState<React.ReactNode>(null);
+  const [switchMessage, setSwitchMessage] = useState<React.ReactNode>(null);
   const [isGameOverPending, setIsGameOverPending] = useState(false);
-  const { activeId, koIds, faintActive } = useTeam(team);
+  const { activeId, koIds, faintActive, maybeSwitchActive, switchActiveTo } = useTeam(team);
 
   const { data: matchup, isFetching } = useMatchup(round, activeId);
   usePrefetchMatchup(round + 1, activeId);
@@ -117,11 +121,13 @@ export function Battle({ team }: BattleProps) {
 
   useEffect(() => {
     // Wrong-guess feedback stays up (to keep showing the correct answer)
-    // until the fainted-message timeout below clears it explicitly.
-    if (!feedback || !feedback.correct) return;
+    // until the fainted-message timeout below clears it explicitly. Same for
+    // a correct guess that triggers a switch: the switch-message timeout
+    // clears it instead, so the green highlight survives the transition.
+    if (!feedback || !feedback.correct || switchMessage) return;
     const timeout = setTimeout(() => setFeedback(null), FEEDBACK_DURATION_MS);
     return () => clearTimeout(timeout);
-  }, [feedback]);
+  }, [feedback, switchMessage]);
 
   const handleGuess = useCallback(
     (guess: Guess) => {
@@ -130,6 +136,30 @@ export function Battle({ team }: BattleProps) {
 
       if (correct) {
         increase();
+
+        const nextActiveId = maybeSwitchActive();
+        if (nextActiveId !== null) {
+          const incoming = team.find((pokemon) => pokemon.id === nextActiveId)!;
+          const incomingName = getResourceName(incoming.species!.names!, language);
+          setSwitchMessage(
+            getTemplatedText('game.status.switched', <span key="switched-name">{incomingName}</span>)
+          );
+
+          setTimeout(() => {
+            startTransition(() => {
+              setSwitchMessage(null);
+              setFeedback(null);
+              // activeId changes together with round, in the same
+              // transition, so the query for the new (round, activeId) pair
+              // resolves in the background instead of suspending on the
+              // spot and cutting the switch message short.
+              switchActiveTo(nextActiveId);
+              setRound((round) => round + 1);
+            });
+          }, SWITCH_MESSAGE_DURATION_MS);
+          return;
+        }
+
         startTransition(() => {
           setRound((round) => round + 1);
         });
@@ -169,7 +199,18 @@ export function Battle({ team }: BattleProps) {
         });
       }, FAINT_MESSAGE_DURATION_MS);
     },
-    [makeGuess, increase, faintActive, endQuiz, matchup, language, getTemplatedText]
+    [
+      makeGuess,
+      increase,
+      maybeSwitchActive,
+      switchActiveTo,
+      faintActive,
+      endQuiz,
+      matchup,
+      team,
+      language,
+      getTemplatedText,
+    ]
   );
 
   const answerButton = (guess: Guess, testId: string, label: string) => {
@@ -185,7 +226,9 @@ export function Battle({ team }: BattleProps) {
       <button
         type="button"
         data-testid={testId}
-        disabled={isFetching || isPending || faintMessage !== null || isGameOverPending}
+        disabled={
+          isFetching || isPending || faintMessage !== null || switchMessage !== null || isGameOverPending
+        }
         onClick={() => handleGuess(guess)}
         className={cn(
           'border-surface-border bg-surface text-foreground min-h-14 cursor-pointer rounded-md border text-sm font-semibold tracking-[0.03em] uppercase',
@@ -298,10 +341,17 @@ export function Battle({ team }: BattleProps) {
               </div>
             ) : null}
           </div>
+        ) : switchMessage ? (
+          <div
+            data-testid="switch-message"
+            className="text-foreground border-surface-border bg-surface flex w-full items-center justify-center gap-1 rounded-md border p-4 text-center text-lg shadow-[0_1px_3px_rgba(0,0,0,0.10)] sm:p-5 dark:shadow-none"
+          >
+            {switchMessage}
+          </div>
         ) : (
           <Question pokemon={matchup.attacker!} move={matchup.move!} />
         )}
-        {question.kind === 'stab' && !faintMessage ? (
+        {question.kind === 'stab' && !faintMessage && !switchMessage ? (
           <div
             data-testid="stab-prompt"
             className="text-foreground text-center text-sm font-semibold tracking-[0.03em] uppercase"

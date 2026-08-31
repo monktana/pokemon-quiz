@@ -107,6 +107,8 @@ describe('<Battle />', () => {
   });
 
   it('increases the score and advances the round on a correct guess', async () => {
+    // Above the switch chance threshold, so this exercises the no-switch path.
+    const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0.99);
     const user = userEvent.setup();
     render(<Battle team={[teamMemberOne, teamMemberTwo]} />);
     await screen.findByTestId('defender-name');
@@ -122,8 +124,37 @@ describe('<Battle />', () => {
     await waitFor(() => expect(screen.getByTestId('super-effective-button')).toBeEnabled(), {
       timeout: 3000,
     });
-    // A correct guess never switches the active team member.
+    // A correct guess that misses the switch chance doesn't switch the
+    // active team member.
     expect(screen.getByTestId('attacker-name')).toHaveTextContent('Team One');
+
+    randomSpy.mockRestore();
+  }, 8000);
+
+  it('switches to a random teammate with a transition message when a correct guess hits the switch chance', async () => {
+    // Below the switch chance threshold, and randomItem's
+    // Math.floor(0 * length) = 0 picks the first eligible (non-active) id.
+    const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0);
+    const user = userEvent.setup();
+    render(<Battle team={[teamMemberOne, teamMemberTwo]} />);
+    await screen.findByTestId('defender-name');
+
+    await user.click(screen.getByTestId('super-effective-button'));
+
+    expect(screen.getByTestId('score-value')).toHaveTextContent('1');
+    expect(await screen.findByTestId('switch-message')).toHaveTextContent('Team Two');
+    expect(screen.getByTestId('super-effective-button')).toBeDisabled();
+
+    await waitFor(() => expect(screen.getByTestId('attacker-name')).toHaveTextContent('Team Two'), {
+      timeout: 3000,
+    });
+    // The outgoing member is not fainted - it's a voluntary switch.
+    expect(screen.getAllByTestId('team-pokeball')[0]).toHaveAttribute('data-status', 'ok');
+    await waitFor(() => expect(screen.getByTestId('super-effective-button')).toBeEnabled(), {
+      timeout: 3000,
+    });
+
+    randomSpy.mockRestore();
   }, 8000);
 
   it('faints the active member and switches to the next on a wrong guess', async () => {
@@ -178,6 +209,9 @@ describe('<Battle />', () => {
       return <Battle {...props} />;
     }
 
+    // Above the switch chance threshold, so the correct guess below doesn't
+    // incidentally trigger an unawaited attacker switch.
+    const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0.99);
     const user = userEvent.setup();
     render(<ExpertBattle team={[teamMemberOne, teamMemberTwo]} />);
 
@@ -192,6 +226,8 @@ describe('<Battle />', () => {
     await user.click(screen.getByTestId('multiplier-2-button'));
 
     expect(screen.getByTestId('score-value')).toHaveTextContent('1');
+
+    randomSpy.mockRestore();
   });
 
   it('asks a STAB question with Yes/No buttons when STAB questions are enabled in expert mode', async () => {
@@ -203,8 +239,11 @@ describe('<Battle />', () => {
       }, [setMode, setIncludeStab]);
       return <Battle {...props} />;
     }
-    // Force the round's chance roll into the STAB branch.
-    const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0);
+    // Force the round's chance roll into the STAB branch (consumed once, on
+    // render), then move the switch chance above its threshold so the
+    // correct guess below doesn't incidentally trigger an unawaited
+    // attacker switch.
+    const randomSpy = vi.spyOn(Math, 'random').mockReturnValueOnce(0).mockReturnValue(0.99);
 
     const user = userEvent.setup();
     render(<StabBattle team={[teamMemberOne, teamMemberTwo]} />);
