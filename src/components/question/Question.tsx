@@ -23,7 +23,7 @@ export function Question({ pokemon: attacker, move }: AttackProps) {
         {getTemplatedText(
           'game.question.effectiveness',
           <span key={attacker.species!.name}>
-            {getResourceName(attacker.species!.names!, language)!}
+            {getResourceName(attacker.species!.names!, language)}
           </span>,
           <TypeTag key={move.type!.name} type={move.type!.name as types} text={move.names!} />
         )}
