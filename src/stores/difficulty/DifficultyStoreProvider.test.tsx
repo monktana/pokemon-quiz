@@ -42,13 +42,7 @@ describe('DifficultyStoreProvider', () => {
   });
 
   it('causes the provided hooks to throw if provider is absent', () => {
-    renderHook(() => {
-      try {
-        useDifficultyMode();
-      } catch (error) {
-        expect((error as Error).message).toEqual('Missing DifficultyStoreProvider');
-      }
-    });
+    expect(() => renderHook(() => useDifficultyMode())).toThrow('Missing DifficultyStoreProvider');
   });
 });
 
