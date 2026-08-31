@@ -209,6 +209,9 @@ describe('<Battle />', () => {
       return <Battle {...props} />;
     }
 
+    // Above the switch chance threshold, so the correct guess below doesn't
+    // incidentally trigger an unawaited attacker switch.
+    const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0.99);
     const user = userEvent.setup();
     render(<ExpertBattle team={[teamMemberOne, teamMemberTwo]} />);
 
@@ -223,6 +226,8 @@ describe('<Battle />', () => {
     await user.click(screen.getByTestId('multiplier-2-button'));
 
     expect(screen.getByTestId('score-value')).toHaveTextContent('1');
+
+    randomSpy.mockRestore();
   });
 
   it('asks a STAB question with Yes/No buttons when STAB questions are enabled in expert mode', async () => {
@@ -234,8 +239,11 @@ describe('<Battle />', () => {
       }, [setMode, setIncludeStab]);
       return <Battle {...props} />;
     }
-    // Force the round's chance roll into the STAB branch.
-    const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0);
+    // Force the round's chance roll into the STAB branch (consumed once, on
+    // render), then move the switch chance above its threshold so the
+    // correct guess below doesn't incidentally trigger an unawaited
+    // attacker switch.
+    const randomSpy = vi.spyOn(Math, 'random').mockReturnValueOnce(0).mockReturnValue(0.99);
 
     const user = userEvent.setup();
     render(<StabBattle team={[teamMemberOne, teamMemberTwo]} />);
