@@ -1,5 +1,6 @@
 import { Pokemon } from '@/api/schema';
 import { getPokemonDataset, hydratePokemon, PokemonDataset } from '@/lib/pokemonData';
+import { shuffle } from '@/lib/random';
 
 export const TEAM_SIZE = 6;
 
@@ -12,8 +13,7 @@ const pickUniqueRandomRecords = (dataset: PokemonDataset, count: number) => {
     throw new Error(`Not enough eligible Pokemon: need ${count}, found ${candidates.length}`);
   }
 
-  const shuffled = [...candidates].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
+  return shuffle(candidates).slice(0, count);
 };
 
 export const generateTeam = async (): Promise<Pokemon[]> => {

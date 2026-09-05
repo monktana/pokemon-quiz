@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import type { Pokemon } from '@/api/schema';
 import { useTeam } from '@/components/game/useTeam';
+import * as roundChance from '@/lib/roundChance';
 
 const { preloadImageMock } = vi.hoisted(() => ({ preloadImageMock: vi.fn() }));
 vi.mock('@/lib', async () => {
@@ -67,15 +68,13 @@ describe('useTeam', () => {
     const team = [makePokemon(1), makePokemon(2), makePokemon(3)];
     const { result, rerender } = renderHook(() => useTeam(team));
 
-    // Below the switch chance threshold, and picks the first eligible id via
-    // randomItem's Math.floor(0 * length) = 0.
-    const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0);
+    const switchSpy = vi.spyOn(roundChance, 'shouldSwitchAttacker').mockReturnValue(true);
     let candidateId: number | null = null;
     act(() => {
       candidateId = result.current.maybeSwitchActive();
     });
     rerender();
-    randomSpy.mockRestore();
+    switchSpy.mockRestore();
 
     expect(candidateId).not.toBeNull();
     expect(candidateId).not.toBe(1);
@@ -97,17 +96,17 @@ describe('useTeam', () => {
     expect(result.current.koIds).toEqual([]);
   });
 
-  it('does not switch when the random roll misses the switch chance', () => {
+  it('does not switch when shouldSwitchAttacker returns false', () => {
     const team = [makePokemon(1), makePokemon(2)];
     const { result, rerender } = renderHook(() => useTeam(team));
 
-    const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0.99);
+    const switchSpy = vi.spyOn(roundChance, 'shouldSwitchAttacker').mockReturnValue(false);
     let nextActiveId: number | null = null;
     act(() => {
       nextActiveId = result.current.maybeSwitchActive();
     });
     rerender();
-    randomSpy.mockRestore();
+    switchSpy.mockRestore();
 
     expect(nextActiveId).toBeNull();
     expect(result.current.activeId).toBe(1);
@@ -118,13 +117,13 @@ describe('useTeam', () => {
     const { result, rerender } = renderHook(() => useTeam(team));
 
     // Would trigger the switch chance, but there's nowhere else to switch to.
-    const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0);
+    const switchSpy = vi.spyOn(roundChance, 'shouldSwitchAttacker').mockReturnValue(true);
     let nextActiveId: number | null = null;
     act(() => {
       nextActiveId = result.current.maybeSwitchActive();
     });
     rerender();
-    randomSpy.mockRestore();
+    switchSpy.mockRestore();
 
     expect(nextActiveId).toBeNull();
     expect(result.current.activeId).toBe(1);
