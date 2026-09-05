@@ -9,6 +9,7 @@ import {
   calculateEffectivenessMultiplier,
 } from '@/lib/calculateEffectiveness';
 import { cn } from '@/lib/cn';
+import { shouldAskStab } from '@/lib/roundChance';
 import {
   useAppStateActions,
   useDifficultyMode,
@@ -42,9 +43,6 @@ const GAME_OVER_DELAY_MS = 500;
 // Shorter than the faint message: a voluntary switch has nothing to explain,
 // just enough time to read "Go! <name>" before the next round loads.
 const SWITCH_MESSAGE_DURATION_MS = 900;
-// Kept low: STAB questions are a bonus layer on top of the effectiveness
-// question, not a coin flip - most rounds should still be effectiveness.
-const STAB_QUESTION_CHANCE = 0.2;
 
 // The precise multiplier a defending type combination can ever produce, per
 // calculateEffectivenessMultiplier - shown as answer buttons in expert mode.
@@ -105,7 +103,7 @@ export function Battle({ team }: BattleProps) {
   // round's duration.
   const questionType = useMemo<'effectiveness' | 'stab'>(() => {
     if (!includeStab || mode !== 'expert') return 'effectiveness';
-    return Math.random() < STAB_QUESTION_CHANCE ? 'stab' : 'effectiveness';
+    return shouldAskStab() ? 'stab' : 'effectiveness';
   }, [round, includeStab, mode]);
 
   // Single source of truth for "what kind of question is this round", so the

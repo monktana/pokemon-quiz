@@ -2,12 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 
 import type { Pokemon } from '@/api/schema';
 import { preloadImage } from '@/lib';
-import { randomItem } from '@/lib/generateMatchup';
-
-// Kept fairly high: a switch is a lightweight, non-punishing transition (no
-// fainting involved), so it can afford to show up more often than the STAB
-// question chance without disrupting the core guessing loop.
-const ATTACKER_SWITCH_CHANCE = 0.4;
+import { randomItem } from '@/lib/random';
+import { shouldSwitchAttacker } from '@/lib/roundChance';
 
 export const useTeam = (team: Pokemon[]) => {
   const [koIds, setKoIds] = useState<number[]>([]);
@@ -53,7 +49,7 @@ export const useTeam = (team: Pokemon[]) => {
   // increment, inside the same transition, or it suspends immediately on
   // its own instead of waiting with the rest of the round's new data.
   const maybeSwitchActive = useCallback(() => {
-    if (Math.random() >= ATTACKER_SWITCH_CHANCE) {
+    if (!shouldSwitchAttacker()) {
       return null;
     }
 
