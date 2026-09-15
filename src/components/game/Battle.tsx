@@ -1,15 +1,14 @@
 import React from 'react';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { useMatchup, usePrefetchMatchup } from '@/api';
-import { TypeEffectiveness, type Matchup, type Pokemon } from '@/api/schema';
+import { TypeEffectiveness, type Pokemon } from '@/api/schema';
 import { useLocalization } from '@/hooks';
 import {
   bucketizeEffectiveness,
   calculateEffectivenessMultiplier,
 } from '@/lib/calculateEffectiveness';
 import { cn } from '@/lib/cn';
-import { recordMatchupHistory, resetMatchupHistory } from '@/lib/matchupHistory';
 import { useAppStateActions, useDifficultyMode, useLanguage, useScoreActions } from '@/stores';
 import { type TextKey } from '@/util';
 
@@ -66,47 +65,7 @@ export function Battle({ team }: BattleProps) {
   const lifecycle = useRoundLifecycle(team);
   const { round, activeId, koIds, outcome, feedback, submitGuess } = lifecycle;
 
-  // One Battle mount = one game (see App.tsx, which only renders Game while
-  // appState is 'quiz'), so this is the right place to start the repeat
-  // penalty tracking fresh instead of carrying it over from a prior game.
-  //
-  // This can't be a useEffect: useMatchup below is a useSuspenseQuery, and
-  // Suspense fetches are kicked off synchronously during render (it throws
-  // the in-flight promise) - before any effect from this component's first
-  // successful commit would ever run. A mount effect would reset the
-  // history only *after* round 1 had already been generated against
-  // whatever was left over from the previous game. Mutating a ref directly
-  // during render, guarded so it only fires once, is React's documented
-  // pattern for exactly this "must happen before the first render's work"
-  // ordering requirement.
-  const hasResetHistory = useRef(false);
-  if (!hasResetHistory.current) {
-    hasResetHistory.current = true;
-    resetMatchupHistory();
-  }
-
   const { data: matchup, isFetching } = useMatchup(round, activeId);
-
-  // Same reasoning as the reset above, in the other direction: this must
-  // run *before* usePrefetchMatchup for round + 1 right below, so that
-  // prefetch's repeat-penalty weighting already accounts for the round
-  // we're about to show. A useEffect would run after that prefetch call
-  // already fired, making every round's penalty one round stale. Recording
-  // here instead of inside generateMatchup also means a discarded prefetch
-  // (e.g. for the Pokemon active before a switch/faint) never pollutes the
-  // history with a matchup the player never actually saw - only a matchup
-  // that reaches this line is about to be rendered.
-  //
-  // react-query keeps the `data` reference stable across re-renders as long
-  // as the underlying data hasn't changed, so comparing by reference (not a
-  // round/activeId key) is enough to record each shown round exactly once,
-  // even though Battle re-renders many times per round (feedback, timers).
-  const recordedMatchupRef = useRef<Matchup | null>(null);
-  if (recordedMatchupRef.current !== matchup) {
-    recordedMatchupRef.current = matchup;
-    recordMatchupHistory(matchup.move!.type!.id!, matchup.effectiveness!);
-  }
-
   usePrefetchMatchup(round + 1, activeId);
 
   const language = useLanguage();
