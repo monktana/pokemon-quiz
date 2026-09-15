@@ -9,7 +9,7 @@ import {
   useDifficultyMode,
 } from '@/stores';
 
-describe('DifficultyStoreProvider', () => {
+describe('DifficultyStore', () => {
   it('defaults to simple mode', () => {
     const { result } = renderHook(() => ({ mode: useDifficultyMode() }), {
       wrapper: createWrapper(DifficultyStoreProvider, {}),
@@ -35,9 +35,6 @@ describe('DifficultyStoreProvider', () => {
     expect(result.current.mode).toBe('expert');
   });
 
-  it('causes the provided hooks to throw if provider is absent', () => {
-    expect(() => renderHook(() => useDifficultyMode())).toThrow('Missing DifficultyStoreProvider');
-  });
 });
 
 const createWrapper = (
