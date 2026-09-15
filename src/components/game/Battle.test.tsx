@@ -10,7 +10,7 @@ import * as roundChance from '@/lib/roundChance';
 import { useAppState, useAppStateActions, useDifficultyActions } from '@/stores';
 
 // Real integration test through the actual useMatchup/usePrefetchMatchup/
-// useTeam/useGuess hooks - only the pure data-generation function is
+// useRoundLifecycle hooks - only the pure data-generation function is
 // stubbed, matching the api/queries test convention.
 const { teamMemberOne, teamMemberTwo, spritelessAttacker, generateMatchupMock } = vi.hoisted(() => {
   const teamMemberOne: Pokemon = {

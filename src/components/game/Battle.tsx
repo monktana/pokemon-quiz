@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCallback, useEffect, useRef, useState, useTransition } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { useMatchup, usePrefetchMatchup } from '@/api';
 import { TypeEffectiveness, type Matchup, type Pokemon } from '@/api/schema';
@@ -23,20 +23,15 @@ import {
   Score,
   Team,
   TypeTag,
-  useGuess,
-  useTeam,
+  useRoundLifecycle,
   type Guess,
   type types,
 } from '../';
 
-const FEEDBACK_DURATION_MS = 400;
-// Long enough to read both the fainted message and which answer button lit
-// up as the correct one (see the wrong-guess feedback handling below).
-const FAINT_MESSAGE_DURATION_MS = 1600;
+// How long to hold the last team member's now-fainted indicator on screen
+// before cutting to Game Over, so the "all 6 fainted" frame gets its own
+// paint instead of being batched away with whatever comes after it.
 const GAME_OVER_DELAY_MS = 500;
-// Shorter than the faint message: a voluntary switch has nothing to explain,
-// just enough time to read "Go! <name>" before the next round loads.
-const SWITCH_MESSAGE_DURATION_MS = 900;
 
 // The precise multiplier a defending type combination can ever produce, per
 // calculateEffectivenessMultiplier - shown as answer buttons in expert mode.
@@ -57,8 +52,6 @@ const EFFECTIVENESS_TEXT_KEYS: Record<TypeEffectiveness, TextKey> = {
   [TypeEffectiveness.SuperEffective]: 'types.effectiveness.supereffective',
 };
 
-type Feedback = { guess: Guess; correct: boolean };
-
 // Bundles "what kind of question this round asks" with its correct answer,
 // so consumers read `kind` off one value instead of re-deriving it.
 type RoundQuestion =
@@ -70,13 +63,8 @@ export type BattleProps = {
 };
 
 export function Battle({ team }: BattleProps) {
-  const [round, setRound] = useState<number>(1);
-  const [isPending, startTransition] = useTransition();
-  const [feedback, setFeedback] = useState<Feedback | null>(null);
-  const [faintMessage, setFaintMessage] = useState<React.ReactNode>(null);
-  const [switchMessage, setSwitchMessage] = useState<React.ReactNode>(null);
-  const [isGameOverPending, setIsGameOverPending] = useState(false);
-  const { activeId, koIds, faintActive, maybeSwitchActive, switchActiveTo } = useTeam(team);
+  const lifecycle = useRoundLifecycle(team);
+  const { round, activeId, koIds, outcome, feedback, submitGuess } = lifecycle;
 
   // One Battle mount = one game (see App.tsx, which only renders Game while
   // appState is 'quiz'), so this is the right place to start the repeat
@@ -134,100 +122,34 @@ export function Battle({ team }: BattleProps) {
     mode === 'expert'
       ? { kind: 'multiplier', correctAnswer: matchup.multiplier! }
       : { kind: 'bucket', correctAnswer: matchup.effectiveness! };
-  const { makeGuess } = useGuess(question.correctAnswer);
 
+  // The round lifecycle only reports *who* fainted/is incoming (an id) - all
+  // localization and name lookup stays here, alongside every other getText
+  // call in this file.
+  const faintedName =
+    outcome.kind === 'fainted'
+      ? getResourceName(team.find((pokemon) => pokemon.id === outcome.attackerId)!.species!.names!, language)
+      : null;
+  const incomingName =
+    outcome.kind === 'switching'
+      ? getResourceName(team.find((pokemon) => pokemon.id === outcome.incomingId)!.species!.names!, language)
+      : null;
+
+  // Once the last team member has fainted, the lifecycle reports 'ending'
+  // and stops - leaving the quiz is a Quiz-level concern, one scope above a
+  // Round, so it's handled here rather than inside useRoundLifecycle.
   useEffect(() => {
-    // Wrong-guess feedback stays up (to keep showing the correct answer)
-    // until the fainted-message timeout below clears it explicitly. Same for
-    // a correct guess that triggers a switch: the switch-message timeout
-    // clears it instead, so the green highlight survives the transition.
-    if (!feedback || !feedback.correct || switchMessage) return;
-    const timeout = setTimeout(() => setFeedback(null), FEEDBACK_DURATION_MS);
+    if (outcome.kind !== 'ending') return;
+    const timeout = setTimeout(endQuiz, GAME_OVER_DELAY_MS);
     return () => clearTimeout(timeout);
-  }, [feedback, switchMessage]);
+  }, [outcome.kind, endQuiz]);
 
   const handleGuess = useCallback(
     (guess: Guess) => {
-      const correct = makeGuess(guess);
-      setFeedback({ guess, correct });
-
-      if (correct) {
-        increase();
-
-        const nextActiveId = maybeSwitchActive();
-        if (nextActiveId !== null) {
-          const incoming = team.find((pokemon) => pokemon.id === nextActiveId)!;
-          const incomingName = getResourceName(incoming.species!.names!, language);
-          setSwitchMessage(
-            getTemplatedText('game.status.switched', <span key="switched-name">{incomingName}</span>)
-          );
-
-          setTimeout(() => {
-            startTransition(() => {
-              setSwitchMessage(null);
-              setFeedback(null);
-              // activeId changes together with round, in the same
-              // transition, so the query for the new (round, activeId) pair
-              // resolves in the background instead of suspending on the
-              // spot and cutting the switch message short.
-              switchActiveTo(nextActiveId);
-              setRound((round) => round + 1);
-            });
-          }, SWITCH_MESSAGE_DURATION_MS);
-          return;
-        }
-
-        startTransition(() => {
-          setRound((round) => round + 1);
-        });
-        return;
-      }
-
-      const faintedName = getResourceName(matchup.attacker!.species!.names!, language);
-      setFaintMessage(
-        getTemplatedText('game.status.fainted', <span key="fainted-name">{faintedName}</span>)
-      );
-
-      // Hold the fainted Pokemon and its message on screen for a beat
-      // before resolving faintActive()/advancing the round, so the KO
-      // reads as an event instead of an instant, unexplained swap. A wrong
-      // guess always switches to a different team member, so the next
-      // round's matchup query was never prefetched for it either way;
-      // wrapping the resolution in a transition keeps whatever's on screen
-      // stable instead of flashing to the Suspense fallback while it loads.
-      setTimeout(() => {
-        startTransition(() => {
-          setFaintMessage(null);
-          setFeedback(null);
-          const nextActiveId = faintActive();
-          if (nextActiveId === null) {
-            // Give the last Pokemon's now-fainted team indicator its own
-            // paint before cutting to Game Over: setting koIds and calling
-            // endQuiz() in the same commit would let React batch both
-            // together and skip straight past the "all 6 fainted" frame.
-            // isGameOverPending keeps the buttons locked through this gap,
-            // since faintMessage itself was already cleared above.
-            setIsGameOverPending(true);
-            setTimeout(() => startTransition(() => endQuiz()), GAME_OVER_DELAY_MS);
-            return;
-          }
-
-          setRound((round) => round + 1);
-        });
-      }, FAINT_MESSAGE_DURATION_MS);
+      const { correct } = submitGuess(guess, question.correctAnswer);
+      if (correct) increase();
     },
-    [
-      makeGuess,
-      increase,
-      maybeSwitchActive,
-      switchActiveTo,
-      faintActive,
-      endQuiz,
-      matchup,
-      team,
-      language,
-      getTemplatedText,
-    ]
+    [submitGuess, question.correctAnswer, increase]
   );
 
   const answerButton = (guess: Guess, testId: string, label: string) => {
@@ -243,9 +165,7 @@ export function Battle({ team }: BattleProps) {
       <button
         type="button"
         data-testid={testId}
-        disabled={
-          isFetching || isPending || faintMessage !== null || switchMessage !== null || isGameOverPending
-        }
+        disabled={isFetching || outcome.kind !== 'answering'}
         onClick={() => handleGuess(guess)}
         className={cn(
           'border-surface-border bg-surface text-foreground min-h-14 cursor-pointer rounded-md border text-sm font-semibold tracking-[0.03em] uppercase',
@@ -319,13 +239,13 @@ export function Battle({ team }: BattleProps) {
             <PokemonTags />
           </div>
         </PokemonPanel>
-        {faintMessage ? (
+        {outcome.kind === 'fainted' ? (
           <div
             data-testid="fainted-message"
             className="text-foreground border-surface-border bg-surface flex w-full flex-col items-center gap-2 rounded-md border p-4 text-center shadow-[0_1px_3px_rgba(0,0,0,0.10)] sm:p-5 dark:shadow-none"
           >
             <div className="flex flex-wrap items-center justify-center gap-1 text-lg">
-              {faintMessage}
+              {getTemplatedText('game.status.fainted', <span key="fainted-name">{faintedName}</span>)}
             </div>
             {question.kind === 'bucket' ? (
               // Simple mode only asks for the combined bucket, so a miss
@@ -358,12 +278,12 @@ export function Battle({ team }: BattleProps) {
               </div>
             ) : null}
           </div>
-        ) : switchMessage ? (
+        ) : outcome.kind === 'switching' ? (
           <div
             data-testid="switch-message"
             className="text-foreground border-surface-border bg-surface flex w-full items-center justify-center gap-1 rounded-md border p-4 text-center text-lg shadow-[0_1px_3px_rgba(0,0,0,0.10)] sm:p-5 dark:shadow-none"
           >
-            {switchMessage}
+            {getTemplatedText('game.status.switched', <span key="switched-name">{incomingName}</span>)}
           </div>
         ) : (
           <Question pokemon={matchup.attacker!} move={matchup.move!} />
