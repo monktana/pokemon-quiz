@@ -1,8 +1,7 @@
-import { useContext } from 'react';
-import { useStore } from 'zustand';
+import { type PropsWithChildren } from 'react';
 
-import { LanguageStoreContext } from '@/stores';
-import { Language } from '@/util';
+import { createStoreContext } from '@/stores/createStoreContext';
+import { getAppLanguage, type Language } from '@/util';
 
 export type LanguageStore = {
   language: Language;
@@ -11,16 +10,23 @@ export type LanguageStore = {
   };
 };
 
-const useLanguageStore = (selector: (state: LanguageStore) => unknown) => {
-  const store = useContext(LanguageStoreContext);
-  if (!store) {
-    throw new Error('Missing LanguageStoreProvider');
-  }
-  return useStore(store, selector);
-};
+type LanguageStoreProps = { initialLanguage: string };
+export type LanguageStoreProviderProps = PropsWithChildren<LanguageStoreProps>;
 
-export const useLanguage = () =>
-  useLanguageStore((state) => state.language) as LanguageStore['language'];
+const { Provider, useStoreSelector } = createStoreContext<LanguageStore, LanguageStoreProps>(
+  'Language',
+  ({ initialLanguage }) =>
+    (set) => ({
+      language: getAppLanguage(initialLanguage),
+      actions: {
+        setLanguage: (language) => {
+          document.documentElement.lang = language;
+          set({ language });
+        },
+      },
+    })
+);
 
-export const useLanguageActions = () =>
-  useLanguageStore((state) => state.actions) as LanguageStore['actions'];
+export const LanguageStoreProvider = Provider;
+export const useLanguage = () => useStoreSelector((state) => state.language);
+export const useLanguageActions = () => useStoreSelector((state) => state.actions);

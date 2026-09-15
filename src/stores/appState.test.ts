@@ -3,9 +3,9 @@ import { afterEach, describe, expect, it } from 'vitest';
 
 import { useAppState, useAppStateActions } from '@/stores';
 
-// appState is a module-level singleton (unlike Score/Language, it has no
-// Provider), so tests must restore it or later specs would inherit
-// whatever state the previous one left behind.
+// appState is a module-level singleton, not Provider-scoped (see the
+// comment in appState.ts), so tests must restore it or later specs would
+// inherit whatever state the previous one left behind.
 afterEach(() => {
   const { result } = renderHook(() => useAppStateActions());
   act(result.current.openMenu);

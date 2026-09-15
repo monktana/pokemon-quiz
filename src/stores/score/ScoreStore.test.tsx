@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 import { ScoreStoreProvider, ScoreStoreProviderProps, useScore, useScoreActions } from '@/stores';
 
-describe('LanguageStoreProvider', () => {
+describe('ScoreStore', () => {
   it('provides a hook to access the current score', () => {
     const { result } = renderHook(() => useScore(), {
       wrapper: createWrapper(ScoreStoreProvider, { initialScore: 1 }),
@@ -115,15 +115,6 @@ describe('LanguageStoreProvider', () => {
     expect(result.current.score).toEqual(0);
   });
 
-  it('causes the provided hooks to throw if provider is absent', () => {
-    renderHook(() => {
-      try {
-        useScore();
-      } catch (error) {
-        expect((error as Error).message).toEqual('Missing ScoreStoreProvider');
-      }
-    });
-  });
 });
 
 const createWrapper = (

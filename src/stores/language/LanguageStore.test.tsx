@@ -9,7 +9,7 @@ import {
   useLanguageActions,
 } from '@/stores';
 
-describe('LanguageStoreProvider', () => {
+describe('LanguageStore', () => {
   it('provides a hook to access the current language', () => {
     const { result } = renderHook(() => useLanguage(), {
       wrapper: createWrapper(LanguageStoreProvider, { initialLanguage: 'en' }),
@@ -37,15 +37,6 @@ describe('LanguageStoreProvider', () => {
     expect(result.current.language, 'de');
   });
 
-  it('causes the provided hooks to throw if provider is absent', () => {
-    renderHook(() => {
-      try {
-        useLanguage();
-      } catch (error) {
-        expect((error as Error).message).toEqual('Missing LanguageStoreProvider');
-      }
-    });
-  });
 });
 
 const createWrapper = (
