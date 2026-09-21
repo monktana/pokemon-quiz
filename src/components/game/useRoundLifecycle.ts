@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useTransition } from 'react';
+import { useCallback, useState, useTransition } from 'react';
 
 import type { Pokemon, TypeEffectiveness } from '@/api/schema';
 
@@ -51,19 +51,11 @@ export const useRoundLifecycle = (team: Pokemon[]) => {
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [, startTransition] = useTransition();
 
-  // The only path with no message overlay of its own (switching/fainted
-  // clear feedback as part of resolving their own timeout below), so it
-  // needs its own timer to fade the highlight instead.
-  useEffect(() => {
-    if (!feedback?.correct || outcome.kind !== 'advancing') return;
-    const timeout = setTimeout(() => setFeedback(null), FEEDBACK_DURATION_MS);
-    return () => clearTimeout(timeout);
-  }, [feedback, outcome]);
-
   const submitGuess = useCallback(
     (guess: Guess, correctAnswer: Guess): { correct: boolean } => {
       const correct = guess === correctAnswer;
-      setFeedback({ guess, correct });
+      const thisFeedback = { guess, correct };
+      setFeedback(thisFeedback);
 
       if (correct) {
         const incomingId = maybeSwitchActive();
@@ -83,6 +75,23 @@ export const useRoundLifecycle = (team: Pokemon[]) => {
           }, SWITCH_MESSAGE_DURATION_MS);
         } else {
           setOutcome({ kind: 'advancing' });
+          // The only path with no message overlay of its own to hold the
+          // highlight up (switching/fainted clear feedback as part of
+          // resolving their own timeout above/below), so it needs its own
+          // timer to fade it instead - scheduled directly here, not via a
+          // useEffect keyed on `outcome`. That was tried first and was
+          // buggy: once this same transition resolves to 'answering', the
+          // effect's dependency changes, its cleanup cancels the pending
+          // timeout, and the re-run's guard skips rescheduling - so if the
+          // transition settles before FEEDBACK_DURATION_MS (routine even
+          // outside tests, e.g. a warm cache), feedback never clears and
+          // hangs over into the next round. Guarded by reference identity
+          // so a later guess's feedback (already showing by then, since
+          // buttons re-enable the moment the transition resolves) can't be
+          // wiped by this stale timer once it does fire.
+          setTimeout(() => {
+            setFeedback((current) => (current === thisFeedback ? null : current));
+          }, FEEDBACK_DURATION_MS);
           startTransition(() => {
             setOutcome({ kind: 'answering' });
             setRound((currentRound) => currentRound + 1);

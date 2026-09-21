@@ -20,13 +20,19 @@ describe('<Question />', () => {
     );
   });
 
-  it('displays the moves name', ({ move }) => {
+  it('displays the move type, not the move name, on the type tag', ({ move }) => {
     render(<Question pokemon={bulbasaur} move={move} />);
 
     expect(screen.getByTestId(`${move.type!.name}-type-tag`)).toBeVisible();
     expect(screen.getByTestId(`${move.type!.name}-type-tag`)).toHaveTextContent(
-      getResourceName(move.names!, 'en')!
+      getResourceName(move.type!.names!, 'en')!
     );
+  });
+
+  it('displays the moves name as plain text', ({ move }) => {
+    render(<Question pokemon={bulbasaur} move={move} />);
+
+    expect(screen.getByTestId('question')).toHaveTextContent(getResourceName(move.names!, 'en')!);
   });
 
   it('displays the icon of the moves type', ({ move }) => {
