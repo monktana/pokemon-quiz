@@ -186,6 +186,14 @@ export function Battle({ team }: BattleProps) {
         <PokemonPanel
           key={matchup.attacker!.id}
           pokemon={matchup.attacker!}
+          // Colored by the Move Type of the attack being used, not the
+          // attacker's own Pokémon Type - only the move's type is relevant
+          // on the attacker's side of a Matchup (see CONTEXT.md). Coloring
+          // this panel by the attacker's own type was the dominant visual
+          // cue leading players to judge effectiveness against the wrong
+          // type entirely (e.g. Fire vs. the defender instead of the used
+          // Ground-type move vs. the defender).
+          colorType={matchup.move!.type!.name as types}
           className="flex-row"
           data-testid="attacker-pokemon"
         >

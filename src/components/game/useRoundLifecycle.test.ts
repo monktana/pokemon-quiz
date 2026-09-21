@@ -71,6 +71,35 @@ describe('useRoundLifecycle', () => {
   });
 
   it(
+    'clears the feedback highlight after a correct guess with no switch, even though the round already advanced',
+    async () => {
+      // Regression test: the fade timer used to live in a useEffect keyed
+      // on `outcome`, which this same transition also changes - the
+      // effect's cleanup canceled the pending timeout and its guard skipped
+      // rescheduling, so feedback never cleared whenever the round
+      // advanced faster than FEEDBACK_DURATION_MS (routine, not just a test
+      // artifact - a warm cache in the real app hits this too). It's now
+      // scheduled directly in submitGuess instead, independent of `outcome`.
+      const team = [makePokemon(1), makePokemon(2)];
+      const switchSpy = vi.spyOn(roundChance, 'shouldSwitchAttacker').mockReturnValue(false);
+      const { result } = renderHook(() => useRoundLifecycle(team));
+
+      act(() => {
+        result.current.submitGuess(CORRECT, CORRECT);
+      });
+      // The round (and outcome) already settles here, well before the
+      // fade timer's 400ms - exactly the ordering that broke before.
+      await waitFor(() => expect(result.current.round).toBe(2));
+      expect(result.current.feedback).toEqual({ guess: CORRECT, correct: true });
+
+      await waitFor(() => expect(result.current.feedback).toBeNull(), { timeout: 3000 });
+
+      switchSpy.mockRestore();
+    },
+    8000
+  );
+
+  it(
     'switches to a random teammate and advances the round when the switch chance hits',
     async () => {
       const team = [makePokemon(1), makePokemon(2)];

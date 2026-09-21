@@ -25,7 +25,13 @@ export function Question({ pokemon: attacker, move }: AttackProps) {
           <span key={attacker.species!.name}>
             {getResourceName(attacker.species!.names!, language)}
           </span>,
-          <TypeTag key={move.type!.name} type={move.type!.name as types} text={move.names!} />
+          <span key={move.name}>{getResourceName(move.names!, language)}</span>,
+          // The Move Type, spelled out - not the attack's own name - is
+          // what actually matters for effectiveness (see CONTEXT.md). It
+          // used to be implied only by this tag's icon/color while showing
+          // the move's name instead, which is easy to miss or misread as
+          // the attacker's own Pokémon Type.
+          <TypeTag key={move.type!.name} type={move.type!.name as types} text={move.type!.names!} />
         )}
       </div>
     </div>
