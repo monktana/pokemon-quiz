@@ -67,6 +67,26 @@ describe('<Pokemon />', () => {
     );
   });
 
+  it("colors the panel by its own type by default", ({ pokemon }) => {
+    const { container } = render(<Pokemon pokemon={pokemon} data-testid="attacker-pokemon" />);
+
+    expect(container.querySelector(`[data-type="${pokemon.types![0].name}"]`)).toBeInTheDocument();
+  });
+
+  it('colors the panel by colorType when provided, overriding its own type', ({ pokemon }) => {
+    // The attacker panel in Battle uses this to color by the used move's
+    // Move Type instead of the attacker's own Pokémon Type - only the
+    // move's type is relevant on the attacker's side of a Matchup.
+    const { container } = render(
+      <Pokemon pokemon={pokemon} colorType="ground" data-testid="attacker-pokemon" />
+    );
+
+    expect(container.querySelector('[data-type="ground"]')).toBeInTheDocument();
+    expect(
+      container.querySelector(`[data-type="${pokemon.types![0].name}"]`)
+    ).not.toBeInTheDocument();
+  });
+
   it('displays the types of the pokemon', ({ pokemon }) => {
     render(
       <Pokemon pokemon={pokemon} className="flex-row-reverse" data-testid="attacker-pokemon">

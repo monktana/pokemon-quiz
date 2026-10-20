@@ -10,6 +10,7 @@ import {
   Languages,
   TextKey,
 } from './i18n';
+import { texts } from './texts';
 
 const languagesGetter = vi.spyOn(navigator, 'languages', 'get');
 const languageGetter = vi.spyOn(navigator, 'language', 'get');
@@ -101,5 +102,19 @@ describe('localized texts', () => {
     expect(() => geti18nText('en', 'unknown' as TextKey)).toThrowError(
       /^access to language texts en with unknown key: unknown$/
     );
+  });
+
+  // Belt-and-suspenders alongside the TextKey type (see the comment on it
+  // in i18n.ts): TypeScript only catches a missing translation key at
+  // `tsc`/build time, not during `npm run dev` or a plain `vitest` run. A
+  // runtime check fails readably regardless of when/whether tsc ran, and
+  // stays a safety net even if TextKey's type-level guard is ever weakened.
+  it('has the same set of keys in every language', () => {
+    const [firstLanguage, ...restLanguages] = Languages;
+    const expectedKeys = Object.keys(texts[firstLanguage]).sort();
+
+    restLanguages.forEach((language) => {
+      expect(Object.keys(texts[language]).sort()).toEqual(expectedKeys);
+    });
   });
 });

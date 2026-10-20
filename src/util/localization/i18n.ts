@@ -6,6 +6,16 @@ export type Language = (typeof Languages)[number];
 export const isSupportedLanguage = (language: string): language is Language =>
   Languages.includes(language as Language);
 
+// Deliberately (typeof texts)[Language], not `keyof typeof texts.en`. Since
+// Language is a union, indexing distributes into a union of every language
+// block's type, and `keyof` of a union is the *intersection* of their keys
+// - so a key missing from even one language block is silently excluded
+// here, and any getText(...) call using it becomes a compile error. That's
+// what enforces translation-key parity across all 7 languages, with no
+// data restructuring needed. Simplifying this to a single language would
+// look equivalent but would only ever check parity against that language,
+// silently disabling the check for everyone else - see
+// docs/adr/0003-textkey-relies-on-keyof-union-intersection.md.
 export type TextKey = keyof (typeof texts)[Language];
 
 /**

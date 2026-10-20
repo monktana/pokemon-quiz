@@ -1,7 +1,6 @@
-import { useContext } from 'react';
-import { useStore } from 'zustand';
+import { type PropsWithChildren } from 'react';
 
-import { DifficultyStoreContext } from '@/stores';
+import { createStoreContext } from '@/stores/createStoreContext';
 
 export type DifficultyMode = 'simple' | 'expert';
 
@@ -12,16 +11,20 @@ export type DifficultyStore = {
   };
 };
 
-const useDifficultyStore = (selector: (state: DifficultyStore) => unknown) => {
-  const store = useContext(DifficultyStoreContext);
-  if (!store) {
-    throw new Error('Missing DifficultyStoreProvider');
-  }
-  return useStore(store, selector);
-};
+type DifficultyStoreProps = { initialMode?: DifficultyMode };
+export type DifficultyStoreProviderProps = PropsWithChildren<DifficultyStoreProps>;
 
-export const useDifficultyMode = () =>
-  useDifficultyStore((state) => state.mode) as DifficultyStore['mode'];
+const { Provider, useStoreSelector } = createStoreContext<DifficultyStore, DifficultyStoreProps>(
+  'Difficulty',
+  ({ initialMode = 'simple' }) =>
+    (set) => ({
+      mode: initialMode,
+      actions: {
+        setMode: (mode) => set({ mode }),
+      },
+    })
+);
 
-export const useDifficultyActions = () =>
-  useDifficultyStore((state) => state.actions) as DifficultyStore['actions'];
+export const DifficultyStoreProvider = Provider;
+export const useDifficultyMode = () => useStoreSelector((state) => state.mode);
+export const useDifficultyActions = () => useStoreSelector((state) => state.actions);
